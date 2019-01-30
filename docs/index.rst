@@ -14,3 +14,5 @@ reporting an issue::
     What did you expect to happen?
 
     What was the URL for the page where the bug occured?
+
+A developer for PsychGH? Visit our `Developer documentation <#>`_!
