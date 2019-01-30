@@ -5,8 +5,9 @@ Welcome to PsychGH!
 PsychGH is an application for navigating and storing patient specific treatment
 plans. To use PsychGH, please visit our `site <#>`_.
 
-To report a bug for PsychGH, please go to our `issues <#>` site and follow our
-template for reporting an issue::
+To report a bug for PsychGH, please go to our `issues
+<https://github.com/TostySSB/psychgh/issues>`_ site and follow our template for
+reporting an issue::
 
     What happened?
 
