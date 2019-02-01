@@ -1,14 +1,14 @@
 {
-  "main.css": "/psychgh/static/css/main.b5ab99ea.chunk.css",
-  "main.js": "/psychgh/static/js/main.4ca6c3e6.chunk.js",
-  "main.js.map": "/psychgh/static/js/main.4ca6c3e6.chunk.js.map",
-  "static/js/1.dfb38a20.chunk.js": "/psychgh/static/js/1.dfb38a20.chunk.js",
-  "static/js/1.dfb38a20.chunk.js.map": "/psychgh/static/js/1.dfb38a20.chunk.js.map",
+  "main.css": "/psychgh/static/css/main.eda475ae.chunk.css",
+  "main.js": "/psychgh/static/js/main.529b1100.chunk.js",
+  "main.js.map": "/psychgh/static/js/main.529b1100.chunk.js.map",
+  "static/js/1.b483825a.chunk.js": "/psychgh/static/js/1.b483825a.chunk.js",
+  "static/js/1.b483825a.chunk.js.map": "/psychgh/static/js/1.b483825a.chunk.js.map",
   "runtime~main.js": "/psychgh/static/js/runtime~main.27854903.js",
   "runtime~main.js.map": "/psychgh/static/js/runtime~main.27854903.js.map",
   "static/media/logo.svg": "/psychgh/static/media/logo.5d5d9eef.svg",
-  "static/css/main.b5ab99ea.chunk.css.map": "/psychgh/static/css/main.b5ab99ea.chunk.css.map",
+  "static/css/main.eda475ae.chunk.css.map": "/psychgh/static/css/main.eda475ae.chunk.css.map",
   "index.html": "/psychgh/index.html",
-  "precache-manifest.556c36fd5c892f2e218db74a06c42f3c.js": "/psychgh/precache-manifest.556c36fd5c892f2e218db74a06c42f3c.js",
+  "precache-manifest.13203a55b41dced91cc9be0bda44c012.js": "/psychgh/precache-manifest.13203a55b41dced91cc9be0bda44c012.js",
   "service-worker.js": "/psychgh/service-worker.js"
 }
