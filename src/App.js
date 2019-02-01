@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './Views/Home';
 import {BrowserRouter, Route} from 'react-router-dom';
-import Docs from './Views/Docs';
+import Docs from './Views/docs';
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
               <Home />
             </div>
          )}/>
-          <Route exact={true} path='/Docs' render={() => (
+          <Route exact={true} path='/docs' render={() => (
             <div className="App">
               <Docs />
             </div>

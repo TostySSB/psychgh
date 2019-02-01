@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-export default class Docs extends Component {
+export default class docs extends Component {
      state = {
      }
-
+  // This is the standard render function, it is rendering our component that links to our ReadTheDocs page
      render() {
           return (
                <div id='container'>
