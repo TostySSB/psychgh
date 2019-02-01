@@ -9,10 +9,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      //BrowserRouter is how this app handles page routing
       <BrowserRouter>
       
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          //This checks what the path variable is and renders the appropriate component
           <Route exact={true} path='/' render={() => (
             <div className="App">
               <Home />
