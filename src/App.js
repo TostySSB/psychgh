@@ -8,7 +8,11 @@ import Docs from './Views/docs';
 class App extends Component {
   render() {
     return (
+<<<<<<< HEAD
       //BrowserRouter is how this app handles page routing, this checks what the path variable is and renders the appropriate component
+=======
+      //BrowserRouter is how this app handles page routing
+>>>>>>> master
       <div className="App">
       <BrowserRouter>
         <header className="App-header">
