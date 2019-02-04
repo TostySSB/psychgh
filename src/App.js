@@ -8,8 +8,8 @@ import Docs from './Views/docs';
 class App extends Component {
   render() {
     return (
-      <div className="App">
       //BrowserRouter is how this app handles page routing
+      <div className="App">
       <BrowserRouter>
       
         <header className="App-header">
