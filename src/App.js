@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Home from './Views/Home';
+import DiagnosisChart from './Views/DiagnosisChart'
 import {BrowserRouter, Route} from 'react-router-dom';
 import Docs from './Views/docs';
 import NavBar from './components/NavBar';
@@ -16,7 +17,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <Route exact={true} path='/' render={() => (
             <div className="App">
-              <Home />
+               <Home />
             </div>
          )}/>
           <Route exact={true} path='/docs' render={() => (
@@ -24,6 +25,9 @@ class App extends Component {
               <Docs />
             </div>
          )}/>
+          <Route exact={true} path='/DiagnosisChart' render={() => (
+              <DiagnosisChart />
+            )} />
         </header>
         </BrowserRouter>
       </div>
