@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 //This is the Home view, it acts as a home page for our app and is a react component
+
 export default class Home extends Component {
    state = { 
    }
    render () {                                   
       return (
-        <div id='container'>
-            <div>
+        <div className="Home" id='container'>
+            <div className="lander">
                <NavBar />
             </div>
             <p>Disclaimer: This is a Zero Feature Release, meaning that none of the final features of the product have been released yet.</p>
