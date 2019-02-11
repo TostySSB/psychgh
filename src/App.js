@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import './App.css';
-import Home from './Views/Home';
-import {BrowserRouter, Route} from 'react-router-dom';
-import Docs from './Views/docs';
 import Routes from './Routes';
 
 class App extends Component {
