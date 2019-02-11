@@ -47,9 +47,6 @@ class App extends Component {
               <Docs />
             </div>
          )}/>
-          <Route exact={true} path='/DiagnosisChart' render={() => (
-              <DiagnosisChart />
-            )} />
         </header>
         </BrowserRouter>
       </div>
