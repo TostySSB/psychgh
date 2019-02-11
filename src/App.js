@@ -33,21 +33,7 @@ class App extends Component {
         </Navbar.Collapse>
       </Navbar>
       <Routes />
-
-      <BrowserRouter>
-        <header className="App-header">
-          <Route exact={true} path='/' render={() => (
-            <div className="App">
-              <Home />
-            </div>
-         )}/>
-          <Route exact={true} path='/docs' render={() => (
-            <div className="App">
-              <Docs />
-            </div>
-         )}/>
-        </header>
-        </BrowserRouter>
+      
       </div>
       
     );

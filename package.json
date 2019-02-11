@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "aws-amplify": "^1.1.19",
     "axios": "^0.18.0",
     "contentful": "^7.2.0",
     "jshint": "^2.10.1",
