@@ -8,11 +8,7 @@ import Routes from './Routes';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.connecToServer = this.connecToServer.bind(this);
-    this.state = {list: []};
-  }
-  connecToServer() {
-    fetch('/');
+    //this.state = {list: []};
   }
   //This is how you access our electron server
   /*getList = () => {
@@ -20,9 +16,6 @@ class App extends Component {
     .then(res => res.json())
     .then(list => this.setState({ list }))
   }*/
-  componentDidMount() {
-    this.connecToServer();
-  }
   render() {
     return (
       //BrowserRouter is how this app handles page routing, this checks what the path variable is and renders the appropriate component

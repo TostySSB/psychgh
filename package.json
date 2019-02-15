@@ -1,28 +1,16 @@
 {
-  "name": "psychgh",
+  "name": "react-express-example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "author": "Nicolas Burgess",
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TostySSB/psychgh.git"
-  },
   "keywords": [],
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TostySSB/psychgh/issues"
-  },
-  "homepage": "https://github.com/TostySSB/psychgh#readme",
   "dependencies": {
-    "concurrently": "^4.1.0",
-    "express": "^4.16.4"
+    "express": "^4.16.3"
   }
 }

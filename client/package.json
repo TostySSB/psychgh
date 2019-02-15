@@ -1,5 +1,5 @@
 {
-  "homepage": "http://TostySSB.github.io/psychgh",
+  "homepage": ".",
   "name": "psychgh",
   "version": "0.1.0",
   "proxy": "http://localhost:5000",
