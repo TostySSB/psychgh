@@ -13,3 +13,25 @@ in our project: `public`, `src`, and `docs`.
  -  `public` contains all of the bootstrapping code for the React application.
  -  `src` contains all of PsychGH's logic, components, and style sheets.
  -  `docs` contains all of the files for the user and developer documentation.
+
+## Working with PsychGH
+
+To run PsychGH in development mode, use the command `npm start` and open your
+browser to `http://localhost:3000` to view the app running. As you make edits,
+this page will reload. Linter errors will appear in the developer console.
+
+To test PsychGH, use the command `npm test` in the project directory to launch
+the test runner. Since we are using React's built-in test runner, see [Facebook's
+documentation](https://facebook.github.io/create-react-app/docs/running-tests)
+for more information. Automated tests are setup to be run via Travis, and all
+configuration for Travis can be found in your `.travis.yml` file.
+
+To build PsychGH, use the command `npm run build`. This buil the app and place
+the production ready code into the `build` folder it creates inside the
+project. This command builds optimized and minified javascript that is ready
+to be deployed to the live site.
+
+## Acessing Bug Reports
+
+Visit our [issues site](https://github.com/TostySSB/psychgh/issues) to see a
+list of currently open issues.
