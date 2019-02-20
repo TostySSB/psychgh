@@ -9,7 +9,6 @@ export default class Home extends Component {
       return (
         <div className="Home" id='container'>
             <div className="lander">
-               <NavBar />
             </div>
             <p>Disclaimer: This is a Zero Feature Release, meaning that none of the final features of the product have been released yet.</p>
             <p>For more information about Psych432 and how to obtain the current release view our documentation or our github page below.</p>
