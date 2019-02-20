@@ -1,3 +1,5 @@
+![alt text](https://travis-ci.org/TostySSB/psychgh.svg?branch=master "Travis Build Status")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
