@@ -8,8 +8,18 @@ import Paper from '@material-ui/core/Paper';
 class DiagnosisChart extends Component {
 	state = {
 		spacing: '16',
-	};
+		list: []
+	}
+	// Call to 
+	getList = () => {
+	    fetch('/api/getList')
+	    .then(res => res.json())
+	    .then(function(myJson) {
+	    	console.log(JSON.stringify(myJson));
+	    })
+	}
 
+ 	
 	render() {
 		const {classes} = this.props;
 		const {spacing} = this.state;
@@ -17,7 +27,7 @@ class DiagnosisChart extends Component {
 			<div className='DiagnosisChart'>
 				<Grid justify='center' container spacing={24}>
 					<Grid justify='center' container spacing={24}>
-						<Grid item xs={12}>
+						<Grid item xs={12} onClick={this.getList}>
 							<Paper>
 								<h2>Diagnosis of Depression</h2>
 							</Paper>

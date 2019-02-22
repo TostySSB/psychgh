@@ -13,8 +13,14 @@ app.get('/api/getList', (req,res) => {
 	console.log('Sent list of items');
 });
 
+app.get('/api/getTest', (req,res) => {
+	let list = ['item1', 'item2', 'item3'];
+	res.json(list);
+	console.log("It worked.");
+});
+
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
+app.get('*', (req,res) => {
 	res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
