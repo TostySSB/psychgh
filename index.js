@@ -1,11 +1,13 @@
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 const express = require('express');
 const path = require('path');
-
 const app = express();
-
+const db = mongoose.connect('mongodb://psychteam:Psych432@ds223685.mlab.com:23685/heroku_jc1qw3bp')
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {
 	var list = ["item1", "item2", "item3"];
