@@ -8,7 +8,6 @@ import DiagnosisChart from './Views/DiagnosisChart'
 import {BrowserRouter, Route} from 'react-router-dom';
 import Docs from './Views/docs';
 import Routes from './Routes';
-
 class App extends Component {
   constructor(props) {
     super(props);
