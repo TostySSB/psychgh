@@ -3,6 +3,14 @@ import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 
 import config from '../../app.config';
+import {
+  HelpBlock,
+  FormGroup,
+  FormControl,
+  ControlLabel
+} from "react-bootstrap";
+import LoaderButton from "../../components/LoaderButton";
+import "../../Views/Signup.css";
 
 export default withAuth(
   class RegistrationForm extends React.Component {
@@ -82,45 +90,47 @@ export default withAuth(
       }
 
       return (
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-element">
-            <label>Email:</label>
-            <input
-              type="email"
-              id="email"
-              value={this.state.email}
-              onChange={this.handleEmailChange}
-            />
-          </div>
-          <div className="form-element">
-            <label>First Name:</label>
-            <input
-              type="text"
-              id="firstName"
-              value={this.state.firstName}
-              onChange={this.handleFirstNameChange}
-            />
-          </div>
-          <div className="form-element">
-            <label>Last Name:</label>
-            <input
-              type="text"
-              id="lastName"
-              value={this.state.lastName}
-              onChange={this.handleLastNameChange}
-            />
-          </div>
-          <div className="form-element">
-            <label>Password:</label>
-            <input
-              type="password"
-              id="password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <input type="submit" id="submit" value="Register" />
-        </form>
+        <div className="Signup">
+          <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+            <ControlLabel>Email:</ControlLabel>
+              <FormControl
+                type="email"
+                id="email"
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="firstName" bsSize="large">
+              <ControlLabel>First Name:</ControlLabel>
+              <FormControl
+                type="text"
+                id="firstName"
+                value={this.state.firstName}
+                onChange={this.handleFirstNameChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="lastName" bsSize="large">
+              <ControlLabel>Last Name:</ControlLabel>
+              <FormControl
+                type="text"
+                id="lastName"
+                value={this.state.lastName}
+                onChange={this.handleLastNameChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="password" bsSize="large">
+              <ControlLabel>Password:</ControlLabel>
+              <FormControl
+                type="password"
+                id="password"
+                value={this.state.password}
+                onChange={this.handlePasswordChange}
+              />
+            </FormGroup>
+            <input type="submit" id="submit" value="Register" />
+          </form>
+        </div>
       );
     }
   }

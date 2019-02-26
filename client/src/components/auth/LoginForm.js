@@ -1,7 +1,8 @@
 import React from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
-
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import "../../Views/Login.css";
 export default withAuth(
   class LoginForm extends React.Component {
     constructor(props) {
@@ -57,29 +58,37 @@ export default withAuth(
       ) : null;
 
       return (
-        <form onSubmit={this.handleSubmit}>
-          {errorMessage}
-          <div className="form-element">
-            <label>Username:</label>
-            <input
-              id="username"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleUsernameChange}
-            />
-          </div>
+        <div className="Login">
+          <form onSubmit={this.handleSubmit}>
+            {errorMessage}
+            <FormGroup controlId="username" bsSize="large">
+              <ControlLabel>Username:</ControlLabel>
+              <FormControl
+                id="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleUsernameChange}
+              />
+            </FormGroup>
 
-          <div className="form-element">
-            <label>Password:</label>
-            <input
-              id="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <input id="submit" type="submit" value="Submit" />
-        </form>
+            <FormGroup controlId="password" bsSize="large">
+              <ControlLabel>Password:</ControlLabel>
+              <FormControl
+                id="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handlePasswordChange}
+              />
+            </FormGroup>
+            <Button
+            block
+            bsSize="large"
+            type="submit"
+            >
+            Login
+            </Button>
+          </form>
+        </div>
       );
     }
   }
