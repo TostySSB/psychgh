@@ -128,7 +128,12 @@ export default withAuth(
                 onChange={this.handlePasswordChange}
               />
             </FormGroup>
-            <input type="submit" id="submit" value="Register" />
+            <LoaderButton
+              block
+              bsSize="large"
+              type="submit"
+              text="Register"
+            />
           </form>
         </div>
       );
