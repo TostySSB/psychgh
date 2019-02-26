@@ -11,6 +11,7 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
+    "@okta/okta-sdk-nodejs": "^1.2.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.3",

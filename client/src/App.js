@@ -1,50 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { Route } from 'react-router-dom';
+import { SecureRoute, ImplicitCallback } from '@okta/okta-react';
+
+import Navigation from './components/shared/Navigation';
+import HomePage from './Views/Home';
+import RegistrationForm from './components/auth/RegistrationForm';
+import config from './app.config';
+import LoginPage from './components/auth/LoginPage';
+import ProfilePage from './components/auth/ProfilePage';
 import './App.css';
-import Home from './Views/Home';
-import DiagnosisChart from './Views/DiagnosisChart'
-import {BrowserRouter, Route} from 'react-router-dom';
-import Docs from './Views/docs';
-import Routes from './Routes';
-class App extends Component {
-  constructor(props) {
-    super(props);
-    //this.state = {list: []};
-  }
-  //This is how you access our electron server
-  /*getList = () => {
-    fetch('/api/getList')
-    .then(res => res.json())
-    .then(list => this.setState({ list }))
-  }*/
+
+export default class App extends Component {
   render() {
     return (
-      //BrowserRouter is how this app handles page routing, this checks what the path variable is and renders the appropriate component
       <div className="App">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Psych432</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle/>
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            <LinkContainer to="/signup">
-              <NavItem>Signup</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/login">
-              <NavItem>Login</NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Routes />
+        <Navigation />
+        <main>
+          <Route path="/" exact component={HomePage} />
+          <Route
+            path="/login"
+            render={() => <LoginPage baseUrl={config.url} />}
+          />
+          <Route path="/implicit/callback" component={ImplicitCallback} />
+          <Route path="/register" component={RegistrationForm} />
+          <SecureRoute path="/profile" component={ProfilePage} />
+        </main>
       </div>
     );
   }
 }
-
-export default App;
