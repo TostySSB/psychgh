@@ -15,6 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
         <Navigation />
         <main>
           <Route path="/" exact component={HomePage} />
