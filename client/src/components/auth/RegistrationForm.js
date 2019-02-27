@@ -4,7 +4,6 @@ import { withAuth } from '@okta/okta-react';
 
 import config from '../../app.config';
 import {
-  HelpBlock,
   FormGroup,
   FormControl,
   ControlLabel

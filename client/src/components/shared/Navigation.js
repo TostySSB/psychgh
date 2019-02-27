@@ -27,33 +27,23 @@ export default withAuth(
     render() {
       if (this.state.authenticated === null) return null;
       const authNav = this.state.authenticated ? (
-        <ul className="auth-nav">
-          <li>
-            <a
-              href="javascript:void(0)"
-              onClick={() => this.props.auth.logout()}
-            >
-              Logout
-            </a>
-          </li>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-        </ul>
+        <div className="auth-nav">
+          <LinkContainer to="" onClick={() => this.props.auth.logout()}>
+            <NavItem>Logout</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/profile">
+            <NavItem>Profile</NavItem>
+          </LinkContainer>
+        </div>
       ) : (
-        <ul className="auth-nav">
-          <li>
-            <a
-              href="javascript:void(0)"
-              onClick={() => this.props.auth.login()}
-            >
-              Login
-            </a>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
+        <div className="auth-nav">
+          <LinkContainer to="" onClick={() => this.props.auth.login()}>
+            <NavItem>Login</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/register">
+            <NavItem>Register</NavItem>
+          </LinkContainer>
+        </div>
       );
       return (
         <Navbar fluid collapseOnSelect>

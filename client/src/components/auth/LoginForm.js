@@ -62,7 +62,7 @@ export default withAuth(
           <form onSubmit={this.handleSubmit}>
             {errorMessage}
             <FormGroup controlId="username" bsSize="large">
-              <ControlLabel>Username:</ControlLabel>
+              <ControlLabel>Email:</ControlLabel>
               <FormControl
                 id="username"
                 type="text"
