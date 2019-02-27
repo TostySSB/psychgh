@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
+import { LinkContainer } from "react-router-bootstrap";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 export default withAuth(
   class Navigation extends React.Component {
@@ -54,14 +56,19 @@ export default withAuth(
         </ul>
       );
       return (
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            {authNav}
-          </ul>
-        </nav>
+        <Navbar fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/">Psych432</Link>
+            </Navbar.Brand>
+            <Navbar.Toggle/>
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav pullRight>
+              {authNav}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       );
     }
   }
