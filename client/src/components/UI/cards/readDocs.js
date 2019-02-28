@@ -17,19 +17,20 @@ const styles = ({
       },
       
   });
-function GitHubCard (props) {
+function ReadDocsCard (props) {
     const { classes } = props;
     return(
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image ={require('../../../resources/images/cards/GHLogo.png')} title="GitHub Logo"/>
+            <CardMedia className={classes.media} image ={require('../../../resources/images/cards/readDocs.png')} title="ReadTheDocs Logo"/>
             <CardContent>
-            <Typography gutterBottom variant="h4" component="h2" align='center'>
-                This is an open source project developed by Troy Oster, Henry Soule, and George Engel.
-                Psychgh is hosted on GitHub. Click below to view the source code for this project.
-            </Typography>
+                <Typography gutterBottom variant="h4" component="h2" align='center'>
+                    Want to learn how to use, modify, and edit this project? Whether you are a developer,
+                    or simply a user, our documentation can help you. Click the link below to view the documentation
+                    for this project.
+                </Typography>
             </CardContent>
             <CardActions>
-                <Button size="large" color="primary" fullWidth="true" href="https://github.com/TostySSB/psychgh">
+                <Button size="large" color="primary" fullWidth="true" href="https://psychgh.readthedocs.io/en/latest/">
                     <Typography variant="h5" component="h2" align='center' color="primary">
                         Learn More
                     </Typography>
@@ -38,4 +39,4 @@ function GitHubCard (props) {
         </Card>
     );
 }
-export default withStyles(styles)(GitHubCard);
+export default withStyles(styles)(ReadDocsCard);

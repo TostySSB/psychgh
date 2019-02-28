@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
-import GitHubCard from '../cards/GitHub'
+import GitHubCard from '../cards/GitHub';
+import ReadDocsCard from '../cards/readDocs';
 const styles = theme => ({
+    root: {
+      flexGrow: 1,
+    },
     paper: {
       height: 140,
       width: 100,
     },
-    control: {
-      padding: theme.spacing.unit * 2,
-    },
   });
 class HomePageGrid extends Component{
     render(){
+        const { classes } = this.props;
         return(
-            <div className="HomeGrid">
-                <Grid container className={"mainGrid"} spacing={16} justify="center">
-                    <Grid item xs={4}>
-                        <GitHubCard></GitHubCard>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <CardContent>
-                            <Paper>
-                                its lit
-                            </Paper>
-                        </CardContent>
-                    </Grid>
+            <div className={classes.root}>
+            <Grid container spacing={14} justify="center">
+                <Grid item xs>
+                    <GitHubCard/>
                 </Grid>
+                <Grid item xs>
+                    <CardContent>
+                        <ReadDocsCard/>
+                    </CardContent>
+                </Grid>
+            </Grid>
             </div>
         );
     }

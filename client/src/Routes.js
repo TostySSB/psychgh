@@ -10,6 +10,6 @@ export default () =>
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/DiagnosisChart" exact component={DiagnosisChart} />
-    <Route path="/docs" exact component={docs} />
+    <Route path="/Docs" exact component={docs} />
     <Route component={NotFound} />
   </Switch>;
