@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import TestButton from '../components/TestButton';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import './DiagnosisChart.css';
-import '../components/UI/cards/ExplorationCard.js';
+//import '../components/UI/cards/ExplorationCard.js';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
