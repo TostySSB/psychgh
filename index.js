@@ -7,7 +7,6 @@ const app = express();
 const DiagnosisExploration = require('./models/DiagnosisExploration')
 var users = require('./routes/users');
 var index = require('./routes/index');
-var lit = require('./routes/lit');
 //connect to the database
 mongoose.connect(process.env.DB, { useNewUrlParser: true })
   .then(() => console.log(`Database connected successfully`))
