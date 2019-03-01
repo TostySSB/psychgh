@@ -39,11 +39,14 @@ export default withAuth(
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
-              <LinkContainer to="#" onClick={() => this.props.auth.logout()}>
-                <NavItem>Logout</NavItem>
+              <LinkContainer to="/DiagnosisChart">
+                <NavItem>DiagnosisChart</NavItem>
               </LinkContainer>
               <LinkContainer to="/profile">
                 <NavItem>Profile</NavItem>
+              </LinkContainer>
+              <LinkContainer to="#" onClick={() => this.props.auth.logout()}>
+                <NavItem>Logout</NavItem>
               </LinkContainer>
               </Nav>
             </Navbar.Collapse>

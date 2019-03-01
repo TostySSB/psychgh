@@ -21,6 +21,14 @@ app.get('/api/getTest', (req,res) => {
 	res.json(list);
 	console.log("It worked.");
 });
+router.get('/getPatients', function(req, res, next){
+  db.explorations.find(function(err,explorations){
+      if(err){
+          res.send(err);
+      }
+      res.json(explorations);
+  });
+});
 app.use('/api', index);
 app.use('/api/users', users);
 app.post('/api/submitExploration', (req,res) => {
