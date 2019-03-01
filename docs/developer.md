@@ -42,8 +42,18 @@ to be deployed to the live site.
 Visit our [issues site](https://github.com/TostySSB/psychgh/issues) to see a
 list of currently open issues.
 
-## Tools used
+## Technologies used
 
-- NodeJS
-- MongoDB
-- 
+- [NodeJS](https://nodejs.org/en/) [`Package Manager`]
+   - NodeJS is the package manager of choice for PsychGH, though pip and other means of installing dependencies should work just fine aswell
+- [React](https://reactjs.org/) [`Framework`]
+   - React is our `JavaScript Library` we chose to use for building the front end UI. We chose react for its ease of use and component-based nature.
+- [Express JS](https://expressjs.com/) [`Framework`]
+   - Express acts as our `middleware` to verify calls to the database are made by users with the apropriate authority, and to add a layer of security by not directly accessing our database from our application's front end
+- [MongoDB](https://www.mongodb.com/) [`Data Base`]
+   - We use mongoDB as our database for storing both `practitioner` & `patient` data, as well as all the data required for the psychiatric guide
+- [Okta](https://developer.okta.com/) [`Authentication`]
+   - Okta is what we use to handle `user authentication` and verify routing using `tokens`
+
+- [Surge](https://surge.sh/) [`Host`]
+   - Surge is what we use to `host` PsychGH when it is deployed
