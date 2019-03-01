@@ -23,10 +23,10 @@ function GitHubCard (props) {
         <Card className={classes.card}>
             <CardMedia className={classes.media} image ={require('../../../resources/images/cards/GHLogo.png')} title="GitHub Logo"/>
             <CardContent>
-            <Typography gutterBottom variant="h4" component="h2" align='center'>
-                This is an open source project developed by Troy Oster, Henry Soule, and George Engel.
-                Psychgh is hosted on GitHub. Click below to view the source code for this project.
-            </Typography>
+                <Typography gutterBottom variant="h4" component="h2" align='center'>
+                    This is an open source project developed by Troy Oster, Henry Soule, and George Engel.
+                    Psychgh is hosted on GitHub. Click below to view the source code for this project.
+                </Typography>
             </CardContent>
             <CardActions>
                 <Button size="large" color="primary" fullWidth="true" href="https://github.com/TostySSB/psychgh">
