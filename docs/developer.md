@@ -16,8 +16,8 @@ in our project: `public`, `src`, and `docs`.
 
 ## Working with PsychGH
 
-To run PsychGH in development mode, use the command `npm start` and open your
-browser to `http://localhost:3000` to view the app running. As you make edits,
+To run PsychGH in development mode, from within the root directory, use the command `npm start` to start the backend Express server. Then navigate to the client directory in a new terminal window and use the command `npm start`. This should open a new
+browser window to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
 this page will reload. Linter errors will appear in the developer console.
 
 To test PsychGH, use the command `npm test` in the project directory to launch

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import TestButton from '../components/TestButton';
 export default class Login extends Component {
   constructor(props) {
     super(props);
