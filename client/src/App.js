@@ -10,9 +10,13 @@ import LoginPage from './components/auth/LoginPage';
 import ProfilePage from './components/auth/ProfilePage'
 import docs from "./Views/docs";
 import './App.css';
-import Routes from './Routes';
+
 
 export default class App extends Component {
+  constructor(){
+    super();
+    this.state ={users: []};
+  }
   render() {
     return (
       <div className="App">
