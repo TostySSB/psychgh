@@ -7,17 +7,23 @@ To get the latest, stable version of the PsychGH project, just run
 
 ## Project Layout
 
-After cloning the repository, you will see that we have three primary folders
-in our project: `public`, `src`, and `docs`.
+After cloning the repository, you will see that we have two primary folders
+in our project: `client` and the root directory.
+ -  `/client` contains the react application, so aptly named "client"
+    -  `/public` contains all of the bootstrapping code for the React application.
+    -  `/src` contains all of PsychGH's logic, components, and style sheets.
+    -  `/docs` contains all of the files for the user and developer documentation.
+ - `root` this folder is not named root, but instead refers to the root directory. This contains the Express backend application. This is responsible for all of the routing done by the client
 
- -  `public` contains all of the bootstrapping code for the React application.
- -  `src` contains all of PsychGH's logic, components, and style sheets.
- -  `docs` contains all of the files for the user and developer documentation.
+## Install Node.js
+
+Navigate to Node.JS's [download page](https://nodejs.org/en/download/current/) and download the appropriate installer for your system. Follow the instructions provided by the installer to fully install Node.js and NPM.
 
 ## Working with PsychGH
 
-To run PsychGH in development mode, from within the root directory, use the command `npm start` to start the backend Express server. Then navigate to the client directory in a new terminal window and use the command `npm start`. This should open a new
-browser window to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
+To run PsychGH in development mode, from within the root directory, use the command `npm install` to install all of the dependencies for the express server. Then execute the command `npm start` to start the backend Express server.
+
+Then navigate to the client directory in a new terminal window and use the command `npm install` to install the client's dependencies. Then execute the command `npm start`. This should open a new browser window to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
 this page will reload. Linter errors will appear in the developer console.
 
 To test PsychGH, use the command `npm test` in the project directory to launch
