@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { SecureRoute, ImplicitCallback } from '@okta/okta-react';
-
+import DiagnosisChart from './Views/DiagnosisChart'
 import Navigation from './components/shared/Navigation';
 import HomePage from './Views/Home';
 import RegistrationForm from './components/auth/RegistrationForm';
@@ -25,6 +25,7 @@ export default class App extends Component {
           />
           <Route path="/implicit/callback" component={ImplicitCallback} />
           <Route path="/register" component={RegistrationForm} />
+          <SecureRoute path="/DiagnosisChart" exact component={DiagnosisChart} />
           <SecureRoute path="/profile" component={ProfilePage} />
         </main>
       </div>
