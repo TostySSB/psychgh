@@ -27,7 +27,6 @@ app.get('api/plsWork', (req,res) => {
 });
 app.use('/api', index);
 app.use('/api/users', users);
-app.use('/api/lit', lit);
 app.post('/api/submitExploration', (req,res) => {
   const {firstName, lastName} = req.body;
   // Make a new Diagnosis Exploration

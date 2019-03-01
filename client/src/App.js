@@ -17,26 +17,11 @@ export default class App extends Component {
     super();
     this.state ={users: []};
   }
-  componentDidMount() {
-    fetch('/api/lit')
-      .then(res => {
-          console.log(res);
-          return res.json()
-       })
-      .then(users => { 
-          console.log(users); 
-          this.setState({ users })
-       });
-   }
   render() {
     return (
       <div className="App">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
         <Navigation />
-        <h1>Users</h1>
-                {this.state.users.map(user =>
-                <div key={user.id}>user: {user.name} Password: {user.password}</div>
-              )}
         <main>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" render={() => <LoginPage baseUrl={config.url} />}
