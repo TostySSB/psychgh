@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TestButton from '../components/TestButton';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import './DiagnosisChart.css';
+import '../components/UI/cards/ExplorationCard.js';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +12,7 @@ class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			newExploration: false,
 			firstName: "",
 			lastName: ""
 		};
@@ -49,6 +51,8 @@ class DiagnosisChart extends Component {
 	render() {
 		return (
 			<div className='DiagnosisChart'>
+				<h1>New Diagnosis Exploration</h1>
+				<p>Enter the patients name below to start a new diagnosis exploration.</p>
 		        <form onSubmit={this.handleSubmit}>
 		        	<FormGroup controlId="firstName" bsSize="large">
 		            	<ControlLabel>First Name</ControlLabel>

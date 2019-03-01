@@ -9,15 +9,15 @@ To get the latest, stable version of the PsychGH project, just run
 
 After cloning the repository, you will see that we have two primary folders
 in our project: `client` and the root directory.
- -  `client` contains the react application, so aptly named "client"
-    -  `public` contains all of the bootstrapping code for the React application.
-    -  `src` contains all of PsychGH's logic, components, and style sheets.
-    -  `docs` contains all of the files for the user and developer documentation.
+ -  `/client` contains the react application, so aptly named "client"
+    -  `/public` contains all of the bootstrapping code for the React application.
+    -  `/src` contains all of PsychGH's logic, components, and style sheets.
+    -  `/docs` contains all of the files for the user and developer documentation.
  - `root` this folder is not named root, but instead refers to the root directory. This contains the Express backend application. This is responsible for all of the routing done by the client
 
 ## Install Node.js
 
-Navigate to https://nodejs.org/en/download/current/ and download the appropriate installer for your system. Follow the instructions provided by the installer to fully install Node.js and NPM.
+Navigate to Node.JS's [download page](https://nodejs.org/en/download/current/) and download the appropriate installer for your system. Follow the instructions provided by the installer to fully install Node.js and NPM.
 
 ## Working with PsychGH
 
