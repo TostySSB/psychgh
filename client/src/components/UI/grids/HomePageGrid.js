@@ -18,14 +18,12 @@ class HomePageGrid extends Component{
         const { classes } = this.props;
         return(
             <div className={classes.root}>
-            <Grid container spacing={14} justify="center">
-                <Grid item xs>
+            <Grid container spacing={14} justify='space-evenly'>
+                <Grid item>
                     <GitHubCard/>
                 </Grid>
-                <Grid item xs>
-                    <CardContent>
-                        <ReadDocsCard/>
-                    </CardContent>
+                <Grid item>
+                    <ReadDocsCard/>
                 </Grid>
             </Grid>
             </div>
