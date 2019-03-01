@@ -22,9 +22,6 @@ app.get('/api/getTest', (req,res) => {
 	res.json(list);
 	console.log("It worked.");
 });
-app.get('api/plsWork', (req,res) => {
-	console.log("Sickomode");
-});
 app.use('/api', index);
 app.use('/api/users', users);
 app.post('/api/submitExploration', (req,res) => {
