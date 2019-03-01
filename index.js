@@ -7,6 +7,7 @@ const app = express();
 const DiagnosisExploration = require('./models/DiagnosisExploration')
 var users = require('./routes/users');
 var index = require('./routes/index');
+var lit = require('./routes/lit');
 //connect to the database
 mongoose.connect(process.env.DB, { useNewUrlParser: true })
   .then(() => console.log(`Database connected successfully`))
@@ -21,9 +22,12 @@ app.get('/api/getTest', (req,res) => {
 	res.json(list);
 	console.log("It worked.");
 });
+app.get('api/plsWork', (req,res) => {
+	console.log("Sickomode");
+});
 app.use('/api', index);
 app.use('/api/users', users);
-
+app.use('/api/lit', lit);
 app.post('/api/submitExploration', (req,res) => {
   const {firstName, lastName} = req.body;
   // Make a new Diagnosis Exploration
