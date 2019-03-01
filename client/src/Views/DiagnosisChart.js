@@ -18,7 +18,6 @@ class DiagnosisChart extends Component {
 	
 	handleSubmit = event => {
 		event.preventDefault();
-		console.log(this.state);
 		fetch('api/submitExploration', {
 			method: 'POST',
 			body: JSON.stringify(this.state),
@@ -27,7 +26,7 @@ class DiagnosisChart extends Component {
 			}
 		})
 		.then(res => {
-			if (res.status === 200) {
+			if (res.status == 200) {
 				this.props.history.push('/');
 			}
 			else {
