@@ -57,7 +57,3 @@ list of currently open issues.
 
 - [Surge](https://surge.sh/) [`Host`]
    - Surge is what we use to `host` PsychGH when it is deployed
-
-## UML Diagram of proposed method for Diagnosis
-
-![Screenshot](img/Practitioner treatment Plan Assignment diagram.png)
