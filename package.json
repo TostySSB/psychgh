@@ -6,7 +6,7 @@
   "author": "Troy Oster, George Engel, Henry Soule",
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
   },
   "keywords": [],
   "license": "ISC",
