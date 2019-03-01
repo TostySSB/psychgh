@@ -41,3 +41,5 @@ to be deployed to the live site.
 
 Visit our [issues site](https://github.com/TostySSB/psychgh/issues) to see a
 list of currently open issues.
+
+## Using PsychGH
