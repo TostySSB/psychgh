@@ -7,6 +7,7 @@ const app = express();
 const DiagnosisExploration = require('./models/DiagnosisExploration')
 var users = require('./routes/users');
 var index = require('./routes/index');
+var cors = require('cors');
 //connect to the database
 mongoose.connect(process.env.DB, { useNewUrlParser: true })
   .then(() => console.log(`Database connected successfully`))
@@ -15,6 +16,7 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true })
 //since mongoose promise is depreciated, we overide it with node's promise
 mongoose.Promise = global.Promise;
 app.use(bodyParser.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/api/getTest', (req,res) => {
 	let list = ['item1', 'item2', 'item3'];
@@ -23,6 +25,13 @@ app.get('/api/getTest', (req,res) => {
 });
 app.use('/api', index);
 app.use('/api/users', users);
+
+app.use(function(req,res,next){
+	res.header("Access-Controll-Allow-Origin","*");
+	res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+	res.header("Access-Control-Allow-Methods","POST, GET, OPTIONS, PUT, DELETE");
+	next();
+});
 
 app.post('/api/submitExploration', (req,res) => {
   const {firstName, lastName} = req.body;
