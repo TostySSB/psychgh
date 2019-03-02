@@ -1,5 +1,8 @@
 # How to Setup the PsychGH Project
 
+## Viewing the project
+This project is currently hosted on Heroku. Click [here](https://psychgh.herokuapp.com/) to view a live demo of the project.
+
 ## Getting the Project
 
 To get the latest, stable version of the PsychGH project, just run
