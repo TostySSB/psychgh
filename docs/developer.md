@@ -21,10 +21,10 @@ Navigate to Node.JS's [download page](https://nodejs.org/en/download/current/) a
 
 ## Working with PsychGH
 
-To run PsychGH in development mode, from within the root directory, use the command `npm install` to install all of the dependencies for the express server. Then execute the command `npm start` to start the backend Express server.
+To run PsychGH in development mode, from within the root directory, use the command `npm install` to install all of the dependencies for the express server.Then navigate to the client directory in a new terminal window and use the command `npm install` to install the client's dependencies. 
 
-Then navigate to the client directory in a new terminal window and use the command `npm install` to install the client's dependencies. Then execute the command `npm start`. This should open a new browser window to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
-this page will reload. Linter errors will appear in the developer console.
+Then, from within the root directory, execute the command `npm run devv`. This runs both the express server and the react client concurrently. A browser window will open up to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
+this page, as well as the express server, will reload. Linter errors will appear in the developer console.
 
 To test PsychGH, use the command `npm test` in the project directory to launch
 the test runner. Since we are using React's built-in test runner, see [Facebook's
@@ -32,9 +32,7 @@ documentation](https://facebook.github.io/create-react-app/docs/running-tests)
 for more information. Automated tests are setup to be run via Travis, and all
 configuration for Travis can be found in your `.travis.yml` file.
 
-To build PsychGH, use the command `npm run build`. This buil the app and place
-the production ready code into the `build` folder it creates inside the
-project. This command builds optimized and minified javascript that is ready
+To build PsychGH, use the command `npm run build` from within both the root and the client directory. This buil the app and placethe production ready code into the `build` folder it creates inside the project. This command builds optimized and minified javascript that is ready
 to be deployed to the live site.
 
 ## Acessing Bug Reports
