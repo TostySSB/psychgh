@@ -1,26 +1,31 @@
 {
-  "name": "psych432",
+  "name": "psychgh",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "author": "Troy Oster, George Engel, Henry Soule",
+  "description": "A utility application for mental health clinics.",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
-    "test": "jest"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "keywords": [],
+  "author": "Troy Oster, George Engel, Henry Soule",
   "license": "ISC",
   "dependencies": {
-    "@okta/okta-sdk-nodejs": "^1.2.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "dotenv": "^6.2.0",
-    "express": "^4.16.3",
-    "mkdocs": "0.0.1",
-    "mongoose": "^5.4.14"
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.16",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
-    "jest-cli": "^24.1.0",
-    "react-test-renderer": "^16.8.3"
+    "nodemon": "^1.18.10"
   }
 }

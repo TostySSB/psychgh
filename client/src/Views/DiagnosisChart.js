@@ -1,34 +1,36 @@
 import React, {Component} from 'react';
-import TestButton from '../components/TestButton';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import './DiagnosisChart.css';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 //import '../components/UI/cards/ExplorationCard.js';
-import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
 class DiagnosisChart extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
+	constructor() {
+		super();
+		this.props = {
 			newExploration: false,
 			firstName: "",
-			lastName: ""
+			lastName: "",
+			errors: {}
 		};
 	}
 	
 	handleSubmit = event => {
 		event.preventDefault();
+		const userData = {
+			firstName: this.props.firstName,
+			lastName: this.props.lastName
+		  };
+	  
 		fetch('api/submitExploration', {
 			method: 'POST',
-			body: JSON.stringify(this.state),
+			body: JSON.stringify(userData),
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		})
 		.then(res => {
-			if (res.status == 200) {
+			if (res.status === 200) {
 				this.props.history.push('/DiagnosisExploration');
 			}
 			else {
@@ -53,35 +55,56 @@ class DiagnosisChart extends Component {
 			<div className='DiagnosisChart'>
 				<h1>New Diagnosis Exploration</h1>
 				<p>Enter the patients name below to start a new diagnosis exploration.</p>
-		        <form onSubmit={this.handleSubmit}>
-		        	<FormGroup controlId="firstName" bsSize="large">
-		            	<ControlLabel>First Name</ControlLabel>
-		            	<FormControl
-		              		autoFocus
-				            value={this.state.firstName}
-				            onChange={this.handleChange}
-		            	/>
-		          </FormGroup>
-		          <FormGroup controlId="lastName" bsSize="large">
-		              <ControlLabel>Last Name</ControlLabel>
-			          <FormControl
-			          	value={this.state.lastName}
-			            onChange={this.handleChange}
-
-			           />
-          		</FormGroup>
-      			<Button
-	            	block
-	            	bsSize="large"
-	            	type="submit"
-	          	>
-	            	Submit
-	          </Button>
-        	</form>
-		</div>
-		);
+			  <div style={{ marginTop: "4rem" }} className="row">
+				<div className="col s8 offset-s2">
+				  <form  onSubmit={this.handleSubmit}>
+					<div className="input-field col s12">
+						<input 
+							onChange={this.handleChange}
+							value={this.props.firstName}
+							id="first_name" 
+							type="text"/>
+						<label htmlFor="first_name">First Name</label>
+					</div>
+					<div className="input-field col s12">
+						<input 
+							onChange={this.handleChange}
+							value={this.props.lastName}
+							id="last_name" 
+							type="text"/>
+						<label htmlFor="last_name">Last Name</label>
+					</div>
+					<div className="col s12" style={{ paddingLeft: "11.250px" }}>
+					  <button
+						style={{
+						  width: "200px",
+						  borderRadius: "3px",
+						  letterSpacing: "1.5px",
+						  marginTop: "1rem"
+						}}
+						type="submit"
+						className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+					  >
+						Create Patient
+					  </button>
+					</div>
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  );
 	}
 }
 
-
-export default DiagnosisChart;
+DiagnosisChart.propTypes = {
+	firstName: PropTypes.object.isRequired
+  };
+  
+  const mapStateToProps = state => ({
+	firstName: state.firstName,
+	errors: state.errors
+  });
+  
+  export default connect(
+	mapStateToProps,
+  )(DiagnosisChart);

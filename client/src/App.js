@@ -1,40 +1,61 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { SecureRoute, ImplicitCallback } from '@okta/okta-react';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { Provider } from "react-redux";
+import store from "./store";
+
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import PrivateRoute from "./components/private-route/PrivateRoute";
+import Dashboard from "./components/dashboard/Dashboard";
 import DiagnosisChart from './Views/DiagnosisChart';
 import DiagnosisGrid from './components/UI/grids/DiagnosisGrid';
-import Navigation from './components/shared/Navigation';
-import HomePage from './Views/Home';
-import RegistrationForm from './components/auth/RegistrationForm';
-import config from './app.config';
-import LoginPage from './components/auth/LoginPage';
-import ProfilePage from './components/auth/ProfilePage'
-import docs from "./Views/docs";
-import './App.css';
 
+import "./App.css";
 
-export default class App extends Component {
-  constructor(){
-    super();
-    this.state ={users: []};
+// Check for token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // to get in milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+
+    // Redirect to login
+    window.location.href = "./login";
   }
+}
+class App extends Component {
   render() {
     return (
-      <div className="App">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
-        <Navigation />
-        <main>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/login" render={() => <LoginPage baseUrl={config.url} />}
-          />
-          <Route path="/implicit/callback" component={ImplicitCallback} />
-          <Route path="/register" component={RegistrationForm} />
-          <Route path="/Docs" exact component={docs} />
-          <SecureRoute path="/DiagnosisChart" exact component={DiagnosisChart} />
-          <SecureRoute path="/DiagnosisExploration" exact component={DiagnosisGrid} />
-          <SecureRoute path="/profile" component={ProfilePage} />
-        </main>
-      </div>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/DiagnosisExploration" component={DiagnosisGrid} />
+              <PrivateRoute exact path="/DiagnosisChart" component={DiagnosisChart} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
+export default App;

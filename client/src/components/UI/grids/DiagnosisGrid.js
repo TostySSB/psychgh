@@ -6,26 +6,24 @@ const styles = theme => ({
     root: {
       flexGrow: 1,
     },
-    paper: {
-      height: 140,
-      width: 100,
-    },
   });
-class HomePageGrid extends Component{
+class DiagnosisGrid extends Component{
     render(){
         const { classes } = this.props;
         return(
-            <div className={classes.root}>
-            <Grid container spacing={14} justify='space-evenly'>
-                <Grid item>
-                    <DummyCard/>
+            <div style={{ paddingTop: "10%" }} className="container valign-wrapper" >
+                <div className={classes.root}>
+                <Grid container spacing={40} justify='space-evenly' style={{ minHeight: '100vh' }}>
+                    <Grid item>
+                        <DummyCard/>
+                    </Grid>
+                    <Grid item>
+                        <DummyCard/>
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <DummyCard/>
-                </Grid>
-            </Grid>
+                </div>
             </div>
         );
     }
 }
-export default withStyles(styles)(HomePageGrid);
+export default withStyles(styles)(DiagnosisGrid);
