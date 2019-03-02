@@ -22,6 +22,9 @@ class MenuHandler extends Component {
             <Link to="/DiagnosisExploration" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>View Patients</MenuItem>
             </Link>
+            <Link to="/DiagnosisChart" style={{ textDecoration: 'none', display: 'block' }}>
+                <MenuItem>New Diagnosis Exploration</MenuItem>
+            </Link>
         </div> 
       )
     }else{

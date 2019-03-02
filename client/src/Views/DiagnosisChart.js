@@ -7,19 +7,28 @@ import { connect } from "react-redux";
 class DiagnosisChart extends Component {
 	constructor() {
 		super();
-		this.props = {
+		this.state = {
 			newExploration: false,
 			firstName: "",
 			lastName: "",
+			patients: undefined,
 			errors: {}
 		};
 	}
-	
+	componentWillMount(){
+		fetch('api/getPatients', {
+			method: 'GET',
+		}).then(res =>{
+			this.setState({
+				patients: res
+			})
+		})
+	}
 	handleSubmit = event => {
 		event.preventDefault();
 		const userData = {
-			firstName: this.props.firstName,
-			lastName: this.props.lastName
+			firstName: this.state.firstName,
+			lastName: this.state.lastName
 		  };
 	  
 		fetch('api/submitExploration', {
@@ -31,7 +40,11 @@ class DiagnosisChart extends Component {
 		})
 		.then(res => {
 			if (res.status === 200) {
-				this.props.history.push('/DiagnosisExploration');
+				alert('Submission successful, ' + this.state.firstName + ' has been added to the database');
+				this.setState({
+					firstName: "",
+					lastName: ""
+					});
 			}
 			else {
 				const error = new Error(res.error);
@@ -44,9 +57,9 @@ class DiagnosisChart extends Component {
 	}
 
 
-	handleChange = event => {
+	handleChange = e => {
 		this.setState({
-			[event.target.id]: event.target.value
+			[e.target.id]: e.target.value
     	});
   	}
  	
@@ -57,22 +70,22 @@ class DiagnosisChart extends Component {
 				<p>Enter the patients name below to start a new diagnosis exploration.</p>
 			  <div style={{ marginTop: "4rem" }} className="row">
 				<div className="col s8 offset-s2">
-				  <form  onSubmit={this.handleSubmit}>
+				  <form noValidate onSubmit={this.handleSubmit}>
 					<div className="input-field col s12">
 						<input 
 							onChange={this.handleChange}
-							value={this.props.firstName}
-							id="first_name" 
+							value={this.state.firstName}
+							id="firstName" 
 							type="text"/>
-						<label htmlFor="first_name">First Name</label>
+						<label htmlFor="firstName">First Name</label>
 					</div>
 					<div className="input-field col s12">
 						<input 
 							onChange={this.handleChange}
-							value={this.props.lastName}
-							id="last_name" 
+							value={this.state.lastName}
+							id="lastName" 
 							type="text"/>
-						<label htmlFor="last_name">Last Name</label>
+						<label htmlFor="lastName">Last Name</label>
 					</div>
 					<div className="col s12" style={{ paddingLeft: "11.250px" }}>
 					  <button
@@ -102,7 +115,7 @@ DiagnosisChart.propTypes = {
   
   const mapStateToProps = state => ({
 	firstName: state.firstName,
-	errors: state.errors
+	lastName: state.errors
   });
   
   export default connect(
