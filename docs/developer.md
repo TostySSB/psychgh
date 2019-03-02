@@ -55,5 +55,6 @@ list of currently open issues.
 - [Okta](https://developer.okta.com/) [`Authentication`]
    - Okta is what we use to handle `user authentication` and verify routing using `tokens`
 
-- [Surge](https://surge.sh/) [`Host`]
-   - Surge is what we use to `host` PsychGH when it is deployed
+## UML Diagram of Diagnosis Plan
+
+![UML Diagram](img/UML.png)
