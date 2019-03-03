@@ -110,7 +110,8 @@ class DiagnosisChart extends Component {
 }
 
 DiagnosisChart.propTypes = {
-	firstName: PropTypes.object.isRequired
+	firstName: PropTypes.object.isRequired,
+	lastName: PropTypes.object.isRequired
   };
   
   const mapStateToProps = state => ({
