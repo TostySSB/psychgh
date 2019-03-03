@@ -115,7 +115,7 @@ DiagnosisChart.propTypes = {
   
   const mapStateToProps = state => ({
 	firstName: state.firstName,
-	lastName: state.errors
+	lastName: state.lastName
   });
   
   export default connect(
