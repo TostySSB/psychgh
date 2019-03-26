@@ -17,7 +17,7 @@ class Dashboard extends Component {
         <div className="row">
           <div className="landing-copy col s12 center-align">
             <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
+              <b>Hey there,</b> {user.name}
               <p className="flow-text grey-text text-darken-1">
                 You are logged into Psych432, this is a beta release. More features to come!{" "}
               </p>

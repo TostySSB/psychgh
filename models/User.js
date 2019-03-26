@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
     type: String,
     required: true
   },
@@ -18,6 +22,15 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  //Practitioner's info
+  pfirstName: {
+    type: String,
+    required: true
+  },
+  plastName: {
+    type: String,
+    required: true
   }
 });
 
