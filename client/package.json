@@ -8,6 +8,7 @@
     "@material-ui/system": "^3.0.0-alpha.2",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "grapesjs": "^0.14.57",
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.6.3",
