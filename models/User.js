@@ -26,11 +26,11 @@ const UserSchema = new Schema({
   //Practitioner's info
   pfirstName: {
     type: String,
-    required: true
+    required: false
   },
   plastName: {
     type: String,
-    required: true
+    required: false
   }
 });
 
