@@ -15,6 +15,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import DiagnosisChart from './Views/DiagnosisChart';
 import DiagnosisGrid from './components/UI/grids/DiagnosisGrid';
+import PatientExploration from './Views/PatientExploration';
 
 import "./App.css";
 
@@ -51,6 +52,7 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/DiagnosisExploration" component={DiagnosisGrid} />
               <PrivateRoute exact path="/DiagnosisChart" component={DiagnosisChart} />
+              <PrivateRoute exact path="/Patients" component={PatientExploration} />
             </Switch>
           </div>
         </Router>

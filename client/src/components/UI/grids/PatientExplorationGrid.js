@@ -1,29 +1,23 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import DummyCard from '../cards/DummyCard';
+import UserList from '../tables/userList';
 const styles = theme => ({
     root: {
       flexGrow: 1,
+      width: '75%'
     },
   });
-class DiagnosisGrid extends Component{
+class PatientExplorationGrid extends Component{
     render(){
         const { classes } = this.props;
         return(
             <div style={{ paddingTop: "10%" }} className="container valign-wrapper" >
                 <div className={classes.root}>
-                <Grid container spacing={40} justify='space-evenly' style={{ minHeight: '100vh' }}>
-                    <Grid item>
-                        <DummyCard/>
-                    </Grid>
-                    <Grid item>
-                        <DummyCard/>
-                    </Grid>
-                </Grid>
+                    <UserList/>
                 </div>
             </div>
         );
     }
 }
-export default withStyles(styles)(DiagnosisGrid);
+export default withStyles(styles)(PatientExplorationGrid);
