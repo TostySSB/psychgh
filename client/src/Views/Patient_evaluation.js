@@ -18,16 +18,3 @@ class Patient_evaluation extends Component{
     }
 }
 export default Patient_evaluation;
-
-/*Currently working on:
-	-Making an abstract component for creating forms for patient evaluation tests
-
-	WILL NEED (in form): PHQ maker
-		-Tables that contain rows/columns of 'components'
-		-Text input boxes
-		-grouped check boxes (can only select from one of X check boxes)
-		-check boxes (multiple choice)
-		-Date input
-		-requirement flag for all above (marked with red asterisks
-
-	General document creator/editor for medication details (effects, studies, stats)/*
