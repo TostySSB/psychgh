@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import DummyCard from '../cards/DummyCard';
+import DiagnosisCard from '../cards/DiagnosisCard';
 import UserList from '../../userList';
 const styles = theme => ({
     root: {
@@ -17,7 +18,8 @@ class DiagnosisGrid extends Component{
                 <Grid container spacing={40} justify='space-evenly' style={{ minHeight: '100vh' }}>
                     <Grid item>
                         <UserList/>
-                        <DummyCard/>
+                        <DiagnosisCard/>
+
                     </Grid>
                     <Grid item>
                         <DummyCard/>
