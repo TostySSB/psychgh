@@ -27,6 +27,10 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  isPractitioner: {
+    type: Boolean,
+    default: false
+  },
   //Practitioner's info
   pfirstName: {
     type: String,
