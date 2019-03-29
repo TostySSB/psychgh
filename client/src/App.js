@@ -11,8 +11,6 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-// This is a temporary test component:
-import Eval_Maker from "./Views/Patient_Eval_Maker";
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -51,8 +49,6 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            //This is a temporary route
-            <Route exact path="/test" component={Eval_Maker} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/DiagnosisExploration" component={DiagnosisGrid} />

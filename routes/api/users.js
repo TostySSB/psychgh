@@ -15,21 +15,33 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
+var recent_id;
 router.post("/register", (req, res) => {
   // Form validation
 
   const { errors, isValid } = validateRegisterInput(req.body);
-
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
+//honestly, this method is a mystery, it appears to find the most recently created user, and get its user_id value
+User.findOne().limit(1).sort({ date: -1 }).exec((err, data) => {
+  if(err) {
+      console.log("We didnt know how to program, please bear with us as we never fix this error")
+      return;
+  }
+  if(data) {
+      recent_id = Number(data.user_id);
+      return;
+  }
+});
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
+      
       const newUser = new User({
+        user_id: recent_id + 1,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -109,6 +121,16 @@ router.post("/login", (req, res) => {
   });
 });
 router.get('/userList', function(req, res) {
+  // res.send('respond with a resource');
+  User.find({}, function(err, users) {
+    if (err){
+      console.log(err);
+    }else{
+      res.json(users)
+    }
+  });
+ });
+ router.get('/userID', function(req, res) {
   // res.send('respond with a resource');
   User.find({}, function(err, users) {
     if (err){

@@ -2,19 +2,21 @@ import React, { Component } from "react";
 import axios from "axios"
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import MUIDataTable from "mui-datatables";
 const columns = [
+    {
+        name: "user_id",
+        label: "User ID",
+        options: {
+         filter: false,
+         sort: true,
+        }
+       },
     {
         name: "lastName",
         label: "Last Name",
         options: {
-         filter: true,
+         filter: false,
          sort: true,
         }
        },
@@ -22,7 +24,7 @@ const columns = [
         name: "firstName",
         label: "First Name",
         options: {
-         filter: true,
+         filter: false,
          sort: true,
         }
        },
@@ -30,7 +32,7 @@ const columns = [
         name: "email",
         label: "Email",
         options: {
-         filter: true,
+         filter: false,
          sort: true,
         }
        },
@@ -38,6 +40,9 @@ const columns = [
 const options = {
     filterType: 'checkbox',
     selectableRows: false,
+    print: false,
+    download: false,
+    filter: false
   };
 const styles = theme => ({
     app: {
