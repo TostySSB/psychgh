@@ -52,7 +52,6 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/evaluation" component={PatientEvaluation} />
-            //This is a temporary route
             <Route exact path="/test" component={Eval_Maker} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
