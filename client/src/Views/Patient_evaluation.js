@@ -12,7 +12,11 @@ class Patient_evaluation extends Component{
     render(){
         return(
             <div className="Patient_evaluation">
-                
+                <div id="test">
+x                     <h1>Patient Evaluation stub!</h1>
+                     <script type="text/javascript">
+                     </script>
+                 </div>
             </div>
         );
     }
