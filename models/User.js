@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
+  user_id:{
+    type: Number,
+    required: false
+  },
   firstName: {
     type: String,
     required: true
@@ -22,6 +26,10 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  isPractitioner: {
+    type: Boolean,
+    default: false
   },
   //Practitioner's info
   pfirstName: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import UserList from '../tables/userList';
+import UserList from '../tables/patientList';
 const styles = theme => ({
     root: {
       flexGrow: 1,
