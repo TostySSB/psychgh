@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MUIDataTable from "mui-datatables";
+
 const columns = [
     {
         name: "lastName",
