@@ -1,29 +1,42 @@
 import React, { Component } from "react";
+import FormBuilder, {formBuilder} from "react-form-builder2";
 
-class Patient_Eval_Maker extends Component{
+class Patient_Eval_Maker extends React.Component{
     
 
   
   render(){
 
-    var React = require('react');
-    var FormBuilder = require('react-form-builder2');
+
+    var items = [{
+      key: 'Header',
+      name: 'Header Text',
+      icon: 'fa fa-header',
+      static: true,
+      content: 'Placeholder Text...'
+    },
+    {
+      key: 'Paragraph',
+      name: 'Paragraph',
+      static: true,
+      icon: 'fa fa-paragraph',
+      content: 'Placeholder Text...'
+    }];
+
     return(
         
         <div className="Patient_Eval_Maker">
-            <div id="gjs">
-                <h1>Hello World Component!</h1>
-                <script type="text/javascript">
-                </script>
-                <FormBuilder.ReactFormBuilder />,
-                document.body
-            </div>
+          <FormBuilder.ReactFormBuilder
+            url='path/to/GET/initial.json'
+            
+            saveUrl='path/to/POST/build/form.json'/>,
+          document.body
         </div>
-        
     );
   }
 }
 export default Patient_Eval_Maker;
+
 
 /*Currently working on:
 	-Making an abstract component for creating forms for patient evaluation tests
