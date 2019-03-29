@@ -19,6 +19,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import DiagnosisChart from './Views/DiagnosisChart';
 import DiagnosisGrid from './components/UI/grids/DiagnosisGrid';
 import PatientExploration from './Views/PatientExploration';
+import PatientEvaluation from './Views/Patient_evaluation';
 
 import "./App.css";
 
@@ -51,6 +52,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/evaluation" component={PatientEvaluation} />
             //This is a temporary route
             <Route exact path="/test" component={Eval_Maker} />
             <Switch>
