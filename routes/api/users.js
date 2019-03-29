@@ -15,7 +15,7 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-var recent_id;
+var recent_id = 0;
 router.post("/register", (req, res) => {
   // Form validation
 
@@ -41,7 +41,7 @@ User.findOne().limit(1).sort({ date: -1 }).exec((err, data) => {
     } else {
       
       const newUser = new User({
-        user_id: recent_id + 1,
+        user_id: Number(recent_id + 1),
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -87,17 +87,18 @@ router.post("/login", (req, res) => {
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
-
     // Check password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User matched
         // Create JWT Payload
+        console.log(user.isPractitioner);
         const payload = {
           id: user.id,
-          name: user.firstName
+          name: user.firstName,
+          isPractitioner: user.isPractitioner
         };
-
+        
         // Sign token
         jwt.sign(
           payload,
@@ -130,15 +131,6 @@ router.get('/userList', function(req, res) {
     }
   });
  });
- router.get('/userID', function(req, res) {
-  // res.send('respond with a resource');
-  User.find({}, function(err, users) {
-    if (err){
-      console.log(err);
-    }else{
-      res.json(users)
-    }
-  });
- });
+
 
 module.exports = router;
