@@ -6,6 +6,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import DiagnosisCard from '../cards/DiagnosisCard';
 import GitHubCard from '../cards/GitHub';
 import ReadDocsCard from '../cards/readDocs';
+import DummyCard from '../cards'
+import PatientBio from '../cards/PatientBio';
 import DiagnosisGrid from '../grids/DiagnosisGrid';
 import HomePageGrid from '../grids/HomePageGrid';
 import PatientExplorationGrid from '../grids/PatientExplorationGrid';
@@ -14,29 +16,37 @@ configure({adapter: new Adapter()});
 
 describe("Test rendering for all UI Cards", () => {
 	it('DiagnosisCard renders without crashing', () => {
-		shallow(<DiagnosisCard />);
+		const diagnosisCard = shallow(<DiagnosisCard />);
+		expect(diagnosisCard.exists()).toBe(true);
 	});
 
 	it('GitHubCard renders without crashing', () => {
-		shallow(<GitHubCard />);
+		const githubCard = shallow(<GitHubCard />);
+		expect(githubCard.exists()).toBe(true);
 	});
 
 	it('ReadDocsCard renders without crashing', () => {
-		shallow(<ReadDocsCard />);
+		const readDocsCard = shallow(<ReadDocsCard />);
+		expect(readDocsCard.exists()).toBe(true);
+	});
+
+	it('PatientBio renders without crashing', () => {
+		expect(shallow(<PatientBio />).exists()).toBe(true);
 	});
 });
 
 describe("Test rendering for all UI grids", () => {
 	it('DiagnosisGrid renders without crashing', () => {
-		shallow(<DiagnosisGrid />);
+		expect(shallow(<DiagnosisGrid />).exists()).toBe(true);
+
 	});
 
 	it('HomePageGrid renders without crashing', () => {
-		shallow(<HomePageGrid />);
+		expect(shallow(<HomePageGrid />).exists()).toBe(true);
 	});
 
 	it('PatientExplorationGrid renders without crashing', () => {
-		shallow(<PatientExplorationGrid />);
+		expect(shallow(<PatientExplorationGrid />).exists()).toBe(true);
 	});
 });
 
