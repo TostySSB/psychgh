@@ -5,14 +5,17 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
-import {Login} from '../src/components/auth/Login';
+
+import GitHubCard from '../src/components/UI/cards/GitHub';
+import ReadDocs from '../src/components/UI/cards/readDocs';
+import DummyCard from '../src/components/UI/cards/DummyCard';
+import DiagnosisCard from '../src/components/UI/cards/DiagnosisCard';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
 storiesOf('Button', module)
   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
   .add('Button test', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('Login', () => <Login/>)
   .add('with some emoji', () => (
     <Button onClick={action('clicked')}>
       <span role="img" aria-label="so cool">
@@ -20,3 +23,9 @@ storiesOf('Button', module)
       </span>
     </Button>
   ));
+
+storiesOf('Card', module)
+.add('GitHubCard', () => <GitHubCard/>)
+.add('readDocsCard', () => <ReadDocs/>)
+.add('DummyCard', () => <DummyCard/>)
+.add('DiagnosisCard', () => <DiagnosisCard/>)
