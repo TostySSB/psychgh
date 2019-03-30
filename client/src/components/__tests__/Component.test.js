@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestRenderer from 'react-test-renderer';
+import renderer from 'react-test-renderer';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Login} from '../auth/Login';
-import Register from '../auth/Register';
-import Dashboard from '../dashboard/Dashboard';
+import {Register} from '../auth/Register';
+import {Dashboard} from '../dashboard/Dashboard';
 import Landing from '../layout/Landing';
 import Navbar from '../layout/Navbar';
 
@@ -20,10 +20,12 @@ configure({adapter: new Adapter()});
 // 	return {props, enzymeWrapper};
 // }
 
-
-describe('test all components', () => {
+// Test layout components
+describe('Test layout components', () => {
 	it('Landing Renders', () => {
-		shallow(<Landing />);
+		// shallow(<Landing />);
+		const LandingComponent = renderer.create(<Landing />).toJSON();
+		expect(LandingComponent).toMatchSnapshot();
 	});
 
 	it('Navbar Renders', () => {
@@ -31,9 +33,4 @@ describe('test all components', () => {
 	});
 });
 
-//Register component
-// it("Register renders without crashing", () => {
-// 	const div = document.createElement('div');
-// 	ReactDOM.render(<Register />, div);
-// 	ReactDOM.unmountComponentAtNode(div);
-// });
+// Test 

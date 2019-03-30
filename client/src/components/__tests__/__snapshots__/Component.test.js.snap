@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test layout components Landing Renders 1`] = `
+<div>
+  <div
+    className="container valign-wrapper"
+    style={
+      Object {
+        "paddingBottom": "10%",
+        "paddingTop": "10%",
+      }
+    }
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col s12 center-align"
+      >
+        <h4>
+          <b>
+            Welcome
+          </b>
+           to Psych432, a work in progress app designed to make the lives of patients and practitioners easier.
+        </h4>
+        <p
+          className="flow-text grey-text text-darken-1"
+        >
+          Proudly built using the MERN stack.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    className="HomePageGrid-root-1"
+  >
+    <div
+      className="MuiGrid-container-2 MuiGrid-justify-xs-space-evenly-23"
+      style={
+        Object {
+          "minHeight": "100vh",
+        }
+      }
+    >
+      <div
+        className="MuiGrid-item-3"
+      >
+        <div
+          className="MuiPaper-root-102 MuiPaper-elevation1-105 MuiPaper-rounded-103 MuiCard-root-101 GitHubCard-card-99"
+        >
+          <div
+            className="MuiCardMedia-root-129 GitHubCard-media-100"
+            style={
+              Object {
+                "backgroundImage": "url(\\"GHLogo.png\\")",
+              }
+            }
+            title="GitHub Logo"
+          />
+          <div
+            className="MuiCardContent-root-131"
+          >
+            <h2
+              className="MuiTypography-root-132 MuiTypography-h4-147 MuiTypography-gutterBottom-159 MuiTypography-alignCenter-155"
+            >
+              This is an open source project developed by Troy Oster, Henry Soule, and George Engel. Psychgh is hosted on GitHub. Click below to view the source code for this project.
+            </h2>
+          </div>
+          <div
+            className="MuiCardActions-root-168"
+          >
+            <a
+              className="MuiButtonBase-root-197 MuiButton-root-171 MuiButton-text-173 MuiButton-textPrimary-174 MuiButton-flat-176 MuiButton-flatPrimary-177 MuiButton-sizeLarge-195 MuiButton-fullWidth-196 MuiCardActions-action-170"
+              href="https://github.com/TostySSB/psychgh"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <span
+                className="MuiButton-label-172"
+              >
+                <h2
+                  className="MuiTypography-root-132 MuiTypography-h5-148 MuiTypography-colorPrimary-162 MuiTypography-alignCenter-155"
+                >
+                  Learn More
+                </h2>
+              </span>
+              <span
+                className="MuiTouchRipple-root-202"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-item-3"
+      >
+        <div
+          className="MuiPaper-root-102 MuiPaper-elevation1-105 MuiPaper-rounded-103 MuiCard-root-101 ReadDocsCard-card-200"
+        >
+          <div
+            className="MuiCardMedia-root-129 ReadDocsCard-media-201"
+            style={
+              Object {
+                "backgroundImage": "url(\\"readDocs.png\\")",
+              }
+            }
+            title="ReadTheDocs Logo"
+          />
+          <div
+            className="MuiCardContent-root-131"
+          >
+            <h2
+              className="MuiTypography-root-132 MuiTypography-h4-147 MuiTypography-gutterBottom-159 MuiTypography-alignCenter-155"
+            >
+              Want to learn how to use, modify, and edit this project? Whether you are a developer, or simply a user, our documentation can help you. Click the link below to view the documentation for this project.
+            </h2>
+          </div>
+          <div
+            className="MuiCardActions-root-168"
+          >
+            <a
+              className="MuiButtonBase-root-197 MuiButton-root-171 MuiButton-text-173 MuiButton-textPrimary-174 MuiButton-flat-176 MuiButton-flatPrimary-177 MuiButton-sizeLarge-195 MuiButton-fullWidth-196 MuiCardActions-action-170"
+              href="https://psychgh.readthedocs.io/en/latest/"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <span
+                className="MuiButton-label-172"
+              >
+                <h2
+                  className="MuiTypography-root-132 MuiTypography-h5-148 MuiTypography-colorPrimary-162 MuiTypography-alignCenter-155"
+                >
+                  Learn More
+                </h2>
+              </span>
+              <span
+                className="MuiTouchRipple-root-202"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
