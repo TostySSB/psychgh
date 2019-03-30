@@ -14,6 +14,7 @@ import Login from "./components/auth/Login";
 import Eval_Maker from "./Views/Patient_Eval_Maker";
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import PractitionerRoute from "./components/private-route/PractitionerRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import DiagnosisChart from './Views/DiagnosisChart';
 import DiagnosisGrid from './components/UI/grids/DiagnosisGrid';
@@ -52,12 +53,13 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/evaluation" component={PatientEvaluation} />
+            
             <Route exact path="/test" component={Eval_Maker} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/DiagnosisExploration" component={DiagnosisGrid} />
               <PrivateRoute exact path="/DiagnosisChart" component={DiagnosisChart} />
-              <PrivateRoute exact path="/Patients" component={PatientExploration} />
+              <PractitionerRoute exact path="/Patients" component={PatientExploration} />
             </Switch>
           </div>
         </Router>
