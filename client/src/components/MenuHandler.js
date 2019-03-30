@@ -32,6 +32,9 @@ export class MenuHandler extends Component {
             <Link to="/PHQ9" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>Administer the PHQ-9</MenuItem>
             </Link>
+            <Link to="/DepressionTest" style={{ textDecoration: 'none', display: 'block' }}>
+                <MenuItem>Depression Chart</MenuItem>
+            </Link>
             <Link to="/DiagnosisChart" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>New Diagnosis Exploration</MenuItem>
             </Link>
