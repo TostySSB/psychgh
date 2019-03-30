@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 
-class MenuHandler extends Component {
+export class MenuHandler extends Component {
   constructor() {
     super();
     this.state = {

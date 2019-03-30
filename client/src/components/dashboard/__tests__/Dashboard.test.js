@@ -18,11 +18,12 @@ function dashboardSetup() {
 		},
 	}
 	const dashboardWrapper = shallow(<Dashboard {...props}/>);
-	return {props, dashboardWrapper};
+	return dashboardWrapper;
 }
 
 describe("Dashboard component renders", () => {
 	it("Renders without crashing", () => {
-		const { dashboard } = dashboardSetup();
+		const dashboard  = dashboardSetup();
+		expect(dashboard.exists()).toBe(true);
 	});
 });
