@@ -74,18 +74,18 @@ class App extends Component {
               <PrivateRoute exact path="/DiagnosisExploration" component={DiagnosisGrid} />
               <PrivateRoute exact path="/DiagnosisChart" component={DiagnosisChart} />
               <PractitionerRoute exact path="/DepressionTest" component={DepressionChart} />
-            <PractitionerRoute exact path="/patient_evaluation2" component={DepressionChart2} />
-            <PractitionerRoute exact path="/patient_evaluation3a" component={DepressionChart3a} />
-            <PractitionerRoute exact path="/patient_evaluation3b" component={DepressionChart3b} />
-            <PractitionerRoute exact path="/patient_evaluation3c" component={DepressionChart3c} />
-            <PractitionerRoute exact path="/patient_evaluation4a" component={DepressionChart4a} />
-            <PractitionerRoute exact path="/patient_evaluation4b" component={DepressionChart4b} />
-            <PractitionerRoute exact path="/patient_evaluation5a" component={DepressionChart5a} />
-            <PractitionerRoute exact path="/patient_evaluation5b" component={DepressionChart5b} />
-            <PractitionerRoute exact path="/patient_evaluation5c" component={DepressionChart5c} />
-            <PractitionerRoute exact path="/patient_evaluation6a" component={DepressionChart6a} />
-            <PractitionerRoute exact path="/patient_evaluation6b" component={DepressionChart6b} />
-            <PractitionerRoute exact path="/patient_evaluation6c" component={DepressionChart6c} />
+              <PractitionerRoute exact path="/patient_evaluation2" component={DepressionChart2} />
+              <PractitionerRoute exact path="/patient_evaluation3a" component={DepressionChart3a} />
+              <PractitionerRoute exact path="/patient_evaluation3b" component={DepressionChart3b} />
+              <PractitionerRoute exact path="/patient_evaluation3c" component={DepressionChart3c} />
+              <PractitionerRoute exact path="/patient_evaluation4a" component={DepressionChart4a} />
+              <PractitionerRoute exact path="/patient_evaluation4b" component={DepressionChart4b} />
+              <PractitionerRoute exact path="/patient_evaluation5a" component={DepressionChart5a} />
+              <PractitionerRoute exact path="/patient_evaluation5b" component={DepressionChart5b} />
+              <PractitionerRoute exact path="/patient_evaluation5c" component={DepressionChart5c} />
+              <PractitionerRoute exact path="/patient_evaluation6a" component={DepressionChart6a} />
+              <PractitionerRoute exact path="/patient_evaluation6b" component={DepressionChart6b} />
+              <PractitionerRoute exact path="/patient_evaluation6c" component={DepressionChart6c} />
               <PractitionerRoute exact path="/Patients" component={PatientExploration} />
               <PractitionerRoute exact path="/PHQ9" component={PHQ9} />
             </Switch>
