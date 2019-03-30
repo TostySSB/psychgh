@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
-class Register extends Component {
+export class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -57,7 +57,7 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-
+    console.log(this.props);
     return (
       <div className="container">
         <div className="row">
