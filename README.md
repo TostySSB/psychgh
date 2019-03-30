@@ -19,9 +19,11 @@ in our project: `public`, `src`, and `docs`.
 
 ## Working with PsychGH
 
-To run PsychGH in development mode, use the command `npm start` and open your
-browser to `http://localhost:3000` to view the app running. As you make edits,
+To run PsychGH in development mode, use the command `npm run dev` and your
+browser will open to `http://localhost:3000` with the app running. As you make edits,
 this page will reload. Linter errors will appear in the developer console.
+
+If you run into errors while trying to run developement mode, use the command `npm install` in both the `root` directory of the project and the `client` directory.
 
 To test PsychGH, use the command `npm test` in the project directory to launch
 the test runner. Since we are using React's built-in test runner, see [Facebook's

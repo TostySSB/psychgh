@@ -23,16 +23,14 @@ Navigate to Node.JS's [download page](https://nodejs.org/en/download/current/) a
 
 To run PsychGH in development mode, from within the root directory, use the command `npm install` to install all of the dependencies for the express server.Then navigate to the client directory in a new terminal window and use the command `npm install` to install the client's dependencies. 
 
-Then, from within the root directory, execute the command `npm run devv`. This runs both the express server and the react client concurrently. A browser window will open up to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
+Then, from within the 'root' directory, execute the command `npm run dev`. This runs both the express server and the react client concurrently. A browser window will open up to `http://localhost:3000`. This will allow you to view the app running. As you make edits,
 this page, as well as the express server, will reload. Linter errors will appear in the developer console.
 
-To test PsychGH, use the command `npm test` in the project directory to launch
-the test runner. Since we are using React's built-in test runner, see [Facebook's
+To test PsychGH, use the command `npm test` in the project directory to launch the test runner. Since we are using React's built-in test runner, see [Facebook's
 documentation](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information. Automated tests are setup to be run via Travis, and all
-configuration for Travis can be found in your `.travis.yml` file.
+for more information. Automated tests are setup to be run via Travis, and all configuration for Travis can be found in your `.travis.yml` file.
 
-To build PsychGH, use the command `npm run build` from within both the root and the client directory. This buil the app and placethe production ready code into the `build` folder it creates inside the project. This command builds optimized and minified javascript that is ready
+To build PsychGH, use the command `npm run build` from within both the root and the client directory. This builds the app and places the production ready code into the `build` folder it creates inside the project. This command builds optimized and minified javascript that is ready
 to be deployed to the live site.
 
 ## Acessing Bug Reports
@@ -50,9 +48,13 @@ list of currently open issues.
    - Express acts as our `middleware` to verify calls to the database are made by users with the apropriate authority, and to add a layer of security by not directly accessing our database from our application's front end
 - [MongoDB](https://www.mongodb.com/) [`Data Base`]
    - We use mongoDB as our database for storing both `practitioner` & `patient` data, as well as all the data required for the psychiatric guide
-- [Okta](https://developer.okta.com/) [`Authentication`]
-   - Okta is what we use to handle `user authentication` and verify routing using `tokens`
+- [PassportJS](http://www.passportjs.org/) [`Authentication`]
+   - PassportJS is what we use to handle `user authentication` and verify routing using `tokens`
+- [StoryBook](https://www.learnstorybook.com/react/en/simple-component/) [`Component debugging`]
+   - We use `storybook` for testing individual components as we make them, to ensure they work atleast before being added to the larger project. To `use` story book, `cd` into the stories directory in `client` and run the command `'yarn run storybook'`.
+- [Jest](https://jestjs.io/) [`Test Cases`]
+   -For unit test cases, we use `Jest`, the javascript testing framework that is built into the `creat-react-app` command we used to start this project.
 
-## UML Diagram of Diagnosis Plan
+## UML Diagram of the Server-Database structure
 
 ![UML Diagram](img/UML.png)

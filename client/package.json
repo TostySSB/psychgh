@@ -20,6 +20,7 @@
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
+    "react-test-renderer": "^16.8.5",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
@@ -42,11 +43,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@storybook/react": "^5.0.5",
+    "@babel/core": "^7.4.0",
     "@storybook/addon-actions": "^5.0.5",
     "@storybook/addon-links": "^5.0.5",
     "@storybook/addons": "^5.0.5",
-    "@babel/core": "^7.4.0",
-    "babel-loader": "^8.0.5"
+    "@storybook/react": "^5.0.5",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2"
   }
 }
