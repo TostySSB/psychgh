@@ -68,7 +68,6 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/evaluation" component={PatientEvaluation} />
             
-            <Route exact path="/test" component={Eval_Maker} />
             <Route exact path="/test2" component={DepressionChart} />
             <Route exact path="/patient_evaluation2" component={DepressionChart2} />
             <Route exact path="/patient_evaluation3a" component={DepressionChart3a} />
