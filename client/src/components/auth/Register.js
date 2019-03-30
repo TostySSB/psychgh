@@ -57,7 +57,7 @@ export class Register extends Component {
 
   render() {
     const { errors } = this.state;
-
+    console.log(this.props);
     return (
       <div className="container">
         <div className="row">

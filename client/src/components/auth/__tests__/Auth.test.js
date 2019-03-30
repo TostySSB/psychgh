@@ -24,15 +24,29 @@ function loginSetup() {
 }
 
 describe('Login Component renders', () => {
-	it('Login renders itself', () => {
+	it('Renders without crashing', () => {
 		const { loginWrapper } = loginSetup();
-		expect(loginWrapper.toJSON).toMatchSnapshot();
-		
 	})
 });
 
 function registerSetup() {
 	const props = {
-		
-	}
+		auth: {
+			isAuthenticated: false,
+			isPractitioner: false,
+			loading: false
+		},
+		registerUser: jest.fn(),
+		errors: {}
+	};
+	const registerWrapper = shallow(<Register {...props}/>);
+	return {props, registerWrapper};
 }
+
+describe('Register Component renders', () => {
+	it('Renders without crashing', () => {
+		const { registerWrapper } = registerSetup();
+	});
+});
+
+
