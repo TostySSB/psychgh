@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './DiagnosisChart.css';
 import PropTypes from "prop-types";
+import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
 import { connect } from "react-redux";
 //import '../components/UI/cards/ExplorationCard.js';
 
@@ -9,8 +10,8 @@ class DiagnosisChart extends Component {
 		super();
 		this.state = {
 			newExploration: false,
-			firstName: "",
-			lastName: "",
+			firstName: "Henry",
+			lastName: "Soule",
 			patients: undefined,
 			errors: {}
 		};
@@ -62,10 +63,16 @@ class DiagnosisChart extends Component {
 			[e.target.id]: e.target.value
     	});
   	}
+
+  	renderNewPatient = () => {
+  		console.log(window.location.pathname);
+  		
+  	}
  	
 	render() {
-		return (
-			<div className='DiagnosisChart'>
+		if (this.state.newExploration) {
+			return (
+  			<div className='DiagnosisChart'>
 				<h1>New Diagnosis Exploration</h1>
 				<p>Enter the patients name below to start a new diagnosis exploration.</p>
 			  <div style={{ marginTop: "4rem" }} className="row">
@@ -105,7 +112,14 @@ class DiagnosisChart extends Component {
 				</div>
 			  </div>
 			</div>
-		  );
+  		);
+		}
+		else {
+			console.log(this.state);
+			return(
+				<DiagnosisCard firstName={this.state.firstName} lastName={this.state.lastName}/>
+			);
+		}
 	}
 }
 
