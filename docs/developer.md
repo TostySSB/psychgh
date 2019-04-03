@@ -58,3 +58,7 @@ list of currently open issues.
 ## UML Diagram of the Server-Database structure
 
 ![UML Diagram](img/UML.png)
+
+## Debugging Coverage at present:
+
+![Debugging Coverage](img/coverage_output.png)
