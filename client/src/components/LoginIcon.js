@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 
 
-class LoginIcon extends Component {
+export class LoginIcon extends Component {
   constructor() {
     super();
     this.state = {

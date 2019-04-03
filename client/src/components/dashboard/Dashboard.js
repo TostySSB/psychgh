@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -11,7 +11,6 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-
     return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">

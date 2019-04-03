@@ -15,4 +15,4 @@ and follow our template for reporting an issue:
     What was the URL for the page where the bug occured?
 ```
 
-A developer for PsychGH? Visit our [Developer documentation](/developer/)!
+A developer for PsychGH? Visit our [Developer documentation](/en/latest/developer/)!

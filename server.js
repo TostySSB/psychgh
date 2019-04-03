@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const DiagnosisExploration = require('./models/DiagnosisExploration');
 const users = require("./routes/api/users");
-
 const app = express();
 
 // Bodyparser middleware

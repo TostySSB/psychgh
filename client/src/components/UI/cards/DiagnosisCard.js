@@ -24,6 +24,7 @@ class DiagnosisCard extends Component {
 			<Card>
 				<CardContent>
 					<DiagnosisCardHeader firstName={this.state.firstName} lastName={this.state.lastName}/>
+					
 				</CardContent>
 			</Card>
 		);
