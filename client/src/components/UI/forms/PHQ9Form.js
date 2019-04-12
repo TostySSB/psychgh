@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
+import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import axios from "axios";
+import { connect } from "react-redux";
+
 //Note, this is a temporary hot fix solution to doing this form, I sincerely appologize to any poor soul who has to read this
 const styles = theme => ({
   root: {
@@ -107,73 +111,80 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
 }
 class PHQ9Form extends React.Component {
   state = {
-    q1: -1,
-    q2: -1,
-    q3: -1,
-    q4: -1,
-    q5: -1,
-    q6: -1,
-    q7: -1,
-    q8: -1,
-    q9: -1,
-    q10: -1,
+    q1: 100,
+    q2: 100,
+    q3: 100,
+    q4: 100,
+    q5: 100,
+    q6: 100,
+    q7: 100,
+    q8: 100,
+    q9: 100,
+    q10: 100,
+    sum: 0,
+    complete: true
   };
-
-  handleChange1 = event => {
-    this.setState({ q1: event.target.value });
+  componentDidMount(){
+    this.calculateSum();
+    this.setState({complete: true})
+  }
+  calculateSum(){
+    var test = Number(this.state.q1)+Number(this.state.q2)+Number(this.state.q3)+Number(this.state.q4)+Number(this.state.q5)+Number(this.state.q6)+Number(this.state.q7)+Number(this.state.q8)+Number(this.state.q9)+Number(this.state.q10);
+    this.setState({sum: Number(test)})
+    if (Number(this.state.sum) < 100 ){
+      this.setState({complete: false})
+    }else{
+      this.setState({complete: true})
+    }
   };
-  handleChange2 = event => {
-    this.setState({ q2: event.target.value });
+  getButton(){
+    if (this.state.sum<100){
+      return(
+        <Button variant="contained" color="primary" disabled = {false} onClick={() => {this.handleSubmit()}}>
+           Submit
+        </Button>
+      )
+    }
+    else{
+      return(
+        <Button variant="contained" color="primary" disabled = {true} onClick={() => {this.handleSubmit()}}>
+           Submit
+        </Button>
+      )
+    }
+  }
+  handleChange(e) {
+    this.setState({ [e.target.name] : e.target.value }
+      , function () {
+        this.calculateSum();
+      });
+    this.calculateSum();
+  }
+  handleSubmit(){
+    this.calculateSum();
+    axios.post("/api/phq9s/q1", {email: this.props.auth.email, q1:this.state.q1, q2:this.state.q2, q3:this.state.q3, q4:this.state.q4,q5:this.state.q5,q6:this.state.q6,q7:this.state.q7,q8:this.state.q8,q9:this.state.q9,q10:this.state.q10});
   };
-  handleChange3 = event => {
-    this.setState({ q3: event.target.value });
-  };
-  handleChange4 = event => {
-    this.setState({ q4: event.target.value });
-  };
-  handleChange5 = event => {
-    this.setState({ q5: event.target.value });
-  };
-  handleChange6 = event => {
-    this.setState({ q6: event.target.value });
-  };
-  handleChange7 = event => {
-    this.setState({ q7: event.target.value });
-  };
-  handleChange8 = event => {
-    this.setState({ q8: event.target.value });
-  };
-  handleChange9 = event => {
-    this.setState({ q9: event.target.value });
-  };
-  handleChange10 = event => {
-    this.setState({ q10: event.target.value });
-    analyzeResults(Number(this.state.q1),Number(this.state.q2),Number(this.state.q3),Number(this.state.q4),Number(this.state.q5),Number(this.state.q6),Number(this.state.q7),Number(this.state.q8),Number(this.state.q9),Number(this.state.q10));
-  };
-
   render() {
     const { classes } = this.props;
-
     return (
     <div>
         <h2>
             Over the past 2 weeks, how often have you been bothered
             by any of the following problems?
         </h2>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Little interest or pleasure in doing things</FormLabel>
           <RadioGroup
             aria-label="Q1"
             name="q1"
-            className={classes.group}
-            value={this.state.q1}
-            onChange={this.handleChange1}
+            value={Number(this.state.q1)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -183,20 +194,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Feeling down, depressed, or hopeless</FormLabel>
           <RadioGroup
             aria-label="Q2"
             name="q2"
-            className={classes.group}
-            value={this.state.q2}
-            onChange={this.handleChange2}
+            
+            value={Number(this.state.q2)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -206,20 +217,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Trouble falling asleep, staying asleep, or sleeping too much</FormLabel>
           <RadioGroup
             aria-label="Q3"
             name="q3"
-            className={classes.group}
-            value={this.state.q3}
-            onChange={this.handleChange3}
+            
+            value={Number(this.state.q3)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -229,20 +240,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Feeling tired or having little energy</FormLabel>
           <RadioGroup
             aria-label="Q4"
             name="q4"
-            className={classes.group}
-            value={this.state.q4}
-            onChange={this.handleChange4}
+            
+            value={Number(this.state.q4)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -252,20 +263,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Poor appetite or overeating</FormLabel>
           <RadioGroup
             aria-label="Q5"
             name="q5"
-            className={classes.group}
-            value={this.state.q5}
-            onChange={this.handleChange5}
+            
+            value={Number(this.state.q5)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -275,20 +286,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Feeling bad about yourself - or that you are a failure - or that you have let yourself or your family down</FormLabel>
           <RadioGroup
             aria-label="Q6"
             name="q6"
-            className={classes.group}
-            value={this.state.q6}
-            onChange={this.handleChange6}
+            
+            value={Number(this.state.q6)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -298,20 +309,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Trouble concentrating on things such as reading the newspaper or watching television</FormLabel>
           <RadioGroup
             aria-label="Q7"
             name="q7"
-            className={classes.group}
-            value={this.state.q7}
-            onChange={this.handleChange7}
+            
+            value={Number(this.state.q7)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -321,20 +332,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Moving or speaking so slowly that other people could have noticed. Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual</FormLabel>
           <RadioGroup
             aria-label="Q8"
             name="q8"
-            className={classes.group}
-            value={this.state.q8}
-            onChange={this.handleChange8}
+            
+            value={Number(this.state.q8)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -344,20 +355,20 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div >
+        <FormControl component="fieldset" >
           <FormLabel component="legend">Thought that you would be better off dead or of hurting yourself in some way</FormLabel>
           <RadioGroup
             aria-label="Q9"
             name="q9"
-            className={classes.group}
-            value={this.state.q9}
-            onChange={this.handleChange9}
+            
+            value={Number(this.state.q9)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Several Days" />
-            <FormControlLabel value="2" control={<Radio />} label="More than half the days" />
-            <FormControlLabel value="3" control={<Radio />} label="Nearly every day" />
+            <FormControlLabel value={0} control={<Radio />} label="Not at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Several Days" />
+            <FormControlLabel value={2} control={<Radio />} label="More than half the days" />
+            <FormControlLabel value={3} control={<Radio />} label="Nearly every day" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -367,20 +378,18 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+      <div className="Q10">
+        <FormControl component="fieldset" >
           <FormLabel component="legend">If you answerd anything other that "not at all" to the questions above, how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people? </FormLabel>
           <RadioGroup
-            aria-label="Q10"
             name="q10"
-            className={classes.group}
-            value={this.state.q10}
-            onChange={this.handleChange10}
+            value={Number(this.state.q10)}
+            onChange={this.handleChange.bind(this)}
           >
-            <FormControlLabel value="0" control={<Radio />} label="Not difficult at all" />
-            <FormControlLabel value="1" control={<Radio />} label="Somewhat difficult" />
-            <FormControlLabel value="2" control={<Radio />} label="Very difficult" />
-            <FormControlLabel value="3" control={<Radio />} label="Extremely difficult" />
+            <FormControlLabel value={0} control={<Radio />} label="Not difficult at all" />
+            <FormControlLabel value={1} control={<Radio />} label="Somewhat difficult" />
+            <FormControlLabel value={2} control={<Radio />} label="Very difficult" />
+            <FormControlLabel value={3} control={<Radio />} label="Extremely difficult" />
             {/* <FormControlLabel
               value="disabled"
               disabled
@@ -390,6 +399,8 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
+      {this.getButton()}
+            {this.state.sum}
         {analyzeResults(Number(this.state.q1),Number(this.state.q2),Number(this.state.q3),Number(this.state.q4),Number(this.state.q5),Number(this.state.q6),Number(this.state.q7),Number(this.state.q8),Number(this.state.q9),Number(this.state.q10))}
       </div>
     );
@@ -400,4 +411,10 @@ PHQ9Form.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PHQ9Form);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps
+)(PHQ9Form);
