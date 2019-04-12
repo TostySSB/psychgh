@@ -9,26 +9,32 @@ import Button from '@material-ui/core/Button';
 import DiagnosisCardHeader from './DiagnosisCardHeader';
 import PatientBio from './PatientBio';
 
-const styles = {
-
-};
 
 const diagnosisCard = (props) => {
 	let cardBody;
-	if (props.firstName != null) {
+	if (props.type == 'header') {
 		cardBody =  <div>
 						<DiagnosisCardHeader firstName={props.firstName} lastName={props.lastName}/>
  						<PatientBio age={props.age} diagnosis={props.diagnosis}/>
  					</div>;
 	}
-	else {
+	if (props.type == 'therapy') {
 		cardBody =  <div>
-						<p>{props.type}</p>
-						<p>More Content Will Go Here.</p>
-					</div>
+						<p>Initial Therapy</p>
+ 					</div>;
+	}
+	else if (props.type == 'response') {
+		cardBody =  <div>
+						<p>Response</p>
+					</div>;
+	}
+	else if (props.type == 'evaluation') {
+		cardBody = <div>
+						<p>Evaluation</p>
+				   </div>;
 	}
 	return (
-		<div className={classes.DiagnosisCard}>
+		<div className={classes.DiagnosisCard} onClick={props.onClick}>
 			<Card>
 				<CardContent>
 						{cardBody}

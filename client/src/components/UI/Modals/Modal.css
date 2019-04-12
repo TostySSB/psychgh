@@ -1,7 +1,19 @@
+.Select {
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+}
+
+.TextField {
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+}
+
 .Modal {
     position: fixed;
     z-index: 500;
-    background-color: black;
+    background-color: white;
     width: 70%;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px black;
