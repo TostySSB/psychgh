@@ -9,8 +9,9 @@ import { connect } from "react-redux";
 //import '../components/UI/cards/ExplorationCard.js';
 
 class DiagnosisChart extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+		let updateEvals = this.updateEvals.bind(this);
 		this.state = {
 			newExploration: false,
 			firstName: "Henry",
@@ -97,9 +98,12 @@ class DiagnosisChart extends Component {
   	cardClickHandler = (type) => {
   		this.cardType = type;
   		this.setState({editingCard: true});
+  	}
 
+  	updateEvals = (evalData) => {
 
   	}
+
 	render() {
 		if (this.state.newExploration) {
 			return (
@@ -107,14 +111,16 @@ class DiagnosisChart extends Component {
   			);
 		}
 		else {
-			let cardModal = <CardModal show={this.state.editingCard} 
-									   modalClosed={this.cancelNewCardHandler}
-									   type={this.cardType}
-							/>;
 
 			return(
 				<div>
-					{cardModal}
+					<CardModal 
+						show={this.state.editingCard}
+					   	modalClosed={this.cancelNewCardHandler}
+					   	type={this.cardType}
+					   	updateEvals ={this.updateEvals.bind(this)}
+					   	
+					/>
 					<DiagnosisCard 
 						type='header' 
 						firstName={this.state.firstName}

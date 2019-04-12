@@ -35,107 +35,116 @@ import Aux from '../../Aux';
 
 
 class CardModal extends Component {
-	state = {
-		var1: '',
-		var2: '',
-		labelWidth: 0
+	constructor(props) {
+		super(props);
+		this.state = {
+			formData: {
+				type: props.type
+			}
+		};
 	}
+	
+	handleChange(formData) {
+		this.setState({evalData: "Data"});
+	}
+	
 
-	saveCardContent = () => {
-		//Save the card content
+	makeForm() {
+		let formContent;
+		if (this.props.type == "therapy") {
+			formContent = <div>
+							<h4>Initial Therapy</h4>
+							<div className={classes.Select}>
+								<FormControl variant="outlined">
+									<InputLabel>Medication</InputLabel>
+									<Select
+										native 
+										input={
+											<OutlinedInput
+												name="medication"
+												labelWidth={this.state.labelWidth}
+											/>
+										}
+									>
+										<option value="" />
+										<option value={"citralopram"}>Citralopram</option>
+										<option value={"sertraline"}>Sertraline</option>
+									</Select>
+								</FormControl>
+							</div>
+							<div className={classes.TextField}>
+								<FormControl variant="outlined" className={classes.FormControl}>
+									<TextField
+										id="initial-therapy-notes"
+										label="Notes on Side Effects"
+										multiline
+										rows="4"
+									/>
+								</FormControl>
+							</div>
+						  </div>;
+		}
+		else if (this.props.type == "response") {
+			formContent = <div>
+							<h4>Response</h4>
+							<div>
+								<FormControl>
+									<InputLabel>
+										Response Type
+									</InputLabel>
+									<Select
+										native 
+										input={
+											<OutlinedInput
+												name="medication"
+												labelWidth={this.state.labelWidth}
+											/>
+										}
+									>
+										<option value="" />
+										<option value={"non"}>Non-Response</option>
+										<option value={"partial"}>Partial Response</option>
+										<option value={"full"}>Full Response</option>
+									</Select>
+								</FormControl>
+							</div>
+						  </div>;
+	
+		}
+		else if (this.props.type == "evaluation") {
+			formContent = <div>
+							<h4>Evaluation</h4>
+							<div>
+								<TextField
+									id="evaluation-notes"
+									rows="5"
+									multiline
+									label="Enter notes here"
+								/>
+							</div>
+						  </div>;
+	
+		}
+		return formContent;
 	}
 
 	render() {
-			let formContent;
-			if (this.props.type == "therapy") {
-				formContent = <div>
-								<h4>Initial Therapy</h4>
-								<div className={classes.Select}>
-									<FormControl variant="outlined">
-										<InputLabel>Medication</InputLabel>
-										<Select
-											native 
-											input={
-												<OutlinedInput
-													name="medication"
-													labelWidth={this.state.labelWidth}
-												/>
-											}
-										>
-											<option value="" />
-											<option value={"citralopram"}>Citralopram</option>
-											<option value={"sertraline"}>Sertraline</option>
-										</Select>
-									</FormControl>
-								</div>
-								<div className={classes.TextField}>
-									<FormControl variant="outlined" className={classes.FormControl}>
-										<TextField
-											id="initial-therapy-notes"
-											label="Notes on Side Effects"
-											multiline
-											rows="4"
-										/>
-									</FormControl>
-								</div>
-							  </div>;
-			}
-			else if (this.props.type == "response") {
-				formContent = <div>
-								<h4>Response</h4>
-								<div>
-									<FormControl>
-										<InputLabel>
-											Response Type
-										</InputLabel>
-										<Select
-											native 
-											input={
-												<OutlinedInput
-													name="medication"
-													labelWidth={this.state.labelWidth}
-												/>
-											}
-										>
-											<option value="" />
-											<option value={"non"}>Non-Response</option>
-											<option value={"partial"}>Partial Response</option>
-											<option value={"full"}>Full Response</option>
-										</Select>
-									</FormControl>
-								</div>
-							  </div>;
+		let formContent = this.makeForm();
+		return (
+			<Aux>
+				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+				<div
+					className={classes.Modal}
+					style={{
+						transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+						opacity: this.props.show ? '1' : '0'
+					}}>
 
-			}
-			else if (this.props.type == "evaluation") {
-				formContent = <div>
-								<h4>Evaluation</h4>
-								<div>
-									<TextField
-										id="evaluation-notes"
-										rows="5"
-										multiline
-										label="Enter notes here"
-									/>
-								</div>
-							  </div>;
-
-			}
-			return (
-				<Aux>
-					<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
-					<div
-						className={classes.Modal}
-						style={{
-							transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-							opacity: this.props.show ? '1' : '0'
-						}}>
-
-						{formContent}
-						<button onClick={this.saveCardContent}>Save</button>
-					</div>
-				</Aux>
-			);
+					{formContent}
+					<button onClick={() => this.props.updateEvals}>Save</button>
+				</div>
+			</Aux>
+		);
 	}
 }
 

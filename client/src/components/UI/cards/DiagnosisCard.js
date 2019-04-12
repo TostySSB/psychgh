@@ -20,17 +20,17 @@ const diagnosisCard = (props) => {
 	}
 	if (props.type == 'therapy') {
 		cardBody =  <div>
-						<p>Initial Therapy</p>
+						<p className={classes.CardTitle}>Initial Therapy</p>
  					</div>;
 	}
 	else if (props.type == 'response') {
 		cardBody =  <div>
-						<p>Response</p>
+						<p className={classes.CardTitle}>Response</p>
 					</div>;
 	}
 	else if (props.type == 'evaluation') {
 		cardBody = <div>
-						<p>Evaluation</p>
+						<p className={classes.CardTitle}>Evaluation</p>
 				   </div>;
 	}
 	return (
