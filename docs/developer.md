@@ -62,3 +62,54 @@ list of currently open issues.
 ## Debugging Coverage at present:
 
 ![Debugging Coverage](img/coverage_output.png)
+
+## User Testing
+Post feature release, we decided to have some actual would be users test the application.
+
+User Profiles:
+- `User 1:`
+	- Full name: Karen Solberg
+	- Occupation: Student (Mathematics Major Junior year)
+- `User 2:`
+	- Full name: Harold Oster
+	- Occupation: Infectious disease specialist/general practitioner (Doctor)
+
+**Their Tasks:**
+
+      We asked User 1 to approach the website as a patient. This would include signing up as a patient and checking if they needed an evaluation test, then taking one if necessary. After this simple task, they would be free to explore around the website and try and tell us what features we had implemented for patients to use, thus allowing us to figure out what he was able to figure out intuitively.
+
+      Meanwhile, we asked User 2 to joining the website as a practitioner, which includes signing up normally, then being verified by us as a practitioner before he could have practitioner privileges. After that, he would be tasked with evaluating a patient’s progress and diagnosing the appropriate methods of treatment. Please note, User 2 is a doctor, so they should approach this similarly to how a psychiatric practitioner would in the field. They would then be free to explore what practitioners have access to on the website and tell us what features there were available to him, thus allowing us to figure out what he was able to figure out intuitively.
+
+**User’s Evaluation:**
+
+- User 1
+   - Took awhile to find the login page due to the login button being hidden behind a menu button
+   - realized they had to register before logging in, and proceeded to do so without any problem
+   - Took the evaluation test and submitted the results, though some of the test results were not reported correctly. 
+   - Logged out
+   - The ‘patient’ understands they can:  View their account, take depression evaluation tests, and log out.
+
+- User 2:
+	- Also took awhile to find the register/login page
+   - Signed up successfully, we approved them as a Practitioner, & they gained access rights immediately.
+   - Was able to add a specific patient just fine, and check their information
+   - Was able to navigate to the depression diagnosis chart just fine & decide the next steps in the patient’s treatment accurately.
+   - “The Diagnosis page looks bad” (It was a temporary implementation meant to be replaced)
+   - Was able to edit the evaluation test
+   - ”Wait, I really have to remake everything in the evaluation test each time I edit it?”
+   - Was able to edit the diagnosis page with some difficulty.
+   - The ‘practitioner’ understands they can: view my patient’s details, Add patients to my patient list, Search for a specific patient, view depression test evaluation results on a patient by patient basis, edit depression test & how it is evaluated.
+
+**What we learned from them:**
+- The main page is good for developers, but not so much for general Users right now.
+- The header bar should have a series of buttons that are currently under the drop down style menu button. This should be changed for improvements in simplicity of design.
+- The depression treatment plan page needs major revamping.
+Normal Patients want to be able to view their own data.
+They liked the minimalist design, and how simple we kept things.
+- The editability of evaluation tests needs improvement.
+
+**What we changed as a result:**
+- The header bar now has a series of buttons inplace of a drop down menu.
+- Remade the depression treatment plan page, basically redoing that function entirely
+- Added ability for patient to view account information
+- Updated evaluation tests to report correct values to the database
