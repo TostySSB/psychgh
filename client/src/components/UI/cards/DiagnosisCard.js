@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import classes from './DiagnosisCard.css';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import classes from './DiagnosisCard.css';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,10 +10,7 @@ import DiagnosisCardHeader from './DiagnosisCardHeader';
 import PatientBio from './PatientBio';
 
 const styles = {
-	width: '25%',
-	margin: 'auto',
-	marginTop: '10px',
-	horizontalAlign: 'center'
+
 };
 
 const diagnosisCard = (props) => {
@@ -32,7 +29,7 @@ const diagnosisCard = (props) => {
 	}
 	return (
 		<div className={classes.DiagnosisCard}>
-			<Card style={styles}>
+			<Card>
 				<CardContent>
 						{cardBody}
 				</CardContent>
