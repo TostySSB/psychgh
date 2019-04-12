@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './DiagnosisChart.css';
 import PropTypes from "prop-types";
 import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
+import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls';
+import NewEvalModal from '../components/UI/Modals/NewEvalModal';
 import { connect } from "react-redux";
 //import '../components/UI/cards/ExplorationCard.js';
 
@@ -12,8 +14,15 @@ class DiagnosisChart extends Component {
 			newExploration: false,
 			firstName: "Henry",
 			lastName: "Soule",
+			age: 30,
+			diagnosis: 'Crazy',
 			patients: undefined,
-			errors: {}
+			evals: [
+				{type: 'Some Type'},
+				{type: 'Some other type'}
+			],
+			errors: {},
+			addingCard: false
 		};
 	}
 	componentWillMount(){
@@ -66,7 +75,20 @@ class DiagnosisChart extends Component {
 
   	renderNewPatient = () => {
   		console.log(window.location.pathname);
-  		
+  	}
+
+  	addCardHandler = () => {
+  		//Update Eval
+  		//Will need to render modal first
+  		this.setState({addingCard: true});
+  	}
+
+  	cancelNewCardHandler = () => {
+  		this.setState({addingCard: false});
+  	}
+
+  	addNewCard = () => {
+
   	}
  	
 	render() {
@@ -115,9 +137,22 @@ class DiagnosisChart extends Component {
   		);
 		}
 		else {
-			console.log(this.state);
 			return(
-				<DiagnosisCard firstName={this.state.firstName} lastName={this.state.lastName}/>
+				<div>
+					<NewEvalModal show={this.state.addingCard} modalClosed={this.cancelNewCardHandler}>
+						<div>Stuff goes here.</div>
+					</NewEvalModal>
+					<DiagnosisCard 
+						firstName={this.state.firstName} 
+						lastName={this.state.lastName}
+						age={this.state.age}
+						diagnosis={this.state.diagnosis}
+					/>
+					{this.state.evals.map(ev => (
+						<DiagnosisCard type={ev.type}/>
+					))}
+					<DiagnosisControls addCard={this.addCardHandler}/>
+				</div>
 			);
 		}
 	}
