@@ -26,4 +26,12 @@ or navigate your way to [*insert-website-url*/login]()
 
 ## How to become authenticated as a Practitioner
 
-- Contact those managing the project website at the `email` specified on the bottom of the homepage.
+- Contact those managing the project website at the `email` specified on the bottom of the homepage with the apropriate credentials to verify that you are infact a `licensed professional`.
+
+## How to view patient information as a Practitioner
+
+- After loggin in as a practitioner, you can select the drop down icon to see a drop down of what you have access to. Select the `View Patients` option and you will be redirected to a page where you can search patients by `first name`, `last name`, `patient ID`, or `Email address`.
+
+## How to view depression chart
+
+- Assuming you are already logged in as a `practitioner`, you should be able to select the `Depression Chart` option from the drop down menu on the website banner and navigate through it appropriatly.
