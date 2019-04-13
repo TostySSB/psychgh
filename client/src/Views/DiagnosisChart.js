@@ -99,6 +99,10 @@ class DiagnosisChart extends Component {
   		this.setState({editingCard: true});
   	}
 
+  	submitEvalData = () => {
+  		
+  	}
+
   	updateEvals = (evalData) => {
   		console.log(evalData);
   		let index;
@@ -118,6 +122,7 @@ class DiagnosisChart extends Component {
 		this.evals[index] = newData;
 		console.log(this.evals);
 		this.setState({evals: this.evals});
+
   	}
 
   	addNewEval = (evalData) => {
