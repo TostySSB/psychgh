@@ -185,7 +185,3 @@ DiagnosisChart.propTypes = {
 	firstName: state.firstName,
 	lastName: state.lastName
   });
-  
-  export default connect(
-	mapStateToProps,
-  )(DiagnosisChart);

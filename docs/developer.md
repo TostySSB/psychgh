@@ -67,7 +67,94 @@ list of currently open issues.
 
 ## Debugging Coverage at present:
 
-![Debugging Coverage](img/coverage_output.png)
+<!-- ![Debugging Coverage](img/coverage_output.png) -->
+----------------------------------|----------|----------|----------|----------|-------------------|
+File                              |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+----------------------------------|----------|----------|----------|----------|-------------------|
+All files                         |    24.71 |    15.38 |    15.79 |    24.63 |                   |
+ src                              |    10.34 |     7.89 |     6.25 |    10.34 |                   |
+  App.js                          |       20 |       25 |      100 |       20 |... 48,50,51,53,56 |
+  index.js                        |        0 |      100 |      100 |        0 |      1,2,3,4,5,12 |
+  serviceWorker.js                |        0 |        0 |        0 |        0 |... 23,130,131,132 |
+  store.js                        |      100 |      100 |      100 |      100 |                   |
+ src/Views                        |     6.12 |        0 |     4.17 |     6.25 |                   |
+  DepressionChart.js              |       50 |      100 |       50 |       50 |                11 |
+  DiagnosisChart.js               |     4.55 |        0 |        0 |     4.65 |... 43,144,150,166 |
+  PHQ9.js                         |        0 |      100 |        0 |        0 |                 5 |
+  PatientExploration.js           |        0 |      100 |        0 |        0 |                 6 |
+  Patient_evaluation.js           |        0 |      100 |        0 |        0 |                13 |
+ src/Views/Depression             |        0 |      100 |        0 |        0 |                   |
+  DepressionChart1.js             |        0 |      100 |        0 |        0 |               1,5 |
+  DepressionChart2.js             |        0 |      100 |        0 |        0 |        7,14,19,24 |
+  DepressionChart3a.js            |        0 |      100 |        0 |        0 |              7,14 |
+  DepressionChart3b.js            |        0 |      100 |        0 |        0 |              7,12 |
+  DepressionChart3c.js            |        0 |      100 |        0 |        0 |                 5 |
+  DepressionChart4a.js            |        0 |      100 |        0 |        0 |        7,11,16,21 |
+  DepressionChart4b.js            |        0 |      100 |        0 |        0 |        7,11,16,21 |
+  DepressionChart5a.js            |        0 |      100 |        0 |        0 |                 7 |
+  DepressionChart5b.js            |        0 |      100 |        0 |        0 |                 5 |
+  DepressionChart5c.js            |        0 |      100 |        0 |        0 |                 5 |
+  DepressionChart6a.js            |        0 |      100 |        0 |        0 |                 5 |
+  DepressionChart6b.js            |        0 |      100 |        0 |        0 |                 7 |
+  DepressionChart6c.js            |        0 |      100 |        0 |        0 |                 7 |
+ src/actions                      |    34.62 |      100 |     8.33 |    34.78 |                   |
+  authActions.js                  |    26.09 |      100 |     8.33 |       25 |... 47,55,63,65,67 |
+  types.js                        |      100 |      100 |      100 |      100 |                   |
+ src/components                   |    73.68 |       50 |    71.43 |    81.25 |                   |
+  Aux.js                          |       50 |      100 |        0 |      100 |                   |
+  LoginIcon.js                    |    85.71 |       50 |      100 |    83.33 |                19 |
+  MenuHandler.js                  |       70 |       50 |    66.67 |    77.78 |             16,27 |
+ src/components/DiagnosisControls |       40 |      100 |        0 |       40 |                   |
+  DiagnosisControl.js             |       50 |      100 |        0 |       50 |                 5 |
+  DiagnosisControls.js            |    33.33 |      100 |        0 |    33.33 |               6,7 |
+ src/components/UI/Backdrop       |       50 |        0 |        0 |       50 |                   |
+  Backdrop.js                     |       50 |        0 |        0 |       50 |                 5 |
+ src/components/UI/Modals         |        0 |        0 |        0 |        0 |                   |
+  CardModal.js                    |        0 |        0 |        0 |        0 |... 12,126,130,131 |
+ src/components/UI/cards          |    41.03 |     62.5 |       40 |    41.03 |                   |
+  DiagnosisCard.js                |       70 |     62.5 |      100 |       70 |          16,22,32 |
+  DiagnosisCardHeader.js          |        0 |      100 |        0 |        0 |               4,5 |
+  DiagnosisControls.js            |        0 |      100 |        0 |        0 |             1,3,4 |
+  DummyCard.js                    |    33.33 |      100 |        0 |    33.33 |             21,22 |
+  GitHub.js                       |      100 |      100 |      100 |      100 |                   |
+  NewDiagnosisChart.js            |        0 |      100 |        0 |        0 |            5,6,13 |
+  PatientBio.js                   |      100 |      100 |      100 |      100 |                   |
+  SurveyCard.js                   |        0 |      100 |        0 |        0 |... ,5,6,7,8,20,21 |
+  readDocs.js                     |      100 |      100 |      100 |      100 |                   |
+ src/components/UI/dialogs        |    11.76 |        0 |        0 |     12.5 |                   |
+  PatientDialog.js                |    11.76 |        0 |        0 |     12.5 |... 52,55,56,57,63 |
+ src/components/UI/forms          |     4.23 |        0 |        0 |     4.35 |                   |
+  PHQ9Form.js                     |     4.23 |        0 |        0 |     4.35 |... 72,173,176,177 |
+ src/components/UI/grids          |    66.67 |      100 |    66.67 |    55.56 |                   |
+  DiagnosisGrid.js                |       50 |      100 |       50 |    33.33 |             12,13 |
+  HomePageGrid.js                 |      100 |      100 |      100 |      100 |                   |
+  PatientExplorationGrid.js       |       50 |      100 |       50 |    33.33 |             13,14 |
+ src/components/UI/tables         |    26.67 |      100 |        0 |    28.57 |                   |
+  patientList.js                  |    26.67 |      100 |        0 |    28.57 |... 0,92,95,99,100 |
+ src/components/auth              |    43.75 |    42.86 |    42.86 |    46.67 |                   |
+  Login.js                        |    41.18 |       50 |    42.86 |    43.75 |... 31,38,42,44,49 |
+  Register.js                     |    46.67 |       25 |    42.86 |       50 |... 32,39,43,45,55 |
+ src/components/dashboard         |    57.14 |      100 |    33.33 |    66.67 |                   |
+  Dashboard.js                    |    57.14 |      100 |    33.33 |    66.67 |               8,9 |
+ src/components/layout            |    66.67 |       75 |       40 |    66.67 |                   |
+  Landing.js                      |      100 |      100 |      100 |      100 |                   |
+  Navbar.js                       |     62.5 |       75 |       25 |     62.5 |          31,35,39 |
+ src/components/private-route     |       50 |        0 |        0 |       60 |                   |
+  PractitionerRoute.js            |       50 |        0 |        0 |       60 |              7,10 |
+  PrivateRoute.js                 |       50 |        0 |        0 |       60 |              7,10 |
+ src/reducers                     |       70 |    57.14 |      100 |       70 |                   |
+  authReducer.js                  |    66.67 |       50 |      100 |    66.67 |             15,22 |
+  errorReducer.js                 |       75 |    66.67 |      100 |       75 |                 8 |
+  index.js                        |      100 |      100 |      100 |      100 |                   |
+ src/utils                        |       25 |        0 |        0 |       25 |                   |
+  setAuthToken.js                 |       25 |        0 |        0 |       25 |             4,6,9 |
+----------------------------------|----------|----------|----------|----------|-------------------|
+
+Test Suites: 10 passed, 10 total
+Tests:       21 passed, 21 total
+Snapshots:   0 total
+Time:        19.811s
+Ran all test suites.
 
 ## User Testing
 Post feature release, we decided to have some actual would be users test the application.
