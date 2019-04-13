@@ -1,0 +1,11 @@
+.DiagnosisCard {
+	width: 25%;
+	margin: auto;
+	margin-top: 10px;
+}
+
+.CardTitle {
+	width: 50%;
+	margin: auto;
+	font-weight: bold;
+}

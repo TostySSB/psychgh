@@ -1,29 +1,46 @@
 import React, {Component} from 'react';
+import axios from "axios";
 import './DiagnosisChart.css';
 import PropTypes from "prop-types";
+import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
+import NewDiagnosisChart from '../components/UI/cards/NewDiagnosisChart';
+import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls';
+import CardModal from '../components/UI/Modals/CardModal';
 import { connect } from "react-redux";
-//import '../components/UI/cards/ExplorationCard.js';
 
 class DiagnosisChart extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+		let updateEvals = this.updateEvals.bind(this);
+		this.evals = [
+				{id: 1, type: 'therapy', data: {}},
+				{id: 2, type: 'response', data: {}},
+				{id: 3, type: 'evaluation', data: {}}
+			];
 		this.state = {
-			newExploration: false,
-			firstName: "",
-			lastName: "",
+			newExploration: true,
+			firstName: "Henry",
+			lastName: "Soule",
+			age: 30,
+			diagnosis: 'Crazy',
 			patients: undefined,
-			errors: {}
+			evals: this.evals,
+			errors: {},
+			addingCard: false,
+			editingCard: false
 		};
 	}
-	componentWillMount(){
+
+	componentWillMount() {
 		fetch('api/getPatients', {
 			method: 'GET',
-		}).then(res =>{
+		}).then(res => {
 			this.setState({
 				patients: res
 			})
 		})
 	}
+
 	handleSubmit = event => {
 		event.preventDefault();
 		const userData = {
@@ -56,56 +73,106 @@ class DiagnosisChart extends Component {
 		});
 	}
 
+	getPatientExploration = (data) => {
+		axios.post('api/explorations/getExploration', data)
+		.then(res => {
+			if (res.status === 200) {
+				console.log(res);
+			}
+		});
+	}
+
 
 	handleChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value
     	});
   	}
- 	
-	render() {
-		return (
-			<div className='DiagnosisChart'>
-				<h1>New Diagnosis Exploration</h1>
-				<p>Enter the patients name below to start a new diagnosis exploration.</p>
-			  <div style={{ marginTop: "4rem" }} className="row">
-				<div className="col s8 offset-s2">
-				  <form noValidate onSubmit={this.handleSubmit}>
-					<div className="input-field col s12">
-						<input 
-							onChange={this.handleChange}
-							value={this.state.firstName}
-							id="firstName" 
-							type="text"/>
-						<label htmlFor="firstName">First Name</label>
-					</div>
-					<div className="input-field col s12">
-						<input 
-							onChange={this.handleChange}
-							value={this.state.lastName}
-							id="lastName" 
-							type="text"/>
-						<label htmlFor="lastName">Last Name</label>
-					</div>
-					<div className="col s12" style={{ paddingLeft: "11.250px" }}>
-					  <button
-						style={{
-						  width: "200px",
-						  borderRadius: "3px",
-						  letterSpacing: "1.5px",
-						  marginTop: "1rem"
-						}}
-						type="submit"
-						className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-					  >
-						Create Patient
-					  </button>
-					</div>
-				  </form>
+
+  	renderNewPatient = () => {
+  		console.log(window.location.pathname);
+  	}
+
+  	addCardHandler = () => {
+  		this.setState({addingCard: true});
+  	}
+
+  	cancelNewCardHandler = () => {
+  		this.setState({addingCard: false});
+  		this.setState({editingCard: false});
+  	}
+
+
+  	cardClickHandler = (type, idNum) => {
+  		this.cardType = type;
+  		this.idNum = idNum;
+  		this.setState({editingCard: true});
+  	}
+
+  	submitEvalData = () => {
+  		
+  	}
+
+  	updateEvals = (evalData) => {
+  		console.log(evalData);
+  		let index;
+  		//Find the right eval
+  		//Then update it. Jank, I know
+  		for (let i = 0; i < this.evals.length; i++) {
+  			if (this.evals[i].id === evalData.id) {
+  				index = i;
+  				break;
+  			}
+  		}
+		let newData = {
+			id: evalData.id,
+			type: evalData.type,
+			data: evalData.evalData
+		};
+		this.evals[index] = newData;
+		console.log(this.evals);
+		this.setState({evals: this.evals});
+
+  	}
+
+  	addNewEval = (evalData) => {
+  		console.log(evalData);
+  	}
+  
+  	render() {
+		if (this.state.newExploration) {
+			return (
+				
+				<button onClick={this.getPatientExploration.bind(this, {firstName: "Henry", lastName: "Soule"})}>Click.</button>
+  			);
+		}
+		else {
+			return(
+				<div>
+					<CardModal 
+						show={this.state.editingCard}
+					   	modalClosed={this.cancelNewCardHandler}
+					   	type={this.cardType}
+					   	idNum={this.idNum}
+					   	updateEvals ={this.updateEvals.bind(this)}
+					   	
+					/>
+					<DiagnosisCard 
+						type='header' 
+						firstName={this.state.firstName}
+						lastName={this.state.lastName}
+					/>
+					{this.evals.map(ev => (
+						<DiagnosisCard
+							type={ev.type}
+							idNum={ev.id}
+							onClick={this.cardClickHandler.bind(this, ev.type, ev.id)}
+							evalData={ev}
+						/>
+					))}
 				</div>
-			  </div>
-			</div>
-		  );
+			);
+		}
 	}
 }
 

@@ -16,6 +16,7 @@ const styles = ({
       },
       
   });
+
 function DummyCard (props) {
     const { classes } = props;
     return(
@@ -35,4 +36,5 @@ function DummyCard (props) {
         </Card>
     );
 }
+
 export default withStyles(styles)(DummyCard);
