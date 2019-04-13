@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
 import { shallow, configure } from 'enzyme';
-import axios from "axios"
+import axios from "axios";
 import Adapter from 'enzyme-adapter-react-16';
 
 

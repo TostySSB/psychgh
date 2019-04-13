@@ -8,7 +8,7 @@ import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls
 import CardModal from '../components/UI/Modals/CardModal';
 import { connect } from "react-redux";
 
-class DiagnosisChart extends Component {
+export default class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
 		let updateEvals = this.updateEvals.bind(this);
