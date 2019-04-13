@@ -17,7 +17,13 @@ class Landing extends Component {
         </div>
       </div>
         <HomePageGrid></HomePageGrid>
+        <div className="col s12 center-align">
+            <p className="flow-text grey-text text-darken-1">
+              For assistance, please contact us at: tempEmailName@gmail.com
+            </p>
+          </div>
       </div>
+      
     );
   }
 }

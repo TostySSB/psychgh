@@ -23,3 +23,7 @@ or navigate your way to [*insert-website-url*/login]()
 - Enter the password associated with the aformentioned email account & Psych432 in the `password` field
 
 - Finally, select the `Login` button below the password field
+
+## How to become authenticated as a Practitioner
+
+- Contact those managing the project website at the `email` specified on the bottom of the homepage.

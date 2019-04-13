@@ -8,7 +8,7 @@ To get the latest, stable version of the PsychGH project, just run
 ## Project Layout
 
 After cloning the repository, you will see that we have two primary folders
-in our project: `client` and the root directory.
+in our project: `client` and the root directory in the developement branch.
  -  `/client` contains the react application, so aptly named "client"
     -  `/public` contains all of the bootstrapping code for the React application.
     -  `/src` contains all of PsychGH's logic, components, and style sheets.
@@ -32,6 +32,12 @@ for more information. Automated tests are setup to be run via Travis, and all co
 
 To build PsychGH, use the command `npm run build` from within both the root and the client directory. This builds the app and places the production ready code into the `build` folder it creates inside the project. This command builds optimized and minified javascript that is ready
 to be deployed to the live site.
+
+## How to change the contact information
+
+Navigate to client/src/components/layout, and open `Landing.js`. Then proceed to replace the default contact information with your own: `For assistance, please contact us at: tempEmailName@gmail.com`
+
+This is especially `important` as practitioner verification is not handled by this application, and so will be done by those managing the Database to give the user `practitioner privilages`.
 
 ## Acessing Bug Reports
 
