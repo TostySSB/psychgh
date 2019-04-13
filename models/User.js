@@ -39,6 +39,10 @@ const UserSchema = new Schema({
   plastName: {
     type: String,
     required: false
+  },
+  phq9:{
+    type: Map,
+    of: Number
   }
 });
 

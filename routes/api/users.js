@@ -48,6 +48,19 @@ User.findOne().limit(1).sort({ date: -1 }).exec((err, data) => {
         password: req.body.password,
         pfirstName: "",
         plastName: "",
+        phq9: {
+          q1: 0,
+          q2: 0,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 0,
+          q7: 0,
+          q7: 0,
+          q8: 0,
+          q9: 0,
+          q10: 0,
+        },
       });
 
       // Hash password before saving in database
@@ -96,6 +109,7 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           name: user.firstName,
+          email: user.email,
           isPractitioner: user.isPractitioner
         };
         
