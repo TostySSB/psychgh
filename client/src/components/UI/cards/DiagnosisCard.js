@@ -18,7 +18,7 @@ const diagnosisCard = (props) => {
  						<PatientBio age={props.age} diagnosis={props.diagnosis}/>
  					</div>;
 	}
-	if (props.type == 'therapy') {
+	else if (props.type == 'therapy') {
 		cardBody =  <div>
 						<p className={classes.CardTitle}>Initial Therapy</p>
  					</div>;
@@ -33,6 +33,7 @@ const diagnosisCard = (props) => {
 						<p className={classes.CardTitle}>Evaluation</p>
 				   </div>;
 	}
+	// console.log(props.evalData);
 	return (
 		<div className={classes.DiagnosisCard} onClick={props.onClick}>
 			<Card>

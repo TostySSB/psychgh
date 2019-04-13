@@ -6,12 +6,16 @@ import NewDiagnosisChart from '../components/UI/cards/NewDiagnosisChart';
 import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls';
 import CardModal from '../components/UI/Modals/CardModal';
 import { connect } from "react-redux";
-//import '../components/UI/cards/ExplorationCard.js';
 
 class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
 		let updateEvals = this.updateEvals.bind(this);
+		this.evals = [
+				{id: 1, type: 'therapy', data: {}},
+				{id: 2, type: 'response', data: {}},
+				{id: 3, type: 'evaluation', data: {}}
+			];
 		this.state = {
 			newExploration: false,
 			firstName: "Henry",
@@ -19,27 +23,23 @@ class DiagnosisChart extends Component {
 			age: 30,
 			diagnosis: 'Crazy',
 			patients: undefined,
-			evals: [
-				{type: 'therapy'},
-				{type: 'response'},
-				{type: 'evaluation'}
-			],
+			evals: this.evals,
 			errors: {},
 			addingCard: false,
 			editingCard: false
 		};
-		this.cardType = "";
 	}
 
 	componentWillMount(){
 		fetch('api/getPatients', {
 			method: 'GET',
-		}).then(res =>{
+		}).then(res => {
 			this.setState({
 				patients: res
 			})
 		})
 	}
+
 	handleSubmit = event => {
 		event.preventDefault();
 		const userData = {
@@ -84,8 +84,6 @@ class DiagnosisChart extends Component {
   	}
 
   	addCardHandler = () => {
-  		//Update Eval
-  		//Will need to render modal first
   		this.setState({addingCard: true});
   	}
 
@@ -95,29 +93,51 @@ class DiagnosisChart extends Component {
   	}
 
 
-  	cardClickHandler = (type) => {
+  	cardClickHandler = (type, idNum) => {
   		this.cardType = type;
+  		this.idNum = idNum;
   		this.setState({editingCard: true});
   	}
 
   	updateEvals = (evalData) => {
-
+  		console.log(evalData);
+  		let index;
+  		//Find the right eval
+  		//Then update it. Jank, I know
+  		for (let i = 0; i < this.evals.length; i++) {
+  			if (this.evals[i].id === evalData.id) {
+  				index = i;
+  				break;
+  			}
+  		}
+		let newData = {
+			id: evalData.id,
+			type: evalData.type,
+			data: evalData.evalData
+		};
+		this.evals[index] = newData;
+		console.log(this.evals);
+		this.setState({evals: this.evals});
   	}
 
-	render() {
+  	addNewEval = (evalData) => {
+  		console.log(evalData);
+  	}
+  
+  	render() {
 		if (this.state.newExploration) {
 			return (
 				<NewDiagnosisChart />
   			);
 		}
 		else {
-
 			return(
 				<div>
 					<CardModal 
 						show={this.state.editingCard}
 					   	modalClosed={this.cancelNewCardHandler}
 					   	type={this.cardType}
+					   	idNum={this.idNum}
 					   	updateEvals ={this.updateEvals.bind(this)}
 					   	
 					/>
@@ -125,10 +145,14 @@ class DiagnosisChart extends Component {
 						type='header' 
 						firstName={this.state.firstName}
 						lastName={this.state.lastName}
-						onClick={this.cardClickHandler}
 					/>
-					{this.state.evals.map(ev => (
-						<DiagnosisCard type={ev.type} onClick={this.cardClickHandler.bind(this, ev.type)} />
+					{this.evals.map(ev => (
+						<DiagnosisCard
+							type={ev.type}
+							idNum={ev.id}
+							onClick={this.cardClickHandler.bind(this, ev.type, ev.id)}
+							evalData={ev}
+						/>
 					))}
 				</div>
 			);

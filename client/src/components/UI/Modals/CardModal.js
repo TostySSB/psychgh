@@ -13,43 +13,35 @@ import Backdrop from '../Backdrop/Backdrop';
 import classes from './Modal.css';
 import Aux from '../../Aux';
 
-// const styles = theme => ({
-// 		root: {
-// 			display: 'flex',
-// 			flexWrap: 'wrap'
-// 		},
-// 		formControl: {
-// 			margin: theme.spacing.unit,
-// 			minWidth: 120,
-// 			fullWidth: true
-// 		},
-// 		textField: {
-// 		    marginLeft: theme.spacing.unit,
-// 		    marginRight: theme.spacing.unit
-//   		},
-// 		selectEmpty: {
-// 			marginTop: theme.spacing.unit * 2
-// 		}
-// 	});
-
-
 
 class CardModal extends Component {
 	constructor(props) {
 		super(props);
+		this.idNum = props.idNum;
+		this.type = props.type;
 		this.state = {
-			formData: {
-				type: props.type
-			}
-		};
+			id: "",
+			type: "",
+			evalData: {}
+		}
 	}
-	
-	handleChange(formData) {
-		this.setState({evalData: "Data"});
-	}
-	
 
-	makeForm() {
+	handleChange = event => {
+		this.setState({evalData: {...this.state.evalData, [event.target.name]: event.target.value}});
+	}
+
+	updateEvals = () => {
+		console.log(this.props.idNum + " " + this.props.type);
+		this.setState({
+			id: this.props.idNum,
+			type: this.props.type
+		}, () => {
+			this.props.updateEvals(this.state);
+		});
+		
+	}
+	
+	makeForm = () => {
 		let formContent;
 		if (this.props.type == "therapy") {
 			formContent = <div>
@@ -58,11 +50,11 @@ class CardModal extends Component {
 								<FormControl variant="outlined">
 									<InputLabel>Medication</InputLabel>
 									<Select
-										native 
+										native
+										onChange={this.handleChange}
 										input={
 											<OutlinedInput
 												name="medication"
-												labelWidth={this.state.labelWidth}
 											/>
 										}
 									>
@@ -75,10 +67,12 @@ class CardModal extends Component {
 							<div className={classes.TextField}>
 								<FormControl variant="outlined" className={classes.FormControl}>
 									<TextField
+										name="therapyNotes"
 										id="initial-therapy-notes"
 										label="Notes on Side Effects"
 										multiline
 										rows="4"
+										onChange={this.handleChange}
 									/>
 								</FormControl>
 							</div>
@@ -94,6 +88,7 @@ class CardModal extends Component {
 									</InputLabel>
 									<Select
 										native 
+										onChange={this.handleChange}
 										input={
 											<OutlinedInput
 												name="medication"
@@ -116,17 +111,18 @@ class CardModal extends Component {
 							<h4>Evaluation</h4>
 							<div>
 								<TextField
-									id="evaluation-notes"
+									name="evaluationNotes"
 									rows="5"
 									multiline
 									label="Enter notes here"
+									onChange={this.handleChange}
 								/>
 							</div>
 						  </div>;
 	
 		}
 		return formContent;
-	}
+	};
 
 	render() {
 		let formContent = this.makeForm();
@@ -139,9 +135,8 @@ class CardModal extends Component {
 						transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
 						opacity: this.props.show ? '1' : '0'
 					}}>
-
 					{formContent}
-					<button onClick={() => this.props.updateEvals}>Save</button>
+					<button onClick={this.updateEvals}>Save</button>
 				</div>
 			</Aux>
 		);
