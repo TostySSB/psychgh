@@ -24,6 +24,24 @@ or navigate your way to [*insert-website-url*/login]()
 
 - Finally, select the `Login` button below the password field
 
+## How to take the PHQ-9 as a Patient
+
+- You will find the option to take the PHQ-9 test by using the banner drop down menu and selecting `PHQ-9`.
+
+- From there just fill out the answers and be sure to submit your results!
+
 ## How to become authenticated as a Practitioner
 
-- Contact those managing the project website at the `email` specified on the bottom of the homepage.
+- Contact those managing the project website at the `email` specified on the bottom of the homepage with the apropriate credentials to verify that you are infact a `licensed professional`.
+
+## How to view patient information as a Practitioner
+
+- After loggin in as a practitioner, you can select the drop down icon to see a drop down of what you have access to. Select the `View Patients` option and you will be redirected to a page where you can search patients by `first name`, `last name`, `patient ID`, or `Email address`.
+
+## How to add a patient as a practitioner
+
+- Go to the `view patient` option under the drop down menu from the banner, and search for the patient you want to add. After finding said patient, click the arrow to the left of the User ID. This will bring up a window with the option to claim them as your patient.
+
+## How to view depression chart
+
+- Assuming you are already logged in as a `practitioner`, you should be able to select the `Depression Chart` option from the drop down menu on the website banner and navigate through it appropriatly.

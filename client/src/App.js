@@ -87,7 +87,7 @@ class App extends Component {
               <PractitionerRoute exact path="/patient_evaluation6b" component={DepressionChart6b} />
               <PractitionerRoute exact path="/patient_evaluation6c" component={DepressionChart6c} />
               <PractitionerRoute exact path="/Patients" component={PatientExploration} />
-              <PractitionerRoute exact path="/PHQ9" component={PHQ9} />
+              <PrivateRoute exact path="/PHQ9" component={PHQ9} />
             </Switch>
           </div>
         </Router>

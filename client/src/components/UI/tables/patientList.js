@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import axios from "axios"
+import axios from "axios";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIDataTable from "mui-datatables";
-
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import PatientDialog from "../dialogs/PatientDialog";
 const columns = [
     {
         name: "user_id",
         label: "User ID",
         options: {
          filter: false,
-         sort: true,
+         sort: false,
         }
        },
     {
@@ -18,7 +20,7 @@ const columns = [
         label: "Last Name",
         options: {
          filter: false,
-         sort: true,
+         sort: false,
         }
        },
        {
@@ -26,7 +28,7 @@ const columns = [
         label: "First Name",
         options: {
          filter: false,
-         sort: true,
+         sort: false,
         }
        },
        {
@@ -34,7 +36,15 @@ const columns = [
         label: "Email",
         options: {
          filter: false,
-         sort: true,
+         sort: false,
+        }
+       },
+       {
+        name: "pLastName",
+        label: "Practitioner",
+        options: {
+         filter: false,
+         sort: false,
         }
        },
 ];
@@ -43,7 +53,20 @@ const options = {
     selectableRows: false,
     print: false,
     download: false,
-    filter: false
+    filter: false,
+    expandableRows: true,
+    renderExpandableRow: (rowData, rowMeta) => {
+        const colSpan = rowData.length + 1;
+        return (
+          <TableRow>
+            <TableCell colSpan={colSpan}>
+            {rowData[0]}
+            </TableCell>
+            <PatientDialog userID={rowData[0]}></PatientDialog>
+          </TableRow>
+          
+        );
+      },
   };
 const styles = theme => ({
     app: {
@@ -56,9 +79,13 @@ class userList extends Component {
         super();
         this.state = {
             userMap: [],
-            users:[]
+            users:[],
+            open:false
         }
     }
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
     componentDidMount(){
         axios.get('/api/users/userList')
             .then(response => {
@@ -85,6 +112,6 @@ class userList extends Component {
 
 userList.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
   
-  export default withStyles(styles)(userList);
+export default withStyles(styles)(userList);
