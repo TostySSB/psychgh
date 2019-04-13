@@ -36,6 +36,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/phq9s", phq9s);
+app.use("/api/explorations", explorations);
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder

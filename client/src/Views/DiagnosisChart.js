@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from "axios";
 import './DiagnosisChart.css';
 import PropTypes from "prop-types";
 import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
@@ -17,7 +18,7 @@ class DiagnosisChart extends Component {
 				{id: 3, type: 'evaluation', data: {}}
 			];
 		this.state = {
-			newExploration: false,
+			newExploration: true,
 			firstName: "Henry",
 			lastName: "Soule",
 			age: 30,
@@ -30,7 +31,7 @@ class DiagnosisChart extends Component {
 		};
 	}
 
-	componentWillMount(){
+	componentWillMount() {
 		fetch('api/getPatients', {
 			method: 'GET',
 		}).then(res => {
@@ -69,6 +70,15 @@ class DiagnosisChart extends Component {
 		}).catch(err => {
 			console.log(err);
 			alert('Submission failed. Please try again.');
+		});
+	}
+
+	getPatientExploration = (data) => {
+		axios.post('api/explorations/getExploration', data)
+		.then(res => {
+			if (res.status === 200) {
+				console.log(res);
+			}
 		});
 	}
 
@@ -132,7 +142,8 @@ class DiagnosisChart extends Component {
   	render() {
 		if (this.state.newExploration) {
 			return (
-				<NewDiagnosisChart />
+				
+				<button onClick={this.getPatientExploration.bind(this, {firstName: "Henry", lastName: "Soule"})}>Click.</button>
   			);
 		}
 		else {
