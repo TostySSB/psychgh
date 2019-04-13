@@ -43,6 +43,10 @@ const UserSchema = new Schema({
   phq9:{
     type: Map,
     of: Number
+  },
+  phq9Results:{
+    type: String,
+    required: false
   }
 });
 
