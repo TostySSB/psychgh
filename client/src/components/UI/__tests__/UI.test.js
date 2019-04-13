@@ -6,7 +6,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import DiagnosisCard from '../cards/DiagnosisCard';
 import GitHubCard from '../cards/GitHub';
 import ReadDocsCard from '../cards/readDocs';
-import DummyCard from '../cards'
 import PatientBio from '../cards/PatientBio';
 import DiagnosisGrid from '../grids/DiagnosisGrid';
 import HomePageGrid from '../grids/HomePageGrid';
@@ -49,4 +48,6 @@ describe("Test rendering for all UI grids", () => {
 		expect(shallow(<PatientExplorationGrid />).exists()).toBe(true);
 	});
 });
+
+
 
