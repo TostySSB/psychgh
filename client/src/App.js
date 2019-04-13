@@ -12,6 +12,7 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PHQ9 from "./Views/PHQ9";
+import MyResults from "./Views/MyResults";
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import PractitionerRoute from "./components/private-route/PractitionerRoute";
@@ -88,6 +89,7 @@ class App extends Component {
               <PractitionerRoute exact path="/patient_evaluation6c" component={DepressionChart6c} />
               <PractitionerRoute exact path="/Patients" component={PatientExploration} />
               <PrivateRoute exact path="/PHQ9" component={PHQ9} />
+              <PrivateRoute exact path="/MyResults" component={MyResults} />
             </Switch>
           </div>
         </Router>
