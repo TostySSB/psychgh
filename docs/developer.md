@@ -66,7 +66,6 @@ list of currently open issues.
 ![UML Diagram](img/UML.png)
 
 ## Debugging Coverage at present:
-
 <!-- ![Debugging Coverage](img/coverage_output.png) -->
 ----------------------------------|----------|----------|----------|----------|-------------------|
 File                              |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
