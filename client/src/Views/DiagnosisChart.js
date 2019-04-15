@@ -18,8 +18,9 @@ class DiagnosisChart extends Component {
 				{id: 3, type: 'evaluation', data: {}}
 			];
 		this.state = {
-			newExploration: true,
-			userID: 1007
+			newExploration: false,
+			userID: 1007,
+			patient: {}
 			// firstName: "Henry",
 			// lastName: "Soule",
 			// age: 30,
@@ -33,13 +34,14 @@ class DiagnosisChart extends Component {
 	}
 
 	componentWillMount() {
-		fetch('api/getPatients', {
-			method: 'GET',
-		}).then(res => {
-			this.setState({
-				patients: res
-			})
-		})
+		axios.get('api/explorations/getExploration', {params: {"userID": this.state.userID}})
+		.then(res => {
+			if (res.status === 200) {
+				// console.log(res);
+				this.setState({"patient": res.data});
+				console.log(this.state);
+			}
+		});
 	}
 
 	handleSubmit = event => {
@@ -159,8 +161,8 @@ class DiagnosisChart extends Component {
 					/>
 					<DiagnosisCard 
 						type='header' 
-						firstName={this.state.firstName}
-						lastName={this.state.lastName}
+						firstName={this.state.patient.firstName}
+						lastName={this.state.patient.lastName}
 					/>
 					{this.evals.map(ev => (
 						<DiagnosisCard
