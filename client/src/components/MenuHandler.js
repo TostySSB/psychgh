@@ -18,6 +18,12 @@ export class MenuHandler extends Component {
             <Link to="/dashboard" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>My account</MenuItem>
             </Link>
+            <Link to="/PHQ9" style={{ textDecoration: 'none', display: 'block' }}>
+                <MenuItem>Take the PHQ9 Depression Test</MenuItem>
+            </Link>
+            <Link to="/MyResults" style={{ textDecoration: 'none', display: 'block' }}>
+                <MenuItem>View My Results</MenuItem>
+            </Link>
         </div> 
       )
     }else if (this.props.auth.isPractitioner && this.props.auth.isAuthenticated){

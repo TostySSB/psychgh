@@ -49,18 +49,19 @@ User.findOne().limit(1).sort({ date: -1 }).exec((err, data) => {
         pfirstName: "",
         plastName: "",
         phq9: {
-          q1: 0,
-          q2: 0,
-          q3: 0,
-          q4: 0,
-          q5: 0,
-          q6: 0,
-          q7: 0,
-          q7: 0,
-          q8: 0,
-          q9: 0,
-          q10: 0,
+          q1: 100,
+          q2: 100,
+          q3: 100,
+          q4: 100,
+          q5: 100,
+          q6: 100,
+          q7: 100,
+          q7: 100,
+          q8: 100,
+          q9: 100,
+          q10: 100,
         },
+        phq9Results: "",
       });
 
       // Hash password before saving in database
@@ -109,6 +110,7 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           name: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           isPractitioner: user.isPractitioner
         };
@@ -145,6 +147,58 @@ router.get('/userList', function(req, res) {
     }
   });
  });
+router.get('/singleUser', function(req, res) {
+  // res.send('respond with a resource');
+  User.findOne({user_id: req.query.userID}, function(err, users) {
+    console.log(req.query.userID);
+    if (err){
+      console.log(err);
+    }else{
+      res.json(users)
+    }
+    console.log(users)
+  });
+ });
+ router.get('/getUser', function(req, res) {
+  // res.send('respond with a resource');
+  User.findOne({email: req.query.email}, function(err, users) {
+    if (err){
+      console.log(err);
+    }else{
+      res.json(users)
+    }
+    console.log(users)
+  });
+ });
+ router.get('/userPHQ9', function(req, res) {
+  // res.send('respond with a resource');
+  User.findOne({user_id: req.query.userID}, function(err, users) {
+    console.log(req.query.userID);
+    if (err){
+      console.log(err);
+    }else{
+      res.json(users.get('phq9.q10'))
+      console.log(users.get('phq9.q10') + "test")
+    }
+    console.log(users)
+  });
+ });
+ router.post("/claim", (req, res) => {
+  User.findOneAndUpdate({email:req.body.email}, {$set:{pfirstName: req.body.firstName, plastName: req.body.lastName}}, {upsert: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+  
+      console.log(doc);
+  });
+  User.findOneAndUpdate({email:req.body.email}, {$set:{phq9Results: req.body.results}}, {upsert: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+  
+      console.log(doc);
+  });
+})
 
 
 module.exports = router;

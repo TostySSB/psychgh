@@ -23,7 +23,23 @@ const styles = theme => ({
     margin: `${theme.spacing.unit}px 0`,
   },
 });
-function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
+class PHQ9Form extends React.Component {
+  state = {
+    q1: 100,
+    q2: 100,
+    q3: 100,
+    q4: 100,
+    q5: 100,
+    q6: 100,
+    q7: 100,
+    q8: 100,
+    q9: 100,
+    q10: 100,
+    sum: 0,
+    complete: true,
+    results: "Please complete the PHQ9 Test to view your results"
+  };
+  analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
     var diagDep = 0;
     if (q1 >= 2 || q3 >=2){
         diagDep +=1;
@@ -67,6 +83,7 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
         severityScore = q1+q2+q3+q4+q5+q6+q7+q8+q9;
     }
     if(severityScore>=5 && severityScore<=9){
+      this.setState({results:"These symptoms are minimal    Treatment: Support, ask to call if worse, return in 1 month"})
         return(
             <div>
                 <h5>These symptoms are minimal</h5>
@@ -74,6 +91,7 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
             </div>
         );
     }else if (severityScore>=10 && severityScore<=14){
+      this.setState({results:"These symptoms are consistent with Minor Depression Dysthymia or Major Depression, mild    Treatment: Support, contact in one week Antidepressant or psychotherapy"})
         return(
             <div>
                 <h5>These symptoms are consistent with Minor Depression Dysthymia or Major Depression, mild</h5>
@@ -81,6 +99,7 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
             </div>
         );
     }else if (severityScore>=15 && severityScore<=19){
+      this.setState({results:"These symptoms are consistent with Major Depression, moderate     Treatment: Antidepressant or psychotherapy"})
         return(
             <div>
                 <h5>These symptoms are consistent with Major Depression, moderate</h5>
@@ -88,6 +107,7 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
             </div>
         );
     }else if (severityScore>=20){
+      this.setState({results:"These symptoms are consistent with Major Depression, severe    Treatment: Support, contact in one week Antidepressant and psychotherapy (especially if not improved on monotherapy)"})
         return(
             <div>
                 <h5>These symptoms are consistent with Major Depression, severe</h5>
@@ -95,6 +115,7 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
             </div>
         );
     }else if (severityScore>=0 && severityScore<=4){
+      this.setState({results:"There no symptoms of depression"})
         return(
             <div>
                 <h5>There no symptoms of depression</h5>
@@ -109,21 +130,6 @@ function analyzeResults(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10){
     }
     
 }
-class PHQ9Form extends React.Component {
-  state = {
-    q1: 100,
-    q2: 100,
-    q3: 100,
-    q4: 100,
-    q5: 100,
-    q6: 100,
-    q7: 100,
-    q8: 100,
-    q9: 100,
-    q10: 100,
-    sum: 0,
-    complete: true
-  };
   componentDidMount(){
     this.calculateSum();
     this.setState({complete: true})
@@ -161,11 +167,13 @@ class PHQ9Form extends React.Component {
     this.calculateSum();
   }
   handleSubmit(){
+    {this.analyzeResults(Number(this.state.q1),Number(this.state.q2),Number(this.state.q3),Number(this.state.q4),Number(this.state.q5),Number(this.state.q6),Number(this.state.q7),Number(this.state.q8),Number(this.state.q9),Number(this.state.q10))}
+    const {user} = this.props.auth;
     this.calculateSum();
-    axios.post("/api/phq9s/q1", {email: this.props.auth.email, q1:this.state.q1, q2:this.state.q2, q3:this.state.q3, q4:this.state.q4,q5:this.state.q5,q6:this.state.q6,q7:this.state.q7,q8:this.state.q8,q9:this.state.q9,q10:this.state.q10});
+    axios.post("/api/phq9s/q1", {email: user.email, q1:this.state.q1, q2:this.state.q2, q3:this.state.q3, q4:this.state.q4,q5:this.state.q5,q6:this.state.q6,q7:this.state.q7,q8:this.state.q8,q9:this.state.q9,q10:this.state.q10, results: this.state.results});
   };
   render() {
-    const { classes } = this.props;
+    const { user } = this.props.auth;
     return (
     <div>
         <h2>
@@ -399,9 +407,8 @@ class PHQ9Form extends React.Component {
           </RadioGroup>
         </FormControl>
       </div>
-      {this.getButton()}
-            {this.state.sum}
-        {analyzeResults(Number(this.state.q1),Number(this.state.q2),Number(this.state.q3),Number(this.state.q4),Number(this.state.q5),Number(this.state.q6),Number(this.state.q7),Number(this.state.q8),Number(this.state.q9),Number(this.state.q10))}
+        {this.getButton()}
+        
       </div>
     );
   }
