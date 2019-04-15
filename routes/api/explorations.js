@@ -4,16 +4,18 @@ const router = express.Router();
 const Exploration = require("../../models/DiagnosisExploration");
 
 router.get('/getExploration', (req, res) => {
-	console.log(req);
-	Exploration.findOne({firstName: req.body.firstName, lastName: req.body.lastName})
-	.then(exp => {
-		if (exp) {
-			const payload = {
-				firstName: exp.firstName,
-				lastName: exp.lastName,
-				evalData: exp.evalData
-			}
-			res.json(exp);
-		}
-	});
-})
+	res.send();
+	// Exploration.findOne({firstName: req.body.firstName, lastName: req.body.lastName})
+	// .then(exp => {
+	// 	if (exp) {
+	// 		const payload = {
+	// 			firstName: exp.firstName,
+	// 			lastName: exp.lastName,
+	// 			evalData: exp.evalData
+	// 		}
+	// 		res.json(exp);
+	// 	}
+	// });
+});
+
+module.exports = router;

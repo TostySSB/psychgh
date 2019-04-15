@@ -74,12 +74,12 @@ class DiagnosisChart extends Component {
 	}
 
 	getPatientExploration = (data) => {
-		axios.post('api/explorations/getExploration', data)
-		.then(res => {
-			if (res.status === 200) {
-				console.log(res);
-			}
-		});
+		axios.get('api/explorations/getExploration', {params: data});
+		// .then(res => {
+		// 	if (res.status === 200) {
+		// 		console.log(res);
+		// 	}
+		// });
 	}
 
 
