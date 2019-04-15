@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
-const express = require('express');
-const mongo = require('mongodb');
+const Schema = mongoose.Schema;
 
 
-const explorationSchema = new mongoose.Schema({
-		new: Boolean,
+const ExplorationSchema = new mongoose.Schema({
 		firstName: {type: String, required: true},
 		lastName: {type: String, required: true},
-		evalData: {}
-		
+		user_id: {type: Number, required: true},		
 	});
 
-module.exports = mongoose.model('Exploration', explorationSchema);
+module.exports = Exploration = mongoose.model('explorations', ExplorationSchema);

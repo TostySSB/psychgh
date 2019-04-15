@@ -19,15 +19,16 @@ class DiagnosisChart extends Component {
 			];
 		this.state = {
 			newExploration: true,
-			firstName: "Henry",
-			lastName: "Soule",
-			age: 30,
-			diagnosis: 'Crazy',
-			patients: undefined,
-			evals: this.evals,
-			errors: {},
-			addingCard: false,
-			editingCard: false
+			userID: 1007
+			// firstName: "Henry",
+			// lastName: "Soule",
+			// age: 30,
+			// diagnosis: 'Crazy',
+			// patients: undefined,
+			// evals: this.evals,
+			// errors: {},
+			// addingCard: false,
+			// editingCard: false
 		};
 	}
 
@@ -81,7 +82,6 @@ class DiagnosisChart extends Component {
 		// 	}
 		// });
 	}
-
 
 	handleChange = e => {
 		this.setState({
@@ -143,7 +143,7 @@ class DiagnosisChart extends Component {
 		if (this.state.newExploration) {
 			return (
 				
-				<button onClick={this.getPatientExploration.bind(this, {firstName: "Henry", lastName: "Soule"})}>Click.</button>
+				<button onClick={this.getPatientExploration.bind(this, {"userID":this.state.userID})}>Click.</button>
   			);
 		}
 		else {
