@@ -26,7 +26,7 @@ or navigate your way to [*insert-website-url*/login]()
 
 ## How to take the PHQ-9 as a Patient
 
-- You will find the option to take the PHQ-9 test by using the banner drop down menu and selecting `PHQ-9`.
+- You will find the option to take the PHQ-9 test by using the banner drop down menu and selecting `Take the PHQ9 Depression Test`.
 
 - From there just fill out the answers and be sure to submit your results!
 
@@ -36,11 +36,11 @@ or navigate your way to [*insert-website-url*/login]()
 
 ## How to view patient information as a Practitioner
 
-- After loggin in as a practitioner, you can select the drop down icon to see a drop down of what you have access to. Select the `View Patients` option and you will be redirected to a page where you can search patients by `first name`, `last name`, `patient ID`, or `Email address`.
+- After loggin in as a practitioner, you can select the drop down icon to see a drop down of what you have access to. Select the `View Patients` option and you will be redirected to a page where you can search patients by `first name`, `last name`, `patient ID`, or `Email address`. From here you are able to click the arrow to the left of the patient in the table. This will bring up a popup of all relevant patient information.
 
 ## How to add a patient as a practitioner
 
-- Go to the `view patient` option under the drop down menu from the banner, and search for the patient you want to add. After finding said patient, click the arrow to the left of the User ID. This will bring up a window with the option to claim them as your patient.
+- Go to the `view patients` option under the drop down menu from the banner, and search for the patient you want to add. After finding said patient, click the arrow to the left of the User ID. This will bring up a window with the option to claim them as your patient.
 
 ## How to view depression chart
 
