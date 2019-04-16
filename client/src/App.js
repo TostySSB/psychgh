@@ -13,6 +13,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PHQ9 from "./Views/PHQ9";
 import MyResults from "./Views/MyResults";
+import formBuilder from "./Views/formBuilder";
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import PractitionerRoute from "./components/private-route/PractitionerRoute";
@@ -37,7 +38,6 @@ import DepressionChart6b from './Views/Depression/DepressionChart6b';
 import DepressionChart6c from './Views/Depression/DepressionChart6c';
 
 import "./App.css";
-
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -90,6 +90,7 @@ class App extends Component {
               <PractitionerRoute exact path="/Patients" component={PatientExploration} />
               <PrivateRoute exact path="/PHQ9" component={PHQ9} />
               <PrivateRoute exact path="/MyResults" component={MyResults} />
+              <PrivateRoute exact path="/formBuilder" component={formBuilder} />
             </Switch>
           </div>
         </Router>
