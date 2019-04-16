@@ -11,25 +11,14 @@ import { connect } from "react-redux";
 class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
-		let updateEvals = this.updateEvals.bind(this);
-		this.evals = [
-				{id: 1, type: 'therapy', data: {}},
-				{id: 2, type: 'response', data: {}},
-				{id: 3, type: 'evaluation', data: {}}
-			];
 		this.state = {
 			newExploration: false,
 			userID: 1007,
-			patient: {}
-			// firstName: "Henry",
-			// lastName: "Soule",
-			// age: 30,
-			// diagnosis: 'Crazy',
-			// patients: undefined,
-			// evals: this.evals,
-			// errors: {},
-			// addingCard: false,
-			// editingCard: false
+			patient: {
+				evals: []
+			},
+			addingCard: false,
+			editingCard: false
 		};
 	}
 
@@ -37,9 +26,9 @@ class DiagnosisChart extends Component {
 		axios.get('api/explorations/getExploration', {params: {"userID": this.state.userID}})
 		.then(res => {
 			if (res.status === 200) {
-				// console.log(res);
-				this.setState({"patient": res.data});
-				console.log(this.state);
+				console.log("Res:");
+				console.log(res.data);
+				this.setState({patient: res.data});
 			}
 		});
 	}
@@ -77,12 +66,12 @@ class DiagnosisChart extends Component {
 	}
 
 	getPatientExploration = (data) => {
-		axios.get('api/explorations/getExploration', {params: data});
-		// .then(res => {
-		// 	if (res.status === 200) {
-		// 		console.log(res);
-		// 	}
-		// });
+		axios.get('api/explorations/getExploration', {params: data})
+		.then(res => {
+			if (res.status === 200) {
+				this.setState({"patient": res.data});
+			}
+		});
 	}
 
 	handleChange = e => {
@@ -117,23 +106,23 @@ class DiagnosisChart extends Component {
 
   	updateEvals = (evalData) => {
   		console.log(evalData);
-  		let index;
-  		//Find the right eval
-  		//Then update it. Jank, I know
-  		for (let i = 0; i < this.evals.length; i++) {
-  			if (this.evals[i].id === evalData.id) {
-  				index = i;
-  				break;
-  			}
-  		}
-		let newData = {
-			id: evalData.id,
-			type: evalData.type,
-			data: evalData.evalData
-		};
-		this.evals[index] = newData;
-		console.log(this.evals);
-		this.setState({evals: this.evals});
+  // 		let index;
+  // 		//Find the right eval
+  // 		//Then update it. Jank, I know
+  // 		for (let i = 0; i < this.patient.evals.length; i++) {
+  // 			if (this.patient.evals[i].id === evalData.id) {
+  // 				index = i;
+  // 				break;
+  // 			}
+  // 		}
+		// let newData = {
+		// 	id: evalData.id,
+		// 	type: evalData.type,
+		// 	data: evalData.evalData
+		// };
+		// // this.patient.evals[index] = newData;
+		// // console.log(this.patient.evals);
+		// // this.setState({evals: this.state.patient.evals});
 
   	}
 
@@ -142,13 +131,13 @@ class DiagnosisChart extends Component {
   	}
   
   	render() {
+  		// console.log(this.state.patient.evals);
 		if (this.state.newExploration) {
 			return (
-				
 				<button onClick={this.getPatientExploration.bind(this, {"userID":this.state.userID})}>Click.</button>
   			);
 		}
-		else {
+		else if (this.state.patient.evals.length > 0) {
 			return(
 				<div>
 					<CardModal 
@@ -157,6 +146,32 @@ class DiagnosisChart extends Component {
 					   	type={this.cardType}
 					   	idNum={this.idNum}
 					   	updateEvals ={this.updateEvals.bind(this)}
+					/>
+					<DiagnosisCard 
+						type='header' 
+						firstName={this.state.patient.firstName}
+						lastName={this.state.patient.lastName}
+					/>
+					{this.state.patient.evals.map(ev => (
+							<DiagnosisCard
+								type={ev.type}
+								idNum={ev.id}
+								onClick={this.cardClickHandler.bind(this, ev.type, ev.id)}
+								evalData={ev}
+							/>))
+					}
+				</div>
+			);
+		}		
+		else {
+			return(
+				<div>
+					<CardModal 
+						show={this.state.editingCard}
+					   	modalClosed={this.cancelNewCardHandler}
+					   	type={this.cardType}
+					   	idNum={this.idNum}
+					   	// updateEvals ={this.updateEvals.bind(this)}
 					   	
 					/>
 					<DiagnosisCard 
@@ -164,19 +179,13 @@ class DiagnosisChart extends Component {
 						firstName={this.state.patient.firstName}
 						lastName={this.state.patient.lastName}
 					/>
-					{this.evals.map(ev => (
-						<DiagnosisCard
-							type={ev.type}
-							idNum={ev.id}
-							onClick={this.cardClickHandler.bind(this, ev.type, ev.id)}
-							evalData={ev}
-						/>
-					))}
+					<p>No Evaluations yet.</p>
 				</div>
 			);
 		}
 	}
 }
+	
 
 DiagnosisChart.propTypes = {
 	firstName: PropTypes.object.isRequired,
