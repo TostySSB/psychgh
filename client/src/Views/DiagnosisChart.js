@@ -100,29 +100,36 @@ class DiagnosisChart extends Component {
   		this.setState({editingCard: true});
   	}
 
-  	submitEvalData = () => {
+  	// submitEvalData = () => {
   		
-  	}
+  	// }
 
   	updateEvals = (evalData) => {
-  		console.log(evalData);
-  // 		let index;
-  // 		//Find the right eval
-  // 		//Then update it. Jank, I know
-  // 		for (let i = 0; i < this.patient.evals.length; i++) {
-  // 			if (this.patient.evals[i].id === evalData.id) {
-  // 				index = i;
-  // 				break;
-  // 			}
-  // 		}
-		// let newData = {
-		// 	id: evalData.id,
-		// 	type: evalData.type,
-		// 	data: evalData.evalData
-		// };
-		// // this.patient.evals[index] = newData;
-		// // console.log(this.patient.evals);
-		// // this.setState({evals: this.state.patient.evals});
+  		console.log("Eval Data:");
+  		// console.log(evalData.evalData.medication);
+  		// Object.keys(evalData.evalData).map((key) => {
+  		// 	console.log(evalData.evalData[key]);
+  		// });
+  		let index;
+  		for (let i = 0; i < this.state.patient.evals.length; i++) {
+  			if (this.state.patient.evals[i].id === evalData.id) {
+  				index = i;
+  				break;
+  			}
+  		}
+		let newData = {
+			userID: this.state.userID,
+			id: evalData.id,
+			type: evalData.type,
+		};
+		Object.keys(evalData.evalData).map((key) => {
+  			newData[key] = evalData.evalData[key];
+  		});
+
+  		axios.post('api/explorations/updateExploration', newData)
+  		.then(res => {
+  			console.log(res);
+  		});
 
   	}
 

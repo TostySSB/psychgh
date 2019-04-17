@@ -9,7 +9,21 @@ router.get('/getExploration', (req, res) => {
 			console.log(err);
 		else
 			res.json(exp);
-		console.log(exp);
+	});
+});
+
+router.post('/updateExploration', (req, res) => {
+	console.log("REQ:");
+	console.log(req.body);
+	let exp;
+	Exploration.findOne({user_id: req.body.userID}, (err, resp) => {
+		if (err)
+			console.log(err);
+		else {
+			exp = resp;
+			console.log("EXP");
+			console.log(type);
+		}
 	});
 });
 

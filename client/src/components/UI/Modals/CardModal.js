@@ -25,7 +25,7 @@ class CardModal extends Component {
 			evalData: {}
 		}
 	}
-
+	
 	handleChange = event => {
 		this.setState({evalData: {
 			...this.state.evalData, [event.target.name]: event.target.value
