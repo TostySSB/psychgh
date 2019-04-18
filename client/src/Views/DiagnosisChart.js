@@ -105,25 +105,16 @@ class DiagnosisChart extends Component {
   	// }
 
   	updateEvals = (evalData) => {
-  		console.log("Eval Data:");
-  		// console.log(evalData.evalData.medication);
-  		// Object.keys(evalData.evalData).map((key) => {
-  		// 	console.log(evalData.evalData[key]);
-  		// });
-  		let index;
-  		for (let i = 0; i < this.state.patient.evals.length; i++) {
-  			if (this.state.patient.evals[i].id === evalData.id) {
-  				index = i;
-  				break;
-  			}
-  		}
 		let newData = {
 			userID: this.state.userID,
-			id: evalData.id,
-			type: evalData.type,
+			newEval: {
+				id: evalData.id,
+				type: evalData.type
+			}
 		};
+		
 		Object.keys(evalData.evalData).map((key) => {
-  			newData[key] = evalData.evalData[key];
+  			newData.newEval[key] = evalData.evalData[key];
   		});
 
   		axios.post('api/explorations/updateExploration', newData)
