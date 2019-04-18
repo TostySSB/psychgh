@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from "axios";
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -19,12 +20,24 @@ class CardModal extends Component {
 		super(props);
 		this.idNum = props.idNum;
 		this.type = props.type;
+		this.evalData = props.evalData
 		this.state = {
 			id: "",
-			type: "",
-			evalData: {}
+			type: ""
 		}
 	}
+
+	// compnentWillMount() {
+	// 	console.log(this.idNum);
+	// 	// axios.get('api/explorations/getExploration', {params: this.props})
+	// 	// .then(res => {
+	// 	// 	if (res.status === 200) {
+	// 	// 		console.log("She mounted boys.");
+	// 	// 		console.log();
+	// 	// 	}
+	// 	// });
+
+	// }
 	
 	handleChange = event => {
 		this.setState({evalData: {
@@ -45,6 +58,9 @@ class CardModal extends Component {
 	
 	makeForm = () => {
 		let formContent;
+		console.log(this.props.idNum);
+		console.log(this.props.type);
+		console.log(this.props.evalData);
 		if (this.props.type == "therapy") {
 			formContent = <div>
 							<h4>Initial Therapy</h4>
@@ -52,6 +68,7 @@ class CardModal extends Component {
 								<FormControl variant="outlined">
 									<InputLabel>Medication</InputLabel>
 									<Select
+										value={this.props.evalData.medication}
 										native
 										onChange={this.handleChange}
 										input={
@@ -69,6 +86,7 @@ class CardModal extends Component {
 							<div className={classes.TextField}>
 								<FormControl variant="outlined" className={classes.FormControl}>
 									<TextField
+										value={this.props.evalData.therapyNotes}
 										name="therapyNotes"
 										id="initial-therapy-notes"
 										label="Notes on Side Effects"

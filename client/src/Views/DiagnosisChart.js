@@ -74,20 +74,24 @@ class DiagnosisChart extends Component {
 		});
 	}
 
+	
 	handleChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value
     	});
   	}
 
+  	
   	renderNewPatient = () => {
   		console.log(window.location.pathname);
   	}
 
+  	
   	addCardHandler = () => {
   		this.setState({addingCard: true});
   	}
 
+  	
   	cancelNewCardHandler = () => {
   		this.setState({addingCard: false});
   		this.setState({editingCard: false});
@@ -97,12 +101,21 @@ class DiagnosisChart extends Component {
   	cardClickHandler = (type, idNum) => {
   		this.cardType = type;
   		this.idNum = idNum;
+  		console.log(idNum);
+  		// Get the right eval data
+  		let evals = this.state.patient.evals;
+  		let index;
+  		console.log(evals.length);
+  		for (let i = 0; i < evals.length; i++) {
+  			console.log(evals[i].id);
+  			if (evals[i].id == idNum) {
+  				index = i;
+  				break;
+  			}
+  		}
+  		this.evalData = evals[index];
   		this.setState({editingCard: true});
   	}
-
-  	// submitEvalData = () => {
-  		
-  	// }
 
   	updateEvals = (evalData) => {
 		let newData = {
@@ -144,9 +157,10 @@ class DiagnosisChart extends Component {
 					   	modalClosed={this.cancelNewCardHandler}
 					   	type={this.cardType}
 					   	idNum={this.idNum}
+					   	evalData={this.evalData}
 					   	updateEvals ={this.updateEvals.bind(this)}
 					/>
-					<DiagnosisCard 
+					<DiagnosisCard
 						type='header' 
 						firstName={this.state.patient.firstName}
 						lastName={this.state.patient.lastName}
@@ -170,8 +184,8 @@ class DiagnosisChart extends Component {
 					   	modalClosed={this.cancelNewCardHandler}
 					   	type={this.cardType}
 					   	idNum={this.idNum}
-					   	// updateEvals ={this.updateEvals.bind(this)}
-					   	
+					   	evalData={this.evalData}
+					   	updateEvals ={this.updateEvals.bind(this)}
 					/>
 					<DiagnosisCard 
 						type='header' 
