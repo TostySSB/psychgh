@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -31,18 +32,6 @@ class CardModal extends Component {
 			type: ""
 		}
 	}
-
-	// compnentWillMount() {
-	// 	console.log(this.idNum);
-	// 	// axios.get('api/explorations/getExploration', {params: this.props})
-	// 	// .then(res => {
-	// 	// 	if (res.status === 200) {
-	// 	// 		console.log("She mounted boys.");
-	// 	// 		console.log();
-	// 	// 	}
-	// 	// });
-
-	// }
 	
 	handleChange = event => {
 		this.setState({evalData: {
@@ -67,41 +56,46 @@ class CardModal extends Component {
 		console.log(this.props.type);
 		console.log(this.props.evalData);
 		if (this.props.type == "therapy") {
-			formContent = <div>
-							<h4>Initial Therapy</h4>
-							<div className={classes.Select}>
-								<FormControl variant="outlined">
-									<InputLabel>Medication</InputLabel>
-									<Select
-										value={this.props.evalData.medication}
-										native
-										onChange={this.handleChange}
-										input={
-											<OutlinedInput
-												name="medication"
-											/>
-										}
-									>
-										<option value="" />
-										<option value={"citralopram"}>Citralopram</option>
-										<option value={"sertraline"}>Sertraline</option>
-									</Select>
-								</FormControl>
-							</div>
-							<div className={classes.TextField}>
-								<FormControl variant="outlined" className={classes.FormControl}>
-									<TextField
-										value={this.props.evalData.therapyNotes}
-										name="therapyNotes"
-										id="initial-therapy-notes"
-										label="Notes on Side Effects"
-										multiline
-										rows="4"
-										onChange={this.handleChange}
-									/>
-								</FormControl>
-							</div>
-						  </div>;
+			formContent =
+				<div> 
+				<DialogTitle><h4>Initial Therapy</h4></DialogTitle>
+								<DialogContent>
+									<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
+										<Grid item>
+											<FormControl variant="outlined">
+												<InputLabel>Medication</InputLabel>
+												<Select
+													value={this.props.evalData.medication}
+													native
+													onChange={this.handleChange}
+													input={
+														<OutlinedInput
+														name="medication"
+														/>
+													}
+												>
+													<option value="" />
+													<option value={"citralopram"}>Citralopram</option>
+													<option value={"sertraline"}>Sertraline</option>
+												</Select>
+											</FormControl>
+										</Grid>
+										<Grid item>
+											<FormControl variant="outlined" className={classes.FormControl}>
+												<TextField
+													value={this.props.evalData.therapyNotes}
+													name="therapyNotes"
+													id="initial-therapy-notes"
+													label="Notes on Side Effects"
+													multiline
+													rows="4"
+													onChange={this.handleChange}
+												/>
+										</FormControl>
+										</Grid>
+									</Grid>
+								</DialogContent>
+								</div>;
 		}
 		else if (this.props.type == "response") {
 			formContent = <div>
@@ -154,15 +148,19 @@ class CardModal extends Component {
 		return (
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
-				<div
-					className={classes.Modal}
-					style={{
-						transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-						opacity: this.props.show ? '1' : '0'
-					}}>
-					{formContent}
-					<button onClick={this.updateEvals}>Save</button>
-				</div>
+				<Dialog
+				open={this.props.show}
+				style={{
+					transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+					opacity: this.props.show ? '1' : '0'
+				}}
+		          	aria-labelledby="form-dialog-title"
+		          	fullWidth
+		          	maxWidth='md'
+	        	>
+	        		{formContent}
+	        	</Dialog>
+				
 			</Aux>
 		);
 	}
