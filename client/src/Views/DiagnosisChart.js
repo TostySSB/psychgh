@@ -112,11 +112,12 @@ class DiagnosisChart extends Component {
 				type: evalData.type
 			}
 		};
-		
+
 		Object.keys(evalData.evalData).map((key) => {
   			newData.newEval[key] = evalData.evalData[key];
   		});
-
+		console.log("new data:");
+		console.log(newData);
   		axios.post('api/explorations/updateExploration', newData)
   		.then(res => {
   			console.log(res);

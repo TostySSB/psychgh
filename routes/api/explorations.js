@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Exploration = require("../../models/DiagnosisExploration");
 
-const updateEval = (evals, newData) => {
+const updateEval = (evals, newData, userID) => {
 	// Need to update the eval array, then set it to 
 	// The users eval array with findOneAndUpdate
 	console.log("OLD EVALS:");
@@ -24,10 +24,12 @@ const updateEval = (evals, newData) => {
 	console.log("UPDATED EVALS:");
 	console.log(evals);
 
-	// Exploration.findOneAndUpdate({user_id: id}, (err, resp) => {
-	// 	console.log("CALLBACK RESP");
-	// 	console.log(resp);
-	// });
+	Exploration.findOneAndUpdate({user_id: userID}, {$set:{evals: evals.evals}}, (err, doc) => {
+		if (err)
+			console.log("nope.");
+		
+		console.log(doc);
+	});
 }
 
 router.get('/getExploration', (req, res) => {
@@ -45,7 +47,7 @@ router.post('/updateExploration', (req, res) => {
 	let userID = req.body.userID;
 	let exp; 
 	Exploration.findOne({user_id: userID}, (err, resp) => {
-		updateEval(resp, req.body.newEval);
+		updateEval(resp, req.body.newEval, userID);
 	});
 });
 
