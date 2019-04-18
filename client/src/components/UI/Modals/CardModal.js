@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from "axios";
+import ResponseDialog from './ResponseDialog';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -17,6 +18,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Backdrop from '../Backdrop/Backdrop';
+import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
 import Aux from '../../Aux';
 
@@ -52,27 +54,23 @@ class CardModal extends Component {
 	
 	makeForm = () => {
 		let formContent;
-		console.log(this.props.idNum);
-		console.log(this.props.type);
-		console.log(this.props.evalData);
+		// console.log(this.props.idNum);
+		// console.log(this.props.type);
+		// console.log(this.props.evalData);
 		if (this.props.type == "therapy") {
 			formContent =
 				<div> 
 				<DialogTitle><h4>Initial Therapy</h4></DialogTitle>
 								<DialogContent>
 									<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
-										<Grid item>
+										<Grid item xs={12}>
 											<FormControl variant="outlined">
-												<InputLabel>Medication</InputLabel>
+												<DialogContentText>Medication</DialogContentText>
 												<Select
 													value={this.props.evalData.medication}
 													native
 													onChange={this.handleChange}
-													input={
-														<OutlinedInput
-														name="medication"
-														/>
-													}
+													input={<OutlinedInput name="medication"/>}
 												>
 													<option value="" />
 													<option value={"citralopram"}>Citralopram</option>
@@ -80,7 +78,7 @@ class CardModal extends Component {
 												</Select>
 											</FormControl>
 										</Grid>
-										<Grid item>
+										<Grid item xs={12}>
 											<FormControl variant="outlined" className={classes.FormControl}>
 												<TextField
 													value={this.props.evalData.therapyNotes}
@@ -91,37 +89,33 @@ class CardModal extends Component {
 													rows="4"
 													onChange={this.handleChange}
 												/>
-										</FormControl>
+											</FormControl>
 										</Grid>
 									</Grid>
 								</DialogContent>
+								<DialogActions>
+									<Button>Log Response</Button>
+					        		<Button onClick={this.updateEvals}>
+					        			Save
+					        		</Button>
+						            <Button onClick={this.props.modalClosed} color="primary">
+						            	Close
+						            </Button>
+		          				</DialogActions>
 								</div>;
 		}
 		else if (this.props.type == "response") {
 			formContent = <div>
-							<h4>Response</h4>
-							<div>
-								<FormControl>
-									<InputLabel>
-										Response Type
-									</InputLabel>
-									<Select
-										native 
-										onChange={this.handleChange}
-										input={
-											<OutlinedInput
-												name="medication"
-												labelWidth={this.state.labelWidth}
-											/>
-										}
-									>
-										<option value="" />
-										<option value={"non"}>Non-Response</option>
-										<option value={"partial"}>Partial Response</option>
-										<option value={"full"}>Full Response</option>
-									</Select>
-								</FormControl>
-							</div>
+							<DialogTitle><h4>Response</h4></DialogTitle>
+							<ResponseDialog />
+							<DialogActions>
+				        		<Button onClick={this.updateEvals}>
+				        			Save
+				        		</Button>
+					            <Button onClick={this.props.modalClosed} color="primary">
+					            	Close
+					            </Button>
+				          </DialogActions>
 						  </div>;
 	
 		}
@@ -137,6 +131,14 @@ class CardModal extends Component {
 									onChange={this.handleChange}
 								/>
 							</div>
+							<DialogActions>
+				        		<Button onClick={this.updateEvals}>
+				        			Save
+				        		</Button>
+					            <Button onClick={this.props.modalClosed} color="primary">
+					            	Close
+					            </Button>
+				          </DialogActions>
 						  </div>;
 	
 		}
@@ -149,18 +151,17 @@ class CardModal extends Component {
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
 				<Dialog
-				open={this.props.show}
-				style={{
-					transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-					opacity: this.props.show ? '1' : '0'
-				}}
+					open={this.props.show}
+					style={{
+						transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+						opacity: this.props.show ? '1' : '0'
+					}}
 		          	aria-labelledby="form-dialog-title"
 		          	fullWidth
-		          	maxWidth='md'
+		          	maxWidth='sm'
 	        	>
 	        		{formContent}
 	        	</Dialog>
-				
 			</Aux>
 		);
 	}

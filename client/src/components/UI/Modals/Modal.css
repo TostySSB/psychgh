@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.FormControl {
+    width: 100%;
+}
+
 .Modal {
     position: fixed;
     z-index: 500;
