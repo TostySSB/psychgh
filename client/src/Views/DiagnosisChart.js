@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
-		this.content = <div></div>
+		this.cardModal = <div></div>
 		this.state = {
 			newExploration: false,
 			userID: 1007,
@@ -19,7 +19,7 @@ class DiagnosisChart extends Component {
 				evals: []
 			},
 			addingCard: false,
-			editingCard: false
+			showModal: false
 		};
 	}
 
@@ -92,10 +92,41 @@ class DiagnosisChart extends Component {
   		this.setState({addingCard: true});
   	}
 
+
+  	makeModal = (type) => {
+  		let cardModal;
+		if (type == "therapy") {
+			cardModal = 
+			<CardModal 
+				show={this.state.showModal}
+			   	modalClosed={this.cancelNewCardHandler}
+			   	type={this.cardType}
+			   	idNum={this.idNum}
+			   	evalData={this.evalData}
+			   	updateEvals ={this.updateEvals.bind(this)}
+			/>
+		}
+		else if (type == "response") {
+			cardModal =
+			<CardModal 
+				show={this.state.showModal}
+			   	modalClosed={this.cancelNewCardHandler}
+			   	type={this.cardType}
+			   	idNum={this.idNum}
+			   	evalData={this.evalData}
+			   	updateEvals ={this.updateEvals.bind(this)}
+			/>
+		}
+		else if (type == "evaluation") {
+
+		}
+		return cardModal;
+  	}
+
   	
   	cancelNewCardHandler = () => {
   		this.setState({addingCard: false});
-  		this.setState({editingCard: false});
+  		this.setState({showModal: false});
   	}
 
 
@@ -114,8 +145,13 @@ class DiagnosisChart extends Component {
   				break;
   			}
   		}
+
   		this.evalData = evals[index];
-  		this.setState({editingCard: true});
+
+  		this.makeModal(type);
+
+
+  		this.setState({showModal: true});
   	}
 
 
@@ -145,7 +181,7 @@ class DiagnosisChart extends Component {
   	}
   
   	render() {
-  		// console.log(this.state.patient.evals);
+  		let cardModal = this.makeModal(this.cardType);
 		if (this.state.newExploration) {
 			return (
 				<button onClick={this.getPatientExploration.bind(this, {"userID":this.state.userID})}>Click.</button>
@@ -154,15 +190,7 @@ class DiagnosisChart extends Component {
 		else if (this.state.patient.evals.length > 0) {
 			return(
 				<div>
-					{this.content}
-					<CardModal 
-						show={this.state.editingCard}
-					   	modalClosed={this.cancelNewCardHandler}
-					   	type={this.cardType}
-					   	idNum={this.idNum}
-					   	evalData={this.evalData}
-					   	updateEvals ={this.updateEvals.bind(this)}
-					/>
+					{cardModal}
 					<DiagnosisCard
 						type='header' 
 						firstName={this.state.patient.firstName}
@@ -183,7 +211,7 @@ class DiagnosisChart extends Component {
 			return(
 				<div>
 					<CardModal 
-						show={this.state.editingCard}
+						show={this.state.showModal}
 					   	modalClosed={this.cancelNewCardHandler}
 					   	type={this.cardType}
 					   	idNum={this.idNum}
