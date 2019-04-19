@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
+		this.content = <div></div>
 		this.state = {
 			newExploration: false,
 			userID: 1007,
@@ -117,6 +118,7 @@ class DiagnosisChart extends Component {
   		this.setState({editingCard: true});
   	}
 
+
   	updateEvals = (evalData) => {
 		let newData = {
 			userID: this.state.userID,
@@ -152,6 +154,7 @@ class DiagnosisChart extends Component {
 		else if (this.state.patient.evals.length > 0) {
 			return(
 				<div>
+					{this.content}
 					<CardModal 
 						show={this.state.editingCard}
 					   	modalClosed={this.cancelNewCardHandler}

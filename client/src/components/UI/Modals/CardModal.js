@@ -41,6 +41,15 @@ class CardModal extends Component {
 		}});
 	}
 
+	nextEvalHandler = (type) => {
+		console.log("Next Eval Triggered");
+		console.log(this.props.type);
+		if (this.props.type == "therapy") {
+			// formContent = makeForm("evaluation")
+			
+		}
+	}
+
 	updateEvals = () => {
 		console.log(this.props.idNum + " " + this.props.type);
 		this.setState({
@@ -49,66 +58,68 @@ class CardModal extends Component {
 		}, () => {
 			this.props.updateEvals(this.state);
 		});
-		
 	}
 	
-	makeForm = () => {
+	makeForm = (type) => {
 		let formContent;
 		// console.log(this.props.idNum);
 		// console.log(this.props.type);
 		// console.log(this.props.evalData);
-		if (this.props.type == "therapy") {
+		if (type == "therapy") {
 			formContent =
 				<div> 
-				<DialogTitle><h4>Initial Therapy</h4></DialogTitle>
-								<DialogContent>
-									<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
-										<Grid item xs={12}>
-											<FormControl variant="outlined">
-												<DialogContentText>Medication</DialogContentText>
-												<Select
-													value={this.props.evalData.medication}
-													native
-													onChange={this.handleChange}
-													input={<OutlinedInput name="medication"/>}
-												>
-													<option value="" />
-													<option value={"citralopram"}>Citralopram</option>
-													<option value={"sertraline"}>Sertraline</option>
-												</Select>
-											</FormControl>
-										</Grid>
-										<Grid item xs={12}>
-											<FormControl variant="outlined" className={classes.FormControl}>
-												<TextField
-													value={this.props.evalData.therapyNotes}
-													name="therapyNotes"
-													id="initial-therapy-notes"
-													label="Notes on Side Effects"
-													multiline
-													rows="4"
-													onChange={this.handleChange}
-												/>
-											</FormControl>
-										</Grid>
-									</Grid>
-								</DialogContent>
-								<DialogActions>
-									<Button>Log Response</Button>
-					        		<Button onClick={this.updateEvals}>
-					        			Save
-					        		</Button>
-						            <Button onClick={this.props.modalClosed} color="primary">
-						            	Close
-						            </Button>
-		          				</DialogActions>
-								</div>;
+				<DialogTitle>
+					<h4>Initial Therapy</h4>
+				</DialogTitle>
+				<DialogContent>
+					<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
+						<Grid item xs={12}>
+							<FormControl variant="outlined">
+								<DialogContentText>Medication</DialogContentText>
+								<Select
+									value={this.props.evalData.medication}
+									native
+									onChange={this.handleChange}
+									input={<OutlinedInput name="medication"/>}
+								>
+									<option value="" />
+									<option value={"citralopram"}>Citralopram</option>
+									<option value={"sertraline"}>Sertraline</option>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControl variant="outlined" className={classes.FormControl}>
+								<TextField
+									value={this.props.evalData.therapyNotes}
+									name="therapyNotes"
+									id="initial-therapy-notes"
+									label="Notes on Side Effects"
+									multiline
+									rows="4"
+									onChange={this.handleChange}
+								/>
+							</FormControl>
+						</Grid>
+					</Grid>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={this.nextEvalHandler}>Log Response</Button>
+	        		<Button onClick={this.updateEvals}>
+	        			Save
+	        		</Button>
+		            <Button onClick={this.props.modalClosed} color="primary">
+		            	Close
+		            </Button>
+  				</DialogActions>
+				</div>;
 		}
-		else if (this.props.type == "response") {
+		else if (type == "response") {
 			formContent = <div>
 							<DialogTitle><h4>Response</h4></DialogTitle>
 							<ResponseDialog />
 							<DialogActions>
+								<Button>Log Evaluation</Button>
 				        		<Button onClick={this.updateEvals}>
 				        			Save
 				        		</Button>
@@ -119,7 +130,7 @@ class CardModal extends Component {
 						  </div>;
 	
 		}
-		else if (this.props.type == "evaluation") {
+		else if (type == "evaluation") {
 			formContent = <div>
 							<h4>Evaluation</h4>
 							<div>
@@ -132,6 +143,7 @@ class CardModal extends Component {
 								/>
 							</div>
 							<DialogActions>
+								<Button>Log Next Response></Button>
 				        		<Button onClick={this.updateEvals}>
 				        			Save
 				        		</Button>
@@ -146,7 +158,7 @@ class CardModal extends Component {
 	};
 
 	render() {
-		let formContent = this.makeForm();
+		let formContent = this.makeForm(this.props.type);
 		return (
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
