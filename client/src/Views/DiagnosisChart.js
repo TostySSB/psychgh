@@ -6,6 +6,8 @@ import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
 import NewDiagnosisChart from '../components/UI/cards/NewDiagnosisChart';
 import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls';
 import CardModal from '../components/UI/Modals/CardModal';
+import TherapyModal from '../components/UI/Modals/TherapyModal';
+import ResponseModal from '../components/UI/Modals/ResponseModal';
 import { connect } from "react-redux";
 
 class DiagnosisChart extends Component {
@@ -19,7 +21,9 @@ class DiagnosisChart extends Component {
 				evals: []
 			},
 			addingCard: false,
-			showModal: false
+			showTherapyModal: false,
+			showResponseModal: false,
+			showEvalModal: false
 		};
 	}
 
@@ -93,34 +97,58 @@ class DiagnosisChart extends Component {
   	}
 
 
-  	makeModal = (type) => {
+  	makeModal = (type, evalData) => {
+  		//TODO: pass id num??
   		let cardModal;
 		if (type == "therapy") {
 			cardModal = 
-			<CardModal 
-				show={this.state.showModal}
-			   	modalClosed={this.cancelNewCardHandler}
-			   	type={this.cardType}
-			   	idNum={this.idNum}
-			   	evalData={this.evalData}
-			   	updateEvals ={this.updateEvals.bind(this)}
-			/>
+				<CardModal 
+					show={this.state.showModal}
+				   	modalClosed={this.cancelNewCardHandler}
+				   	type={type}
+				   	idNum={this.idNum}
+				   	evalData={evalData}
+				   	updateEvals ={this.updateEvals.bind(this)}
+				/>
 		}
 		else if (type == "response") {
 			cardModal =
-			<CardModal 
-				show={this.state.showModal}
-			   	modalClosed={this.cancelNewCardHandler}
-			   	type={this.cardType}
-			   	idNum={this.idNum}
-			   	evalData={this.evalData}
-			   	updateEvals ={this.updateEvals.bind(this)}
-			/>
+				<CardModal 
+					show={this.state.showModal}
+				   	modalClosed={this.cancelNewCardHandler}
+				   	type={type}
+				   	idNum={this.idNum}
+				   	evalData={evalData}
+				   	updateEvals ={this.updateEvals.bind(this)}
+				/>
 		}
 		else if (type == "evaluation") {
 
 		}
-		return cardModal;
+		return cardModal
+  	}
+
+  	
+  	newEvalHandler = (type) => {
+  		//Render correct type, 
+  		//based on type of modal we currently have rendered
+  		// this.setState({showModal: false});
+  		if (type == "therapy") {
+  			// Render a response
+  			this.cardType = "response";
+  		}
+  		else if (type == "response") {
+  			// Render an eval
+  			this.cardType = "evaluation";
+  		}
+  		else if (type == "evaluation") {
+  			// Render a response
+  			this.cardType = "response";
+  		}
+  		this.evalData = {};
+  		this.idNum = this.idNum + 1;
+  		// this.setState({showModal: true});
+
   	}
 
   	
@@ -147,10 +175,7 @@ class DiagnosisChart extends Component {
   		}
 
   		this.evalData = evals[index];
-
-  		this.makeModal(type);
-
-
+  		// this.makeModal(type, this.evalData);
   		this.setState({showModal: true});
   	}
 
@@ -181,7 +206,7 @@ class DiagnosisChart extends Component {
   	}
   
   	render() {
-  		let cardModal = this.makeModal(this.cardType);
+  		let cardModal = this.makeModal(this.cardType, this.evalData);
 		if (this.state.newExploration) {
 			return (
 				<button onClick={this.getPatientExploration.bind(this, {"userID":this.state.userID})}>Click.</button>
@@ -190,7 +215,15 @@ class DiagnosisChart extends Component {
 		else if (this.state.patient.evals.length > 0) {
 			return(
 				<div>
-					{cardModal}
+					<CardModal 
+						show={this.state.showModal}
+					   	modalClosed={this.cancelNewCardHandler}
+					   	type={this.cardType}
+					   	idNum={this.idNum}
+					   	evalData={this.evalData}
+					   	updateEvals={this.updateEvals.bind(this)}
+					   	nextEvalHandler={this.newEvalHandler}
+					/>
 					<DiagnosisCard
 						type='header' 
 						firstName={this.state.patient.firstName}

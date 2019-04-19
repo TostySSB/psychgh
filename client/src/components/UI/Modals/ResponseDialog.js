@@ -24,8 +24,6 @@ class ResponseDialog extends Component {
 	}
 
 	handleTypeChange = event => {
-		console.log("EVENT:");
-		console.log(event.target.value);
 		this.setState({type: event.target.value});
 	}
 

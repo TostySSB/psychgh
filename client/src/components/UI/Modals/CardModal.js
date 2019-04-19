@@ -104,7 +104,7 @@ class CardModal extends Component {
 					</Grid>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={this.nextEvalHandler}>Log Response</Button>
+					<Button onClick={this.props.nextEvalHandler.bind(this.props.type)}>Log Response</Button>
 	        		<Button onClick={this.updateEvals}>
 	        			Save
 	        		</Button>
