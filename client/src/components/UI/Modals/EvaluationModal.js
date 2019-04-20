@@ -31,10 +31,12 @@ class EvaluationModal extends Component {
 	}
 
 	handleChange = event => {
-		this.setState({evalData: {
-			...this.state.evalData, [event.target.name]: event.target.value
-		}});
+		if (event.target.type === "textarea") {
+			console.log("It's a text area");
+		}
+		this.props.handleEvalChange(event);
 	}
+	
 
 	render() {
 		return (

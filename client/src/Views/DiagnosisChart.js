@@ -161,7 +161,7 @@ class DiagnosisChart extends Component {
   			this.setState({showEvalModal: false});
   			this.setState({showResponseModal: true});
   		}
-  		this.evalData = {};
+  		this.state.currentEvalData = {};
   		this.idNum = this.idNum + 1;
   	}
 
@@ -204,7 +204,7 @@ class DiagnosisChart extends Component {
   	}
 
 
-  	updateEvals = (evalData) => {
+  	updateEvals = () => {
   		console.log(this.state.currentEvalData);
 		let newData = {
 			userID: this.state.userID,
@@ -231,12 +231,7 @@ class DiagnosisChart extends Component {
   	}
   
   	render() {
-		if (this.state.newExploration) {
-			return (
-				<button onClick={this.getPatientExploration.bind(this, {"userID":this.state.userID})}>Click.</button>
-  			);
-		}
-		else if (this.state.patient.evals.length > 0) {
+		if (this.state.patient.evals.length > 0) {
 			console.log(this.evalData);
 			return(
 				<div>
@@ -261,6 +256,7 @@ class DiagnosisChart extends Component {
 						type="response"
 						updateEvals ={this.updateEvals.bind(this)}
 						submitEval={this.submitEval}
+						handleEvalChange={this.handleEvalChange}
 						newExploration={this.state.newExploration}
 						modalClosed={this.cancelNewCardHandler.bind(this, "response")}
 					/>
@@ -273,6 +269,7 @@ class DiagnosisChart extends Component {
 						type="evaluation"
 						updateEvals ={this.updateEvals.bind(this)}
 						submitEval={this.submitEval}
+						handleEvalChange={this.handleEvalChange}
 						newExploration={this.state.newExploration}
 						modalClose={this.cancelNewCardHandler.bind(this, "evaluation")}
 					/>

@@ -46,7 +46,7 @@ class TherapyModal extends Component {
 			id: this.props.idNum,
 			type: this.props.type
 		}, () => {
-			this.props.updateEvals(this.state);
+			this.props.updateEvals();
 		});
 	}
 

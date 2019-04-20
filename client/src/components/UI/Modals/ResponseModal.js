@@ -32,20 +32,23 @@ class ResponseModal extends Component {
 	}
 
 	handleChange = event => {
-		this.setState({evalData: {
-			...this.state.evalData, [event.target.name]: event.target.value
-		}});
+		if (event.target.name === "response-type") {
+			this.setState({type: event.target.value});
+		}
+		if (event.target.type === "textarea") {
+			console.log("It's a text area");
+		}
+		this.props.handleEvalChange(event);
 	}
 
 	updateEvals = () => {
-		console.log("RESPONSE STATE:");
-		console.log(this.state);
-		// this.setState({
-		// 	id: this.props.idNum,
-		// 	type: "response"
-		// }, () => {
-		// 	this.props.updateEvals(this.state);
-		// });
+		console.log(this.props.idNum + " " + this.props.type);
+		this.setState({
+			id: this.props.idNum,
+			type: this.props.type
+		}, () => {
+			this.props.updateEvals();
+		});
 	}
 
 	handleTypeChange = event => {
@@ -93,7 +96,7 @@ class ResponseModal extends Component {
 					<FormControl>
 						<Select
 							native
-							onChange={this.handleActionChange}
+							onChange={this.handleChange}
 							input={<OutlinedInput name="response-decision"/>}
 						>
 							<option value="optimize">Optimize Dose</option>
@@ -142,8 +145,8 @@ class ResponseModal extends Component {
 									<FormControl>
 										<Select
 											native
-											input={<OutlinedInput />}
-											onChange={this.handleTypeChange}
+											input={<OutlinedInput name="response-type"/>}
+											onChange={this.handleChange}
 										>
 											<option value="">Select Response Type</option>
 											<option value="non-response">Non Response</option>

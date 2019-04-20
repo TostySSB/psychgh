@@ -16,8 +16,6 @@ const updateEval = (evals, newData, userID) => {
 			break;
 		}
 	}
-	// console.log("Eval to be updated:");
-	// console.log(evals.evals[index]);
 
 	evals.evals[index] = newData;
 
@@ -42,7 +40,8 @@ router.get('/getExploration', (req, res) => {
 });
 
 router.post('/newExploration', (req, res) => {
-	Exploration.save();
+	console.log("NEW EXPLORATION REQ:");
+	console.log(req);
 });
 
 router.post('/updateExploration', (req, res) => {
