@@ -26,7 +26,6 @@ class TherapyModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			medication: "",
 			notes: ""
 		};
 	}
@@ -53,6 +52,10 @@ class TherapyModal extends Component {
 
 
 	handleChange = event => {
+		console.log(event.target.type);
+		if (event.target.type === "textarea") {
+			console.log("It's a text area");
+		}
 		this.props.handleEvalChange(event);
 	}
 
@@ -66,7 +69,7 @@ class TherapyModal extends Component {
 								<FormControl variant="outlined">
 									<DialogContentText>Medication</DialogContentText>
 									<Select
-										// value={this.state.medication}
+										value={this.props.evalData.medication}
 										native
 										onChange={this.handleChange}
 										input={<OutlinedInput name="medication"/>}
@@ -80,13 +83,14 @@ class TherapyModal extends Component {
 							<Grid item xs={12}>
 								<FormControl variant="outlined" className={classes.FormControl}>
 									<TextField
-										value={this.state.therapyNotes}
+										//TODO figure out the functionality to update the notes.
+										value={this.props.evalData.therapyNotes}
 										name="notes"
 										id="initial-therapy-notes"
 										label="Notes on Side Effects"
 										multiline
 										rows="4"
-										onChange={() => { this.handleInputChange(this.state.notes); }}
+										onChange={this.handleChange}
 									/>
 								</FormControl>
 							</Grid>

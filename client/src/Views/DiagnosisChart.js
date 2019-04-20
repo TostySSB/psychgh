@@ -96,8 +96,6 @@ class DiagnosisChart extends Component {
   		console.log(this.state.currentEvalData);
   		currentEval[event.target.name] = event.target.value;
   		this.setState({currentEvalData: currentEval});
-  		console.log("Post-Update state eval:");
-  		console.log(this.state.currentEvalData);
   	}
 
   	
@@ -207,17 +205,17 @@ class DiagnosisChart extends Component {
 
 
   	updateEvals = (evalData) => {
-  		console.log(evalData);
+  		console.log(this.state.currentEvalData);
 		let newData = {
 			userID: this.state.userID,
 			newEval: {
-				id: evalData.id,
-				type: evalData.type
+				id: this.state.currentEvalData.id,
+				type: this.state.currentEvalData.type
 			}
 		};
 
-		Object.keys(evalData.evalData).map((key) => {
-  			newData.newEval[key] = evalData.evalData[key];
+		Object.keys(this.state.currentEvalData).map((key) => {
+  			newData.newEval[key] = this.state.currentEvalData[key];
   		});
 		console.log("new data:");
 		console.log(newData);

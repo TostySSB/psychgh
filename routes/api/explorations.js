@@ -6,7 +6,7 @@ const updateEval = (evals, newData, userID) => {
 	// Need to update the eval array, then set it to 
 	// The users eval array with findOneAndUpdate
 	console.log("OLD EVALS:");
-	console.log(evals);
+	console.log(evals.evals);
 	console.log("NEW DATA");
 	console.log(newData);
 	let index;
@@ -22,7 +22,7 @@ const updateEval = (evals, newData, userID) => {
 	evals.evals[index] = newData;
 
 	console.log("UPDATED EVALS:");
-	console.log(evals);
+	console.log(evals.evals);
 
 	Exploration.findOneAndUpdate({user_id: userID}, {$set:{evals: evals.evals}}, (err, doc) => {
 		if (err)
