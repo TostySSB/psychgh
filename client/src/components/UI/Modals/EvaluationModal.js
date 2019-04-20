@@ -22,16 +22,16 @@ import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
 import Aux from '../../Aux';
 
-class ResponseModal extends Component {
+class EvaluationModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stuff: ""
-		}
+			thing: ""
+		};
 	}
 
 	render() {
-		return(
+		return (
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
 				<Dialog
@@ -44,23 +44,32 @@ class ResponseModal extends Component {
 		          	fullWidth
 		          	maxWidth='sm'
 	        	>
-	    			<DialogTitle><h4>Response</h4></DialogTitle>
-						<ResponseDialog />
-						<DialogActions>
-							<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)}>
-								Log Evaluation
-							</Button>
-			        		<Button onClick={this.updateEvals}>
-			        			Save
-			        		</Button>
-				            <Button onClick={this.props.modalClosed} color="primary">
-				            	Close
-				            </Button>
-			          </DialogActions>
+	        			<DialogTitle><h4>Evaluation</h4></DialogTitle>
+							<div>
+								<TextField
+									name="evaluationNotes"
+									rows="5"
+									multiline
+									label="Enter notes here"
+									onChange={this.handleChange}
+								/>
+							</div>
+							<DialogActions>
+								<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} >
+									Log Next Response
+								</Button>
+				        		<Button onClick={this.updateEvals}>
+				        			Save
+				        		</Button>
+					            <Button onClick={this.props.modalClosed} color="primary">
+					            	Close
+					            </Button>
+				          </DialogActions>
 	        	</Dialog>
 			</Aux>
 		);
 	}
+
 }
 
-export default ResponseModal;
+export default EvaluationModal;
