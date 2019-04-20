@@ -14,9 +14,12 @@ import { connect } from "react-redux";
 class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
-		this.cardModal = <div></div>
+		this.evalData = {};
+		this.idNum = 0;
 		this.state = {
 			newExploration: false,
+			currentIdNum: 0,
+			currentEvalData: {},
 			userID: 1007,
 			patient: {
 				evals: []
@@ -131,6 +134,7 @@ class DiagnosisChart extends Component {
 
   	
   	nextEvalHandler = (type) => {
+  		this.setState({newExploration: true})
   		//Render correct type of modal
   		//based on type of modal we currently have rendered
   		console.log(type);
@@ -153,27 +157,15 @@ class DiagnosisChart extends Component {
   		this.idNum = this.idNum + 1;
   	}
 
-  	
-  	cancelNewCardHandler = (type) => {
-  		this.setState({addingCard: false});
-  		
-  		if (type == "therapy")
-  			this.setState({showTherapyModal: false});
-  		else if (type == "response")
-  			this.setState({showResponseModal: false});
-  		else if (type == "evaluation")
-  			this.setState({showEvalModal: false});
-  	}
-
 
   	cardClickHandler = (type, idNum) => {
+  		this.setState({newExploration: false});
   		this.cardType = type;
-  		this.idNum = idNum;
-  		console.log(idNum);
+  		// this.idNum = idNum;
+  		this.setState({currentIdNum: idNum});
   		// Get the right eval data
   		let evals = this.state.patient.evals;
   		let index;
-  		console.log(evals.length);
   		for (let i = 0; i < evals.length; i++) {
   			console.log(evals[i].id);
   			if (evals[i].id == idNum) {
@@ -182,7 +174,8 @@ class DiagnosisChart extends Component {
   			}
   		}
 
-  		this.evalData = evals[index];
+  		// this.evalData = evals[index];
+  		this.setState({currentEvalData: evals[index]});
 
   		if (type == "therapy")
   			this.setState({showTherapyModal: true});
@@ -193,7 +186,19 @@ class DiagnosisChart extends Component {
   	}
 
 
+  	cancelNewCardHandler = (type) => {
+  		this.setState({addingCard: false});
+  		if (type == "therapy")
+  			this.setState({showTherapyModal: false});
+  		else if (type == "response")
+  			this.setState({showResponseModal: false});
+  		else if (type == "evaluation")
+  			this.setState({showEvalModal: false});
+  	}
+
+
   	updateEvals = (evalData) => {
+  		console.log(evalData);
 		let newData = {
 			userID: this.state.userID,
 			newEval: {
@@ -219,36 +224,48 @@ class DiagnosisChart extends Component {
   	}
   
   	render() {
-  		let cardModal = this.makeModal(this.cardType, this.evalData);
 		if (this.state.newExploration) {
 			return (
 				<button onClick={this.getPatientExploration.bind(this, {"userID":this.state.userID})}>Click.</button>
   			);
 		}
 		else if (this.state.patient.evals.length > 0) {
+			console.log(this.evalData);
 			return(
 				<div>
 					<TherapyModal 
 						show={this.state.showTherapyModal}
-						evalData={this.evalData}
+						evalData={this.state.currentEvalData}
+						idNum={this.state.currentIdNum}
 						nextEvalHandler={this.nextEvalHandler}
 						type={"therapy"}
+						updateEvals ={this.updateEvals.bind(this)}
+						submitEval={this.submitEval}
+						newExploration={this.state.newExploration}
 						modalClosed={this.cancelNewCardHandler.bind(this, "therapy")}
 					/>
 
 					<ResponseModal 
 						show={this.state.showResponseModal} 
-						evalData={this.evalData}
+						evalData={this.state.currentEvalData}
+						idNum={this.state.currentIdNum}
 						nextEvalHandler={this.nextEvalHandler}
 						type="response"
+						updateEvals ={this.updateEvals.bind(this)}
+						submitEval={this.submitEval}
+						newExploration={this.state.newExploration}
 						modalClosed={this.cancelNewCardHandler.bind(this, "response")}
 					/>
 
 					<EvaluationModal
 						show={this.state.showEvalModal}
-						evalData={this.evalData}
+						evalData={this.state.currentEvalData}
+						idNum={this.state.currentIdNum}
 						nextEvalHandler={this.nextEvalHandler}
 						type="evaluation"
+						updateEvals ={this.updateEvals.bind(this)}
+						submitEval={this.submitEval}
+						newExploration={this.state.newExploration}
 						modalClose={this.cancelNewCardHandler.bind(this, "evaluation")}
 					/>
 					

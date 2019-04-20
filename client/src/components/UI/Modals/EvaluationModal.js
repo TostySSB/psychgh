@@ -26,8 +26,14 @@ class EvaluationModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			thing: ""
+			evaluationNotes: ""
 		};
+	}
+
+	handleChange = event => {
+		this.setState({evalData: {
+			...this.state.evalData, [event.target.name]: event.target.value
+		}});
 	}
 
 	render() {
@@ -58,7 +64,7 @@ class EvaluationModal extends Component {
 								<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} >
 									Log Next Response
 								</Button>
-				        		<Button onClick={this.updateEvals}>
+				        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals}>
 				        			Save
 				        		</Button>
 					            <Button onClick={this.props.modalClosed} color="primary">

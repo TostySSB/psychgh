@@ -27,12 +27,71 @@ class TherapyModal extends Component {
 		super(props);
 		this.evalData = props.evalData;
 		this.state = {
-			stuff: ""
+			medication: "",
+			notes: ""
 		};
 	}
 
+	updateEvals = () => {
+		console.log(this.props.idNum + " " + this.props.type);
+		this.setState({
+			id: this.props.idNum,
+			type: this.props.type
+		}, () => {
+			this.props.updateEvals(this.state);
+		});
+	}
+
+
+	handleChange = event => {
+		this.setState({evalData: {
+			...this.state.evalData, [event.target.name]: event.target.value
+		}});
+	}
+
+	
+	// Will probably have to delete this at some point, needless function
+	makeDialogContent = () => {
+		let content =
+			<DialogContent>
+						<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
+							<Grid item xs={12}>
+								<FormControl variant="outlined">
+									<DialogContentText>Medication</DialogContentText>
+									<Select
+										value={this.props.evalData.medication}
+										native
+										// onChange={this.handleChange}
+										input={<OutlinedInput name="medication"/>}
+									>
+										<option value="" />
+										<option value={"citralopram"}>Citralopram</option>
+										<option value={"sertraline"}>Sertraline</option>
+									</Select>
+								</FormControl>
+							</Grid>
+							<Grid item xs={12}>
+								<FormControl variant="outlined" className={classes.FormControl}>
+									<TextField
+										value={this.props.evalData.therapyNotes}
+										name="therapyNotes"
+										id="initial-therapy-notes"
+										label="Notes on Side Effects"
+										multiline
+										rows="4"
+										onChange={this.handleChange}
+									/>
+								</FormControl>
+							</Grid>
+						</Grid>
+					</DialogContent>
+		
+		return content;
+	}
+
 	render() {
-		console.log("PROPS TYPE: " + this.props.type);
+		console.log(this.props);
+		let dialogContent = this.makeDialogContent();
 		return (
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
@@ -47,41 +106,10 @@ class TherapyModal extends Component {
 		          	maxWidth='sm'
 	        	>
 		        	<DialogTitle><h4>Initial Therapy</h4></DialogTitle>
-					<DialogContent>
-						<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
-							<Grid item xs={12}>
-								<FormControl variant="outlined">
-									<DialogContentText>Medication</DialogContentText>
-									<Select
-										// value={this.props.evalData.medication ? this.props.evalData.medication : ""}
-										native
-										onChange={this.handleChange}
-										input={<OutlinedInput name="medication"/>}
-									>
-										<option value="" />
-										<option value={"citralopram"}>Citralopram</option>
-										<option value={"sertraline"}>Sertraline</option>
-									</Select>
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl variant="outlined" className={classes.FormControl}>
-									<TextField
-										// value={this.props.evalData.therapyNotes}
-										name="therapyNotes"
-										id="initial-therapy-notes"
-										label="Notes on Side Effects"
-										multiline
-										rows="4"
-										onChange={this.handleChange}
-									/>
-								</FormControl>
-							</Grid>
-						</Grid>
-					</DialogContent>
+					{dialogContent}
 					<DialogActions>
 						<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)}>Log Response</Button>
-		        		<Button onClick={this.updateEvals}>
+		        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals}>
 		        			Save
 		        		</Button>
 			            <Button onClick={this.props.modalClosed} color="primary">

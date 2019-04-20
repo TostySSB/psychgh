@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from "axios";
-import ResponseDialog from './ResponseDialog';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -26,11 +25,102 @@ class ResponseModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stuff: ""
+			id: props.idNum,
+			type: "",
+			action: {}
 		}
 	}
 
+	handleChange = event => {
+		this.setState({evalData: {
+			...this.state.evalData, [event.target.name]: event.target.value
+		}});
+	}
+
+	updateEvals = () => {
+		console.log("RESPONSE STATE:");
+		console.log(this.state);
+		// this.setState({
+		// 	id: this.props.idNum,
+		// 	type: "response"
+		// }, () => {
+		// 	this.props.updateEvals(this.state);
+		// });
+	}
+
+	handleTypeChange = event => {
+		this.setState({type: event.target.value});
+	}
+
+	handleActionChange = event => {
+		console.log(this.state.type);
+		console.log(event.target.value);
+	}
+
+	makeBody = () => {
+		let dialogBody;
+		if (this.state.type == "non-response") {
+			dialogBody = 
+			<div>
+				<Grid item xs={12}>
+					<DialogContentText>
+						<p>
+							Switch Antidepressants?
+						</p>
+					</DialogContentText>
+					<FormControl>
+						<Select
+							native
+							onChange={this.handleActionChange}
+							input={<OutlinedInput name="change-medication"/>}
+						>
+							<option value="citalopram">Citralopram</option>
+							<option value="sertraline">Sertraline</option>
+						</Select>
+					</FormControl>
+				</Grid>
+			</div>;
+		}
+		else if (this.state.type == "partial-response") {
+			dialogBody = 
+			<div>
+				<Grid item xs={12}>
+					<DialogContentText>
+						<p>
+							What would you like to do?
+						</p>
+					</DialogContentText>
+					<FormControl>
+						<Select
+							native
+							onChange={this.handleActionChange}
+							input={<OutlinedInput name="response-decision"/>}
+						>
+							<option value="optimize">Optimize Dose</option>
+							<option value="augment-med">Augment Dose</option>
+							<option value="switch-med">Switch Medication</option>
+						</Select>
+					</FormControl>
+				</Grid>
+			</div>;
+		}
+		else if (this.state.type == "full-response") {
+			dialogBody = 
+			<div>
+				<Grid item xs={12}>
+					<p>Full Response. Treatment will continue</p>
+				</Grid>
+			</div>;
+		}
+		
+		else dialogBody = <div></div>;
+		return dialogBody;
+	}
+
+
+
 	render() {
+		let dialogBody = this.makeBody();
 		return(
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
@@ -45,12 +135,30 @@ class ResponseModal extends Component {
 		          	maxWidth='sm'
 	        	>
 	    			<DialogTitle><h4>Response</h4></DialogTitle>
-						<ResponseDialog />
+						<DialogContent>
+							<Grid container>
+								<Grid item xs={12}>
+									<FormControl>
+										<Select
+											native
+											input={<OutlinedInput />}
+											onChange={this.handleTypeChange}
+										>
+											<option value="">Select Response Type</option>
+											<option value="non-response">Non Response</option>
+											<option value="partial-response">Partial Response</option>
+											<option value="full-response">Full Response</option>
+										</Select>
+									</FormControl>
+								</Grid>
+								{dialogBody}
+							</Grid>
+						</DialogContent>
 						<DialogActions>
 							<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)}>
 								Log Evaluation
 							</Button>
-			        		<Button onClick={this.updateEvals}>
+			        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals}>
 			        			Save
 			        		</Button>
 				            <Button onClick={this.props.modalClosed} color="primary">

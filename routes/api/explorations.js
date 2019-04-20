@@ -41,6 +41,10 @@ router.get('/getExploration', (req, res) => {
 	});
 });
 
+router.post('/newExploration', (req, res) => {
+	Exploration.save();
+});
+
 router.post('/updateExploration', (req, res) => {
 	console.log("REQ:");
 	console.log(req.body);
