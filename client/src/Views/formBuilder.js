@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import quizQuestions from "../components/UI/forms/form-components/quizQuestions";
 import Quiz from "../components/UI/forms/form-components/Quiz";
 import Result from "../components/UI/forms/form-components/Result";
-
 class formBuilder extends Component{
     constructor(props) {
         super(props);
@@ -129,6 +128,7 @@ class formBuilder extends Component{
               <h2>React Quiz</h2>
             </div>
             {this.state.result ? this.renderResult() : this.renderQuiz()}
+            <questionareBuilder></questionareBuilder>
           </div>
         );
       }
