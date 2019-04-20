@@ -25,12 +25,21 @@ import Aux from '../../Aux';
 class TherapyModal extends Component {
 	constructor(props) {
 		super(props);
-		this.evalData = props.evalData;
 		this.state = {
 			medication: "",
 			notes: ""
 		};
 	}
+
+	// componentWillReceiveProps() {
+	// 	if (this.props.show === true) {
+	// 		console.log("Shown.");
+	// 		console.log(this.props.evalData);
+	// 		this.setState({
+	// 			medication: this.props.evalData.medication
+	// 		});
+	// 	}
+	// }
 
 	updateEvals = () => {
 		console.log(this.props.idNum + " " + this.props.type);
@@ -44,9 +53,7 @@ class TherapyModal extends Component {
 
 
 	handleChange = event => {
-		this.setState({evalData: {
-			...this.state.evalData, [event.target.name]: event.target.value
-		}});
+		this.props.handleEvalChange(event);
 	}
 
 	
@@ -59,9 +66,9 @@ class TherapyModal extends Component {
 								<FormControl variant="outlined">
 									<DialogContentText>Medication</DialogContentText>
 									<Select
-										value={this.props.evalData.medication}
+										// value={this.state.medication}
 										native
-										// onChange={this.handleChange}
+										onChange={this.handleChange}
 										input={<OutlinedInput name="medication"/>}
 									>
 										<option value="" />
@@ -73,13 +80,13 @@ class TherapyModal extends Component {
 							<Grid item xs={12}>
 								<FormControl variant="outlined" className={classes.FormControl}>
 									<TextField
-										value={this.props.evalData.therapyNotes}
-										name="therapyNotes"
+										value={this.state.therapyNotes}
+										name="notes"
 										id="initial-therapy-notes"
 										label="Notes on Side Effects"
 										multiline
 										rows="4"
-										onChange={this.handleChange}
+										onChange={() => { this.handleInputChange(this.state.notes); }}
 									/>
 								</FormControl>
 							</Grid>

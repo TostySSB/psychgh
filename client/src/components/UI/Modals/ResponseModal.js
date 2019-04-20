@@ -121,6 +121,7 @@ class ResponseModal extends Component {
 
 	render() {
 		let dialogBody = this.makeBody();
+		console.log(this.props);
 		return(
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />

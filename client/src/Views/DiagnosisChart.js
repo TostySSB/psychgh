@@ -90,6 +90,16 @@ class DiagnosisChart extends Component {
     	});
   	}
 
+  	handleEvalChange = event => {
+  		let currentEval = this.state.currentEvalData;
+  		console.log("Pre-update state eval:");
+  		console.log(this.state.currentEvalData);
+  		currentEval[event.target.name] = event.target.value;
+  		this.setState({currentEvalData: currentEval});
+  		console.log("Post-Update state eval:");
+  		console.log(this.state.currentEvalData);
+  	}
+
   	
   	renderNewPatient = () => {
   		console.log(window.location.pathname);
@@ -174,9 +184,8 @@ class DiagnosisChart extends Component {
   			}
   		}
 
-  		// this.evalData = evals[index];
   		this.setState({currentEvalData: evals[index]});
-
+  		
   		if (type == "therapy")
   			this.setState({showTherapyModal: true});
   		else if (type == "response")
@@ -241,6 +250,7 @@ class DiagnosisChart extends Component {
 						type={"therapy"}
 						updateEvals ={this.updateEvals.bind(this)}
 						submitEval={this.submitEval}
+						handleEvalChange={this.handleEvalChange}
 						newExploration={this.state.newExploration}
 						modalClosed={this.cancelNewCardHandler.bind(this, "therapy")}
 					/>
