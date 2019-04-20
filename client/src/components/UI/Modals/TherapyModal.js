@@ -30,16 +30,6 @@ class TherapyModal extends Component {
 		};
 	}
 
-	// componentWillReceiveProps() {
-	// 	if (this.props.show === true) {
-	// 		console.log("Shown.");
-	// 		console.log(this.props.evalData);
-	// 		this.setState({
-	// 			medication: this.props.evalData.medication
-	// 		});
-	// 	}
-	// }
-
 	updateEvals = () => {
 		console.log(this.props.idNum + " " + this.props.type);
 		this.setState({
@@ -48,6 +38,10 @@ class TherapyModal extends Component {
 		}, () => {
 			this.props.updateEvals();
 		});
+	}
+
+	submitEval = () => {
+		this.props.submitEval("therapy");
 	}
 
 

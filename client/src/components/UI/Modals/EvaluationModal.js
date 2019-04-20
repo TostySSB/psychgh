@@ -36,6 +36,14 @@ class EvaluationModal extends Component {
 		}
 		this.props.handleEvalChange(event);
 	}
+
+	updateEvals = () => {
+		this.props.updateEvals();
+	}
+
+	submitEval = () => {
+		this.props.submitEval("evaluation");
+	}
 	
 
 	render() {
@@ -66,7 +74,7 @@ class EvaluationModal extends Component {
 								<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} >
 									Log Next Response
 								</Button>
-				        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals}>
+				        		<Button onClick={this.props.newExploration ? this.submitEval : this.updateEvals}>
 				        			Save
 				        		</Button>
 					            <Button onClick={this.props.modalClosed} color="primary">

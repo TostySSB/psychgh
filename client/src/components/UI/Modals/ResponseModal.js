@@ -32,6 +32,7 @@ class ResponseModal extends Component {
 	}
 
 	handleChange = event => {
+		console.log(event.target.name + " " + event.target.value);
 		if (event.target.name === "response-type") {
 			this.setState({type: event.target.value});
 		}
@@ -42,13 +43,11 @@ class ResponseModal extends Component {
 	}
 
 	updateEvals = () => {
-		console.log(this.props.idNum + " " + this.props.type);
-		this.setState({
-			id: this.props.idNum,
-			type: this.props.type
-		}, () => {
-			this.props.updateEvals();
-		});
+		this.props.updateEvals();
+	}
+
+	submitEval = () => {
+		this.props.submitEval("response");
 	}
 
 	handleTypeChange = event => {
@@ -74,7 +73,7 @@ class ResponseModal extends Component {
 					<FormControl>
 						<Select
 							native
-							onChange={this.handleActionChange}
+							onChange={this.handleChange}
 							input={<OutlinedInput name="change-medication"/>}
 						>
 							<option value="citalopram">Citralopram</option>

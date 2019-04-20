@@ -162,7 +162,7 @@ class DiagnosisChart extends Component {
   			this.setState({showResponseModal: true});
   		}
   		this.state.currentEvalData = {};
-  		this.idNum = this.idNum + 1;
+  		this.setState({currentIdNum: this.state.currentIdNum + 1});
   	}
 
 
@@ -203,8 +203,30 @@ class DiagnosisChart extends Component {
   			this.setState({showEvalModal: false});
   	}
 
+  	// Submit a new evaluation to the database
+  	submitEval = (type) => {
+  		//Prepare new data
+  		let newData = {
+			userID: this.state.userID,
+			newEval: {
+				id: this.state.currentIdNum,
+				type: type
+			}
+		};
+		// Create key-value pairs of the current eval in state
+		// For the data we'll send to the database
+		Object.keys(this.state.currentEvalData).map((key) => {
+  			newData.newEval[key] = this.state.currentEvalData[key];
+  		});
 
+  		console.log("NEW EVAL:");
+  		console.log(newData);
+  		axios.post('api/explorations/newExploration', newData);
+  	}
+
+  	// Update an existing evaluation in the database
   	updateEvals = () => {
+  		// TODO: OVERWRITE OLD RESPONSE DATA
   		console.log(this.state.currentEvalData);
 		let newData = {
 			userID: this.state.userID,
@@ -224,10 +246,6 @@ class DiagnosisChart extends Component {
   			console.log(res);
   		});
 
-  	}
-
-  	addNewEval = (evalData) => {
-  		console.log(evalData);
   	}
   
   	render() {

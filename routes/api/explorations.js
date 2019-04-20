@@ -30,6 +30,24 @@ const updateEval = (evals, newData, userID) => {
 	});
 }
 
+
+const addNewEval = (evals, newData, userID) => {
+	console.log("EVALS:")
+	console.log(evals.evals);
+	console.log("NEW DATA:");
+	console.log(newData);
+
+	let updatedEvals = evals.evals;
+	updatedEvals.push(newData);
+	Exploration.findOneAndUpdate({user_id: userID}, {$set:{evals: updatedEvals}}, (err, doc) => {
+		if (err)
+			console.log("Nope.");
+		else
+			console.log(doc);
+	});
+
+}
+
 router.get('/getExploration', (req, res) => {
 	Exploration.findOne({user_id: req.query.userID}, (err, exp) => {
 		if (err)
@@ -41,7 +59,14 @@ router.get('/getExploration', (req, res) => {
 
 router.post('/newExploration', (req, res) => {
 	console.log("NEW EXPLORATION REQ:");
-	console.log(req);
+	console.log(req.body);
+	let userID = req.body.userID;
+	Exploration.findOne({user_id: userID}, (err, resp) => {
+		if (err)
+			console.log("ERROR: " + err);
+		else
+			addNewEval(resp, req.body.newEval, userID);
+	});
 });
 
 router.post('/updateExploration', (req, res) => {
