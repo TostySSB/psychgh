@@ -206,6 +206,11 @@ class DiagnosisChart extends Component {
   	// Submit a new evaluation to the database
   	submitEval = (type) => {
   		//Prepare new data
+  		
+  		console.log("Submit Data:");
+  		console.log(type);
+  		console.log(this.state);
+
   		let newData = {
 			userID: this.state.userID,
 			newEval: {

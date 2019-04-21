@@ -161,7 +161,7 @@ class ResponseModal extends Component {
 							<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} color="primary">
 								Log Evaluation
 							</Button>
-			        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals} color="primary">
+			        		<Button onClick={this.props.newExploration ? this.submitEval : this.updateEvals} color="primary">
 			        			Save
 			        		</Button>
 				            <Button onClick={this.props.modalClosed} color="primary">

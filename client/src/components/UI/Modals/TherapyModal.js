@@ -114,7 +114,7 @@ class TherapyModal extends Component {
 					{dialogContent}
 					<DialogActions>
 						<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)}>Log Response</Button>
-		        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals}>
+		        		<Button onClick={this.props.newExploration ? this.submitEval : this.updateEvals}>
 		        			Save
 		        		</Button>
 			            <Button onClick={this.props.modalClosed} color="primary">
