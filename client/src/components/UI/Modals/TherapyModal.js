@@ -60,7 +60,7 @@ class TherapyModal extends Component {
 			<DialogContent>
 						<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
 							<Grid item xs={12}>
-								<FormControl variant="outlined">
+								<FormControl variant="outlined" className={classes.FormControl}>
 									<DialogContentText>Medication</DialogContentText>
 									<Select
 										value={this.props.evalData.medication}

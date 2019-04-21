@@ -289,7 +289,7 @@ class DiagnosisChart extends Component {
 						submitEval={this.submitEval}
 						handleEvalChange={this.handleEvalChange}
 						newExploration={this.state.newExploration}
-						modalClose={this.cancelNewCardHandler.bind(this, "evaluation")}
+						modalClosed={this.cancelNewCardHandler.bind(this, "evaluation")}
 					/>
 					
 					<DiagnosisCard

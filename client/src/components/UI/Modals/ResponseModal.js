@@ -70,7 +70,7 @@ class ResponseModal extends Component {
 							Switch Antidepressants?
 						</p>
 					</DialogContentText>
-					<FormControl>
+					<FormControl className={classes.FormControl}>
 						<Select
 							native
 							onChange={this.handleChange}
@@ -92,7 +92,7 @@ class ResponseModal extends Component {
 							What would you like to do?
 						</p>
 					</DialogContentText>
-					<FormControl>
+					<FormControl className={classes.FormControl}>
 						<Select
 							native
 							onChange={this.handleChange}
@@ -141,7 +141,7 @@ class ResponseModal extends Component {
 						<DialogContent>
 							<Grid container>
 								<Grid item xs={12}>
-									<FormControl>
+									<FormControl className={classes.FormControl}>
 										<Select
 											native
 											input={<OutlinedInput name="response-type"/>}
@@ -158,10 +158,10 @@ class ResponseModal extends Component {
 							</Grid>
 						</DialogContent>
 						<DialogActions>
-							<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)}>
+							<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} color="primary">
 								Log Evaluation
 							</Button>
-			        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals}>
+			        		<Button onClick={this.props.newEvaluation ? this.submitEval : this.updateEvals} color="primary">
 			        			Save
 			        		</Button>
 				            <Button onClick={this.props.modalClosed} color="primary">

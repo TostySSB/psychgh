@@ -61,20 +61,21 @@ class EvaluationModal extends Component {
 		          	maxWidth='sm'
 	        	>
 	        			<DialogTitle><h4>Evaluation</h4></DialogTitle>
-							<div>
+							<DialogContent>
 								<TextField
 									name="evaluationNotes"
 									rows="5"
 									multiline
+									fullWidth
 									label="Enter notes here"
 									onChange={this.handleChange}
 								/>
-							</div>
+							</DialogContent>
 							<DialogActions>
-								<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} >
+								<Button onClick={this.props.nextEvalHandler.bind(this, this.props.type)} color="primary">
 									Log Next Response
 								</Button>
-				        		<Button onClick={this.props.newExploration ? this.submitEval : this.updateEvals}>
+				        		<Button onClick={this.props.newExploration ? this.submitEval : this.updateEvals} color="primary">
 				        			Save
 				        		</Button>
 					            <Button onClick={this.props.modalClosed} color="primary">
