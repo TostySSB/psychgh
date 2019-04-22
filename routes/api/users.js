@@ -147,6 +147,7 @@ router.get('/userList', function(req, res) {
     }
   });
  });
+// returns a single based on its user_id
 router.get('/singleUser', function(req, res) {
   // res.send('respond with a resource');
   User.findOne({user_id: req.query.userID}, function(err, users) {
@@ -159,6 +160,7 @@ router.get('/singleUser', function(req, res) {
     console.log(users)
   });
  });
+ //Returns a single user's information
  router.get('/getUser', function(req, res) {
   // res.send('respond with a resource');
   User.findOne({email: req.query.email}, function(err, users) {
