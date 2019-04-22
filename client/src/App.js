@@ -24,7 +24,6 @@ import PatientExploration from './Views/PatientExploration';
 import PatientEvaluation from './Views/Patient_evaluation';
 import DepressionChart from './Views/DepressionChart';
 import QuestionareBuilder from './Views/QuestionareBuilder';
-import QuestionareBuilder from './Views/QuestionareBuilder';
 import Questionare from './Views/Questionare';
 
 
