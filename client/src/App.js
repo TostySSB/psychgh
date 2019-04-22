@@ -96,6 +96,7 @@ class App extends Component {
               <PrivateRoute exact path="/MyResults" component={MyResults} />
               <PrivateRoute exact path="/formBuilder" component={formBuilder} />
               <PrivateRoute exact path="/Questionare" component={Questionare} />
+              <PrivateRoute exact path="/formBuilder" component={formBuilder} />
             </Switch>
           </div>
         </Router>
