@@ -16,9 +16,7 @@ import { connect } from "react-redux";
     user: [],
     q10: 0,
   };
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  
 
   handleClose = () => {
     this.setState({ open: false });

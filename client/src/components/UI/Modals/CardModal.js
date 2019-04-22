@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import axios from "axios";
+import ResponseDialog from './ResponseDialog';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -10,6 +17,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Backdrop from '../Backdrop/Backdrop';
+import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
 import Aux from '../../Aux';
 
@@ -19,17 +27,26 @@ class CardModal extends Component {
 		super(props);
 		this.idNum = props.idNum;
 		this.type = props.type;
+		this.evalData = props.evalData
 		this.state = {
 			id: "",
-			type: "",
-			evalData: {}
+			type: ""
 		}
 	}
-
+	
 	handleChange = event => {
 		this.setState({evalData: {
 			...this.state.evalData, [event.target.name]: event.target.value
 		}});
+	}
+
+	nextEvalHandler = (type) => {
+		console.log("Next Eval Triggered");
+		console.log(this.props.type);
+		if (this.props.type == "therapy") {
+			// formContent = makeForm("evaluation")
+			
+		}
 	}
 
 	updateEvals = () => {
@@ -40,75 +57,79 @@ class CardModal extends Component {
 		}, () => {
 			this.props.updateEvals(this.state);
 		});
-		
 	}
 	
-	makeForm = () => {
+	makeForm = (type) => {
 		let formContent;
-		if (this.props.type == "therapy") {
-			formContent = <div>
-							<h4>Initial Therapy</h4>
-							<div className={classes.Select}>
-								<FormControl variant="outlined">
-									<InputLabel>Medication</InputLabel>
-									<Select
-										native
-										onChange={this.handleChange}
-										input={
-											<OutlinedInput
-												name="medication"
-											/>
-										}
-									>
-										<option value="" />
-										<option value={"citralopram"}>Citralopram</option>
-										<option value={"sertraline"}>Sertraline</option>
-									</Select>
-								</FormControl>
-							</div>
-							<div className={classes.TextField}>
-								<FormControl variant="outlined" className={classes.FormControl}>
-									<TextField
-										name="therapyNotes"
-										id="initial-therapy-notes"
-										label="Notes on Side Effects"
-										multiline
-										rows="4"
-										onChange={this.handleChange}
-									/>
-								</FormControl>
-							</div>
-						  </div>;
+		// console.log(this.props.idNum);
+		// console.log(this.props.type);
+		// console.log(this.props.evalData);
+		if (type == "therapy") {
+			formContent =
+				<div> 
+				<DialogTitle>
+					<h4>Initial Therapy</h4>
+				</DialogTitle>
+				<DialogContent>
+					<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
+						<Grid item xs={12}>
+							<FormControl variant="outlined">
+								<DialogContentText>Medication</DialogContentText>
+								<Select
+									value={this.props.evalData.medication}
+									native
+									onChange={this.handleChange}
+									input={<OutlinedInput name="medication"/>}
+								>
+									<option value="" />
+									<option value={"citralopram"}>Citralopram</option>
+									<option value={"sertraline"}>Sertraline</option>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControl variant="outlined" className={classes.FormControl}>
+								<TextField
+									value={this.props.evalData.therapyNotes}
+									name="therapyNotes"
+									id="initial-therapy-notes"
+									label="Notes on Side Effects"
+									multiline
+									rows="4"
+									onChange={this.handleChange}
+								/>
+							</FormControl>
+						</Grid>
+					</Grid>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={this.props.nextEvalHandler.bind(this.props.type)}>Log Response</Button>
+	        		<Button onClick={this.updateEvals}>
+	        			Save
+	        		</Button>
+		            <Button onClick={this.props.modalClosed} color="primary">
+		            	Close
+		            </Button>
+  				</DialogActions>
+				</div>;
 		}
-		else if (this.props.type == "response") {
+		else if (type == "response") {
 			formContent = <div>
-							<h4>Response</h4>
-							<div>
-								<FormControl>
-									<InputLabel>
-										Response Type
-									</InputLabel>
-									<Select
-										native 
-										onChange={this.handleChange}
-										input={
-											<OutlinedInput
-												name="medication"
-												labelWidth={this.state.labelWidth}
-											/>
-										}
-									>
-										<option value="" />
-										<option value={"non"}>Non-Response</option>
-										<option value={"partial"}>Partial Response</option>
-										<option value={"full"}>Full Response</option>
-									</Select>
-								</FormControl>
-							</div>
+							<DialogTitle><h4>Response</h4></DialogTitle>
+							<ResponseDialog />
+							<DialogActions>
+								<Button>Log Evaluation</Button>
+				        		<Button onClick={this.updateEvals}>
+				        			Save
+				        		</Button>
+					            <Button onClick={this.props.modalClosed} color="primary">
+					            	Close
+					            </Button>
+				          </DialogActions>
 						  </div>;
 	
 		}
-		else if (this.props.type == "evaluation") {
+		else if (type == "evaluation") {
 			formContent = <div>
 							<h4>Evaluation</h4>
 							<div>
@@ -120,6 +141,15 @@ class CardModal extends Component {
 									onChange={this.handleChange}
 								/>
 							</div>
+							<DialogActions>
+								<Button>Log Next Response></Button>
+				        		<Button onClick={this.updateEvals}>
+				        			Save
+				        		</Button>
+					            <Button onClick={this.props.modalClosed} color="primary">
+					            	Close
+					            </Button>
+				          </DialogActions>
 						  </div>;
 	
 		}
@@ -127,19 +157,22 @@ class CardModal extends Component {
 	};
 
 	render() {
-		let formContent = this.makeForm();
+		let formContent = this.makeForm(this.props.type);
 		return (
 			<Aux>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
-				<div
-					className={classes.Modal}
+				<Dialog
+					open={this.props.show}
 					style={{
 						transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
 						opacity: this.props.show ? '1' : '0'
-					}}>
-					{formContent}
-					<button onClick={this.updateEvals}>Save</button>
-				</div>
+					}}
+		          	aria-labelledby="form-dialog-title"
+		          	fullWidth
+		          	maxWidth='sm'
+	        	>
+	        		{formContent}
+	        	</Dialog>
 			</Aux>
 		);
 	}
