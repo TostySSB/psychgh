@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button';
 const patientBio = (props) => {
 	return(
 		<div>
-			<p>Age: {props.age}</p>
-			<p>Diagnosis: {props.diagnosis}</p>
+			<p></p>
+			<p></p>
 		</div>
 	);
 }

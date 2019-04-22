@@ -11,6 +11,14 @@ import PatientBio from './PatientBio';
 
 
 const diagnosisCard = (props) => {
+	const cardStyles = {
+			marginLeft: "auto",
+  			marginRight: "auto",
+  			marginBottom: "10px",
+  			width: "25%",
+			maxWidth: "320px"
+		};
+
 	let cardBody;
 	if (props.type == 'header') {
 		cardBody =  <div>
@@ -35,7 +43,7 @@ const diagnosisCard = (props) => {
 	}
 	// console.log(props.evalData);
 	return (
-		<div className={classes.DiagnosisCard} onClick={props.onClick}>
+		<div style={cardStyles} className={classes.DiagnosisCard} onClick={props.onClick}>
 			<Card>
 				<CardContent>
 						{cardBody}

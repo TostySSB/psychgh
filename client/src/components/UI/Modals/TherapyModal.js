@@ -22,6 +22,10 @@ import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
 import Aux from '../../Aux';
 
+const formStyle = {
+	width: "100%"
+}
+
 class TherapyModal extends Component {
 	constructor(props) {
 		super(props);
@@ -60,7 +64,7 @@ class TherapyModal extends Component {
 			<DialogContent>
 						<Grid container spacing={40} justify='space-evenly' direction='row' alignItems='center'>
 							<Grid item xs={12}>
-								<FormControl variant="outlined" className={classes.FormControl}>
+								<FormControl variant="outlined" style={formStyle}>
 									<DialogContentText>Medication</DialogContentText>
 									<Select
 										value={this.props.evalData.medication}
@@ -75,7 +79,7 @@ class TherapyModal extends Component {
 								</FormControl>
 							</Grid>
 							<Grid item xs={12}>
-								<FormControl variant="outlined" className={classes.FormControl}>
+								<FormControl variant="outlined" style={formStyle}>
 									<TextField
 										//TODO figure out the functionality to update the notes.
 										value={this.props.evalData.therapyNotes}

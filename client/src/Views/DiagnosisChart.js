@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import classes from './DiagnosisChart.css';
-// import styles from '../components/UI/cards/DiagnosisCard.css';
+import '../components/UI/cards/DiagnosisCard.css';
 import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
 import PatientDialog from "../components/UI/dialogs/PatientDialog";
@@ -337,7 +337,7 @@ export default class DiagnosisChart extends Component {
   			width: "25%"
   		};
 
-  		const styles = {
+  		const cardStyles = {
 			marginLeft: "auto",
   			marginRight: "auto",
   			marginBottom: "10px",
@@ -416,7 +416,7 @@ export default class DiagnosisChart extends Component {
 					<h4 style={centerStyles}>Diagnosis Chart</h4>
 					<p style={centerStyles}>Click an evaluation card below to edit the evaluation.</p>
 					<DiagnosisCard
-						style={styles}
+						style={cardStyles}
 						type='header' 
 						firstName={this.state.patient.firstName}
 						lastName={this.state.patient.lastName}
@@ -424,7 +424,7 @@ export default class DiagnosisChart extends Component {
 
 					{this.state.patient.evals.map(ev => (
 							<DiagnosisCard
-								style={styles}
+								style={cardStyles}
 								type={ev.type}
 								idNum={ev.id}
 								onClick={this.cardClickHandler.bind(this, ev.type, ev.id)}
@@ -478,6 +478,7 @@ export default class DiagnosisChart extends Component {
 
 					<DiagnosisCard
 						type='header' 
+						style={cardStyles}
 						firstName={this.state.patient.firstName}
 						lastName={this.state.patient.lastName}
 					/>

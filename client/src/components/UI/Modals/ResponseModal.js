@@ -21,6 +21,10 @@ import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
 import Aux from '../../Aux';
 
+const formStyle = {
+	width: "100%"
+}
+
 class ResponseModal extends Component {
 	constructor(props) {
 		super(props);
@@ -70,7 +74,7 @@ class ResponseModal extends Component {
 							Switch Antidepressants?
 						</p>
 					</DialogContentText>
-					<FormControl className={classes.FormControl}>
+					<FormControl style={formStyle}>
 						<Select
 							native
 							onChange={this.handleChange}
@@ -92,7 +96,7 @@ class ResponseModal extends Component {
 							What would you like to do?
 						</p>
 					</DialogContentText>
-					<FormControl className={classes.FormControl}>
+					<FormControl style={formStyle}>
 						<Select
 							native
 							onChange={this.handleChange}
@@ -141,7 +145,7 @@ class ResponseModal extends Component {
 						<DialogContent>
 							<Grid container>
 								<Grid item xs={12}>
-									<FormControl className={classes.FormControl}>
+									<FormControl style={formStyle}>
 										<Select
 											native
 											input={<OutlinedInput name="response-type"/>}
