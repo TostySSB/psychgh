@@ -50,11 +50,12 @@ const columns = [
 ];
 const options = {
     filterType: 'checkbox',
-    selectableRows: false,
+    selectableRows: true,
     print: false,
     download: false,
     filter: false,
     expandableRows: true,
+    clickableRows: false,
     renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length + 1;
         return (
@@ -83,9 +84,7 @@ class userList extends Component {
             open:false
         }
     }
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
+ 
     componentDidMount(){
         axios.get('/api/users/userList')
             .then(response => {

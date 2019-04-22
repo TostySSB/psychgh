@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import axios from "axios";
 import './DiagnosisChart.css';
 import PropTypes from "prop-types";
+import MUIDataTable from "mui-datatables";
+import PatientDialog from "../components/UI/dialogs/PatientDialog";
 import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
 import NewDiagnosisChart from '../components/UI/cards/NewDiagnosisChart';
 import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls';
 import CardModal from '../components/UI/Modals/CardModal';
@@ -11,6 +15,49 @@ import ResponseModal from '../components/UI/Modals/ResponseModal';
 import EvaluationModal from '../components/UI/Modals/EvaluationModal';
 import { connect } from "react-redux";
 
+const columns = [
+    {
+        name: "user_id",
+        label: "User ID",
+        options: {
+         filter: false,
+         sort: false,
+        }
+       },
+    {
+        name: "lastName",
+        label: "Last Name",
+        options: {
+         filter: false,
+         sort: false,
+        }
+       },
+       {
+        name: "firstName",
+        label: "First Name",
+        options: {
+         filter: false,
+         sort: false,
+        }
+       },
+       {
+        name: "email",
+        label: "Email",
+        options: {
+         filter: false,
+         sort: false,
+        }
+       },
+       {
+        name: "pLastName",
+        label: "Practitioner",
+        options: {
+         filter: false,
+         sort: false,
+        }
+       },
+];
+
 class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
@@ -18,6 +65,7 @@ class DiagnosisChart extends Component {
 		this.idNum = 0;
 		this.state = {
 			newExploration: false,
+			patients: [],
 			currentIdNum: 0,
 			currentEvalData: {},
 			userID: 1007,
@@ -32,6 +80,15 @@ class DiagnosisChart extends Component {
 	}
 
 	componentWillMount() {
+		axios.get('/api/users/userList')
+		.then(res => { 
+			this.setState({users: res.data});
+		});
+
+	}
+
+
+	getPatientExploration = () => {
 		axios.get('api/explorations/getExploration', {params: {"userID": this.state.userID}})
 		.then(res => {
 			if (res.status === 200) {
@@ -41,6 +98,8 @@ class DiagnosisChart extends Component {
 			}
 		});
 	}
+ 
+
 
 	handleSubmit = event => {
 		event.preventDefault();
@@ -75,12 +134,14 @@ class DiagnosisChart extends Component {
 	}
 
 	getPatientExploration = (data) => {
+		console.log(data);
 		axios.get('api/explorations/getExploration', {params: data})
 		.then(res => {
 			if (res.status === 200) {
-				this.setState({"patient": res.data});
+				this.setState({patient: res.data});
 			}
 		});
+		console.log(this.state);
 	}
 
 	
@@ -108,6 +169,11 @@ class DiagnosisChart extends Component {
   		this.setState({addingCard: true});
   	}
 
+
+  	renderPatientChart = (event) => {
+  		console.log("Patient rendered");
+  	}
+ 
 
   	makeModal = (type, evalData) => {
   		//TODO: pass id num??
@@ -254,8 +320,34 @@ class DiagnosisChart extends Component {
   	}
   
   	render() {
+
+  		const options = {
+		    filterType: 'checkbox',
+		    selectableRows: false,
+		    print: false,
+		    download: false,
+		    filter: false,
+		    expandableRows: true,
+		    renderExpandableRow: (rowData, rowMeta) => {
+		        const colSpan = rowData.length + 1;
+		        return (
+		          <TableRow>
+		            <TableCell colSpan={colSpan}>
+		            {rowData[0]}
+		            </TableCell>
+		            <PatientDialog userID={rowData[0]}></PatientDialog>
+		          </TableRow>
+		          
+		        );
+		      },
+		      onRowClick: (rowData) => { 
+		      	console.log(rowData);
+		      	this.getPatientExploration(rowData[0]);
+		      }
+  			};
+
+
 		if (this.state.patient.evals.length > 0) {
-			console.log(this.evalData);
 			return(
 				<div>
 					<TherapyModal 
@@ -316,22 +408,15 @@ class DiagnosisChart extends Component {
 		}		
 		else {
 			return(
-				<div>
-					<CardModal 
-						show={this.state.showModal}
-					   	modalClosed={this.cancelNewCardHandler}
-					   	type={this.cardType}
-					   	idNum={this.idNum}
-					   	evalData={this.evalData}
-					   	updateEvals ={this.updateEvals.bind(this)}
-					/>
-					<DiagnosisCard 
-						type='header' 
-						firstName={this.state.patient.firstName}
-						lastName={this.state.patient.lastName}
-					/>
-					<p>No Evaluations yet.</p>
-				</div>
+				<div className="App">
+	                <MUIDataTable
+	                    title={"Patients"}
+	                    data={this.state.users}
+	                    columns={columns}
+	                    options={options}
+	                    onRowClick={this.renderPatientChart}
+	                />
+            	</div>
 			);
 		}
 	}
