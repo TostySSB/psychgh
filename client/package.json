@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^3.0.0-alpha.10",
     "@material-ui/system": "^3.0.0-alpha.2",
     "alloyeditor": "^2.0.0-beta.7",
     "axios": "^0.18.0",
@@ -24,7 +25,9 @@
     "react-test-renderer": "^16.8.5",
     "react-transition-group": "^1.2.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sweetalert2": "^8.8.5",
+    "sweetalert2-react-content": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
