@@ -77,6 +77,7 @@ class ResponseModal extends Component {
 					<FormControl style={formStyle}>
 						<Select
 							native
+							value={this.props.evalData.change_medication}
 							onChange={this.handleChange}
 							input={<OutlinedInput name="change_medication"/>}
 						>
@@ -99,6 +100,7 @@ class ResponseModal extends Component {
 					<FormControl style={formStyle}>
 						<Select
 							native
+							value={this.props.evalData.response_decision}
 							onChange={this.handleChange}
 							input={<OutlinedInput name="response_decision"/>}
 						>
