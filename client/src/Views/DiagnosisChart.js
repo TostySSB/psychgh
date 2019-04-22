@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import './DiagnosisChart.css';
+import classes from './DiagnosisChart.css';
 import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
 import PatientDialog from "../components/UI/dialogs/PatientDialog";
 import DiagnosisCard from '../components/UI/cards/DiagnosisCard';
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import Button from '@material-ui/core/Button';
 import NewDiagnosisChart from '../components/UI/cards/NewDiagnosisChart';
 import DiagnosisControls from '../components/DiagnosisControls/DiagnosisControls';
 import CardModal from '../components/UI/Modals/CardModal';
@@ -39,23 +40,7 @@ const columns = [
          filter: false,
          sort: false,
         }
-       },
-       {
-        name: "email",
-        label: "Email",
-        options: {
-         filter: false,
-         sort: false,
-        }
-       },
-       {
-        name: "pLastName",
-        label: "Practitioner",
-        options: {
-         filter: false,
-         sort: false,
-        }
-       },
+       }
 ];
 
 class DiagnosisChart extends Component {
@@ -65,7 +50,8 @@ class DiagnosisChart extends Component {
 		this.idNum = 0;
 		this.state = {
 			newExploration: false,
-			patients: [],
+			users: [],
+			chartSelected: false,
 			currentIdNum: 0,
 			currentEvalData: {},
 			userID: 1007,
@@ -98,8 +84,6 @@ class DiagnosisChart extends Component {
 			}
 		});
 	}
- 
-
 
 	handleSubmit = event => {
 		event.preventDefault();
@@ -134,7 +118,6 @@ class DiagnosisChart extends Component {
 	}
 
 	getPatientExploration = (data) => {
-		console.log(data);
 		axios.get('api/explorations/getExploration', {params: data})
 		.then(res => {
 			if (res.status === 200) {
@@ -272,11 +255,6 @@ class DiagnosisChart extends Component {
   	// Submit a new evaluation to the database
   	submitEval = (type) => {
   		//Prepare new data
-  		
-  		console.log("Submit Data:");
-  		console.log(type);
-  		console.log(this.state);
-
   		let newData = {
 			userID: this.state.userID,
 			newEval: {
@@ -289,10 +267,17 @@ class DiagnosisChart extends Component {
 		Object.keys(this.state.currentEvalData).map((key) => {
   			newData.newEval[key] = this.state.currentEvalData[key];
   		});
-
-  		console.log("NEW EVAL:");
-  		console.log(newData);
   		axios.post('api/explorations/newExploration', newData);
+  		//Close the modal
+  		if (type === "therapy") {
+  			this.setState({showTherapyModal: false});
+  		}
+  		else if (type === "evaluation") {
+  			this.setState({showEvalModal: false});
+  		}
+  		else if (type === "response") {
+  			this.setState({showResponseModal: false});
+  		}
   	}
 
   	// Update an existing evaluation in the database
@@ -316,10 +301,32 @@ class DiagnosisChart extends Component {
   		.then(res => {
   			console.log(res);
   		});
+  		//Close the modal
+  		console.log("TYPE:" + this.state.currentEvalData.type);
+  		if (this.state.currentEvalData.type === "therapy") {
+  			this.setState({showTherapyModal: false});
+  		}
+  		else if (this.state.currentEvalData.type === "evaluation") {
+  			this.setState({showEvalModal: false});
+  		}
+  		else if (this.state.currentEvalData.type === "response") {
+  			this.setState({showResponseModal: false});
+  		}
 
   	}
   
   	render() {
+  		const centerStyles = {
+  			marginLeft: "auto",
+  			marginRight: "auto",
+  			marginBottom: "10px",
+  			width: "75%"
+  		}
+
+  		const centerStylesTwo = {
+  			margin: "auto",
+  			width: "25%"
+  		}
 
   		const options = {
 		    filterType: 'checkbox',
@@ -342,12 +349,13 @@ class DiagnosisChart extends Component {
 		      },
 		      onRowClick: (rowData) => { 
 		      	console.log(rowData);
+		      	this.setState({chartSelected: true});
 		      	this.getPatientExploration(rowData[0]);
 		      }
   			};
 
 
-		if (this.state.patient.evals.length > 0) {
+		if (this.state.chartSelected && this.state.patient.evals.length > 0) {
 			return(
 				<div>
 					<TherapyModal 
@@ -388,7 +396,8 @@ class DiagnosisChart extends Component {
 						newExploration={this.state.newExploration}
 						modalClosed={this.cancelNewCardHandler.bind(this, "evaluation")}
 					/>
-					
+					<h4 style={centerStyles}>Diagnosis Chart</h4>
+					<p style={centerStyles}>Click an evaluation card below to edit the evaluation.</p>
 					<DiagnosisCard
 						type='header' 
 						firstName={this.state.patient.firstName}
@@ -405,17 +414,40 @@ class DiagnosisChart extends Component {
 					}
 				</div>
 			);
+		}
+		else if (this.state.chartSelected && this.state.patient.evals.length == 0) {
+			return (
+				<div>
+					<DiagnosisCard
+						type='header' 
+						firstName={this.state.patient.firstName}
+						lastName={this.state.patient.lastName}
+					/>
+					<div style={centerStylesTwo}>
+						<h5>Diagnosis Chart not started yet.</h5>
+						<Button color="primary" variant="contained">
+							Click here to start {this.state.patient.firstName}'s Chart
+						</Button>
+					</div>
+				</div>
+			);
 		}		
 		else {
 			return(
-				<div className="App">
-	                <MUIDataTable
-	                    title={"Patients"}
-	                    data={this.state.users}
-	                    columns={columns}
-	                    options={options}
-	                    onRowClick={this.renderPatientChart}
-	                />
+				<div>
+					<h4 style={centerStyles}>Diagnosis Chart</h4>
+					<p style={centerStyles}>Select a patient for the menu below to view and edit their Diagnosis Chart.</p>
+					
+						<div className={classes.root} style={centerStyles}>
+			                <MUIDataTable
+			                    title={"Patients"}
+			                    data={this.state.users}
+			                    columns={columns}
+			                    options={options}
+			                    onRowClick={this.renderPatientChart}
+			                />
+		            	</div>
+	            	
             	</div>
 			);
 		}
