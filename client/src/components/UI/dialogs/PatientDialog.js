@@ -10,6 +10,7 @@ import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import Swal from 'sweetalert2';
  class PatientDialog extends Component {
   state = {
     open: true,
@@ -47,13 +48,21 @@ import { connect } from "react-redux";
   }
   handleClaim(){
     const {user} = this.props.auth;
-    axios.post("/api/users/claim", {email: this.state.user.email, firstName: user.name, lastName: user.lastName});
+    axios.post("/api/users/claim", {email: this.state.user.email, firstName: user.name, lastName: user.lastName})
+      .then((response) => {
+        this.setState({open:false})
+        Swal.fire(
+          'Success!',
+          'You have claimed this patient',
+          'success'
+        )
+      });
   }
   genButton(){
     const {user} = this.props.auth;
     if (user.isPractitioner){
         return(
-            <Button onClick={this.handleClaim()} color="primary" size='medium'><h5>Claim Patient</h5></Button>
+            <Button onClick={()=>{this.handleClaim()}} color="primary" size='medium'><h5>Claim Patient</h5></Button>
         )
     }
   }

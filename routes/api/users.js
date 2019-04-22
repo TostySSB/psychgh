@@ -62,7 +62,7 @@ User.findOne().limit(1).sort({ date: -1 }).exec((err, data) => {
           q9: 100,
           q10: 100,
         },
-        phq9Results: "",
+        phq9Results: "Fill out the PHQ9 to receive your results",
       });
 
       // Hash password before saving in database
@@ -187,19 +187,12 @@ router.get('/singleUser', function(req, res) {
   });
  });
  router.post("/claim", (req, res) => {
-  User.findOneAndUpdate({email:req.body.email}, {$set:{pfirstName: req.body.firstName, plastName: req.body.lastName}}, {upsert: true}, (err, doc) => {
+  User.findOneAndUpdate({email:req.body.email}, {$set:{pfirstName: req.body.firstName, plastName: req.body.lastName}}, {upsert: false}, (err, doc) => {
       if (err) {
           console.log("Something wrong when updating data!");
       }
-  
-      console.log(doc);
-  });
-  User.findOneAndUpdate({email:req.body.email}, {$set:{phq9Results: req.body.results}}, {upsert: true}, (err, doc) => {
-      if (err) {
-          console.log("Something wrong when updating data!");
-      }
-  
-      console.log(doc);
+      console.log("Claim called")
+      res.send("Success")
   });
 })
 
