@@ -43,7 +43,7 @@ const columns = [
        }
 ];
 
-class DiagnosisChart extends Component {
+export default class DiagnosisChart extends Component {
 	constructor(props) {
 		super(props);
 		this.evalData = {};
