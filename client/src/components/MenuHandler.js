@@ -19,7 +19,7 @@ export class MenuHandler extends Component {
                 <MenuItem>My account</MenuItem>
             </Link>
             <Link to="/Questionare" style={{ textDecoration: 'none', display: 'block' }}>
-                <MenuItem>Fill out Forms</MenuItem>
+                <MenuItem>Fill out forms</MenuItem>
             </Link>
             <Link to="/MyResults" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>View My Results</MenuItem>
@@ -38,8 +38,8 @@ export class MenuHandler extends Component {
             <Link to="/DepressionTest" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>Depression Chart</MenuItem>
             </Link>
-            <Link to="/DiagnosisChart" style={{ textDecoration: 'none', display: 'block' }}>
-                <MenuItem>New Diagnosis Exploration</MenuItem>
+            <Link to="/questionareBuilder" style={{ textDecoration: 'none', display: 'block' }}>
+                <MenuItem>Create new form</MenuItem>
             </Link>
         </div> 
       )
