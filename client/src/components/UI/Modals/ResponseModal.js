@@ -37,7 +37,7 @@ class ResponseModal extends Component {
 
 	handleChange = event => {
 		console.log(event.target.name + " " + event.target.value);
-		if (event.target.name === "response-type") {
+		if (event.target.name === "response_type") {
 			this.setState({type: event.target.value});
 		}
 		if (event.target.type === "textarea") {
@@ -65,7 +65,7 @@ class ResponseModal extends Component {
 
 	makeBody = () => {
 		let dialogBody;
-		if (this.state.type == "non-response") {
+		if (this.state.type === "non_response" || this.props.evalData.response_type === "non_response") {
 			dialogBody = 
 			<div>
 				<Grid item xs={12}>
@@ -78,7 +78,7 @@ class ResponseModal extends Component {
 						<Select
 							native
 							onChange={this.handleChange}
-							input={<OutlinedInput name="change-medication"/>}
+							input={<OutlinedInput name="change_medication"/>}
 						>
 							<option value="citalopram">Citralopram</option>
 							<option value="sertraline">Sertraline</option>
@@ -87,7 +87,7 @@ class ResponseModal extends Component {
 				</Grid>
 			</div>;
 		}
-		else if (this.state.type == "partial-response") {
+		else if (this.state.type === "partial_response" || this.props.evalData.response_type === "partial_response") {
 			dialogBody = 
 			<div>
 				<Grid item xs={12}>
@@ -100,17 +100,17 @@ class ResponseModal extends Component {
 						<Select
 							native
 							onChange={this.handleChange}
-							input={<OutlinedInput name="response-decision"/>}
+							input={<OutlinedInput name="response_decision"/>}
 						>
 							<option value="optimize">Optimize Dose</option>
-							<option value="augment-med">Augment Dose</option>
-							<option value="switch-med">Switch Medication</option>
+							<option value="augment_med">Augment Dose</option>
+							<option value="switch_med">Switch Medication</option>
 						</Select>
 					</FormControl>
 				</Grid>
 			</div>;
 		}
-		else if (this.state.type == "full-response") {
+		else if (this.state.type == "full_response" || this.props.evalData.response_type === "full_response") {
 			dialogBody = 
 			<div>
 				<Grid item xs={12}>
@@ -147,14 +147,15 @@ class ResponseModal extends Component {
 								<Grid item xs={12}>
 									<FormControl style={formStyle}>
 										<Select
+											value={this.props.evalData.response_type}
 											native
-											input={<OutlinedInput name="response-type"/>}
+											input={<OutlinedInput name="response_type"/>}
 											onChange={this.handleChange}
 										>
 											<option value="">Select Response Type</option>
-											<option value="non-response">Non Response</option>
-											<option value="partial-response">Partial Response</option>
-											<option value="full-response">Full Response</option>
+											<option value="non_response">Non Response</option>
+											<option value="partial_response">Partial Response</option>
+											<option value="full_response">Full Response</option>
 										</Select>
 									</FormControl>
 								</Grid>
