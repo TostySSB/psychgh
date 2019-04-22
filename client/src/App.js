@@ -13,6 +13,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PHQ9 from "./Views/PHQ9";
 import MyResults from "./Views/MyResults";
+import formBuilder from "./Views/formBuilder";
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import PractitionerRoute from "./components/private-route/PractitionerRoute";
@@ -22,6 +23,7 @@ import DiagnosisGrid from './components/UI/grids/DiagnosisGrid';
 import PatientExploration from './Views/PatientExploration';
 import PatientEvaluation from './Views/Patient_evaluation';
 import DepressionChart from './Views/DepressionChart';
+import QuestionareBuilder from './Views/QuestionareBuilder';
 
 import DepressionChart2 from './Views/Depression/DepressionChart2';
 import DepressionChart3a from './Views/Depression/DepressionChart3a';
@@ -37,7 +39,6 @@ import DepressionChart6b from './Views/Depression/DepressionChart6b';
 import DepressionChart6c from './Views/Depression/DepressionChart6c';
 
 import "./App.css";
-
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -88,8 +89,10 @@ class App extends Component {
               <PractitionerRoute exact path="/patient_evaluation6b" component={DepressionChart6b} />
               <PractitionerRoute exact path="/patient_evaluation6c" component={DepressionChart6c} />
               <PractitionerRoute exact path="/Patients" component={PatientExploration} />
+              <PractitionerRoute exact path="/QuestionareBuilder" component={QuestionareBuilder} />
               <PrivateRoute exact path="/PHQ9" component={PHQ9} />
               <PrivateRoute exact path="/MyResults" component={MyResults} />
+              <PrivateRoute exact path="/formBuilder" component={formBuilder} />
             </Switch>
           </div>
         </Router>
