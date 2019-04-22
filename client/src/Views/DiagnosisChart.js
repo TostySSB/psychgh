@@ -54,7 +54,7 @@ class DiagnosisChart extends Component {
 			chartSelected: false,
 			currentIdNum: 0,
 			currentEvalData: {},
-			userID: 1007,
+			userID: 0,
 			patient: {
 				evals: []
 			},
@@ -121,7 +121,10 @@ class DiagnosisChart extends Component {
 		axios.get('api/explorations/getExploration', {params: data})
 		.then(res => {
 			if (res.status === 200) {
+				console.log("RES: ");
+				console.log(res.data);
 				this.setState({patient: res.data});
+				this.setState({userID: res.data.user_id});
 			}
 		});
 		console.log(this.state);
@@ -214,6 +217,11 @@ class DiagnosisChart extends Component {
   		this.setState({currentIdNum: this.state.currentIdNum + 1});
   	}
 
+  	firstCardHandler = () => {
+  		this.setState({newExploration: true});
+  		this.setState({currentIdNum: 0});
+  		this.setState({showTherapyModal: true});
+  	}
 
   	cardClickHandler = (type, idNum) => {
   		this.setState({newExploration: false});
@@ -418,6 +426,45 @@ class DiagnosisChart extends Component {
 		else if (this.state.chartSelected && this.state.patient.evals.length == 0) {
 			return (
 				<div>
+				<TherapyModal 
+						show={this.state.showTherapyModal}
+						evalData={this.state.currentEvalData}
+						idNum={this.state.currentIdNum}
+						nextEvalHandler={this.nextEvalHandler}
+						type={"therapy"}
+						updateEvals ={this.updateEvals.bind(this)}
+						submitEval={this.submitEval}
+						handleEvalChange={this.handleEvalChange}
+						newExploration={this.state.newExploration}
+						modalClosed={this.cancelNewCardHandler.bind(this, "therapy")}
+					/>
+
+					<ResponseModal 
+						show={this.state.showResponseModal} 
+						evalData={this.state.currentEvalData}
+						idNum={this.state.currentIdNum}
+						nextEvalHandler={this.nextEvalHandler}
+						type="response"
+						updateEvals ={this.updateEvals.bind(this)}
+						submitEval={this.submitEval}
+						handleEvalChange={this.handleEvalChange}
+						newExploration={this.state.newExploration}
+						modalClosed={this.cancelNewCardHandler.bind(this, "response")}
+					/>
+
+					<EvaluationModal
+						show={this.state.showEvalModal}
+						evalData={this.state.currentEvalData}
+						idNum={this.state.currentIdNum}
+						nextEvalHandler={this.nextEvalHandler}
+						type="evaluation"
+						updateEvals ={this.updateEvals.bind(this)}
+						submitEval={this.submitEval}
+						handleEvalChange={this.handleEvalChange}
+						newExploration={this.state.newExploration}
+						modalClosed={this.cancelNewCardHandler.bind(this, "evaluation")}
+					/>
+
 					<DiagnosisCard
 						type='header' 
 						firstName={this.state.patient.firstName}
@@ -425,7 +472,7 @@ class DiagnosisChart extends Component {
 					/>
 					<div style={centerStylesTwo}>
 						<h5>Diagnosis Chart not started yet.</h5>
-						<Button color="primary" variant="contained">
+						<Button color="primary" variant="contained" onClick={this.firstCardHandler}>
 							Click here to start {this.state.patient.firstName}'s Chart
 						</Button>
 					</div>
