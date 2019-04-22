@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 const styles = theme => ({
   button: {

@@ -10,14 +10,11 @@ router.post("/q1", (req, res) => {
             console.log("Something wrong when updating data!");
         }
     
-        console.log(doc);
     });
     User.findOneAndUpdate({email:req.body.email}, {$set:{phq9Results: req.body.results}}, {upsert: true}, (err, doc) => {
         if (err) {
             console.log("Something wrong when updating data!");
         }
-    
-        console.log(doc);
     });
 })
 
