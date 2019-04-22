@@ -62,7 +62,7 @@ User.findOne().limit(1).sort({ date: -1 }).exec((err, data) => {
           q9: 100,
           q10: 100,
         },
-        phq9Results: "",
+        phq9Results: "Fill out the PHQ9 to receive your results",
       });
 
       // Hash password before saving in database

@@ -43,7 +43,7 @@ class Questionare extends Component{
     constructor() {
         super();
         this.state = {
-          questionareMap: [{name: "", questions: [{ question: "", answers:[{answer:""}]}]}],
+          questionareMap: [{name: "", approved:true, questions: [{ question: "", answers:[{answer:""}]}]}],
           formIndex: -1,
           answerValues: [1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12],
         };
@@ -107,7 +107,11 @@ class Questionare extends Component{
       }
     renderMenuItems(){
         const items = this.state.questionareMap.map((item, key) =>
-            <MenuItem value={key}>{item.formName}</MenuItem>
+            {if(item.approved == true){
+                return <MenuItem value={key}>{item.formName}</MenuItem>
+            }else{
+                return null;
+            }}
         )
         return items;
     }
@@ -149,7 +153,6 @@ class Questionare extends Component{
                     <h4>
                     <b>Form:</b> please select a form below to get started.
                     </h4>
-                    {this.state.answerValues.toString()} test
                     <form className={classes.root} autoComplete="off">
                         <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="form-select">Form</InputLabel>

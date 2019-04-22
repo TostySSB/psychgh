@@ -11,6 +11,7 @@ const questionSchema = new Schema({
 }, {_id : false})
 const QuestionareSchema = new Schema({
     formName: String,
+    approved: Boolean,
     questions: [questionSchema]
 });
 module.exports = Questionare = mongoose.model("questionares", QuestionareSchema);
