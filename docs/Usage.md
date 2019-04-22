@@ -30,6 +30,13 @@ or navigate your way to [*insert-website-url*/login]()
 
 - From there just fill out the answers and be sure to submit your results!
 
+## Making a evaluation form as a Practitioner
+
+- Be sure that you are logged in as a `practitioner`.
+- Select the `form builder` from the drop down menu on the website's banner.
+- Build to questionare to your liking, adding questions and answers as you see fit.
+- When finished defining the form, Submit it for evaluation.
+
 ## How to become authenticated as a Practitioner
 
 - Contact those managing the project website at the `email` specified on the bottom of the homepage with the apropriate credentials to verify that you are infact a `licensed professional`.

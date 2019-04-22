@@ -47,7 +47,6 @@ import { connect } from "react-redux";
   }
   handleClaim(){
     const {user} = this.props.auth;
-    
     axios.post("/api/users/claim", {email: this.state.user.email, firstName: user.name, lastName: user.lastName});
   }
   genButton(){
