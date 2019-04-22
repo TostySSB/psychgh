@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^3.0.0-alpha.10",
     "@material-ui/system": "^3.0.0-alpha.2",
     "alloyeditor": "^2.0.0-beta.7",
     "axios": "^0.18.0",
@@ -39,15 +40,8 @@
     "react-transition-group": "^1.2.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "resolve": "1.10.0",
-    "sass-loader": "7.1.0",
-    "style-loader": "0.23.1",
-    "terser-webpack-plugin": "1.2.2",
-    "url-loader": "1.1.2",
-    "webpack": "4.28.3",
-    "webpack-dev-server": "3.1.14",
-    "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3"
+    "sweetalert2": "^8.8.5",
+    "sweetalert2-react-content": "^1.1.0"
   },
   "scripts": {
     "start": "node scripts/start.js",

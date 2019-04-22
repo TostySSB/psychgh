@@ -24,6 +24,9 @@ import PatientExploration from './Views/PatientExploration';
 import PatientEvaluation from './Views/Patient_evaluation';
 import DepressionChart from './Views/DepressionChart';
 import QuestionareBuilder from './Views/QuestionareBuilder';
+import QuestionareBuilder from './Views/QuestionareBuilder';
+import Questionare from './Views/Questionare';
+
 
 import DepressionChart2 from './Views/Depression/DepressionChart2';
 import DepressionChart3a from './Views/Depression/DepressionChart3a';
@@ -92,6 +95,8 @@ class App extends Component {
               <PractitionerRoute exact path="/QuestionareBuilder" component={QuestionareBuilder} />
               <PrivateRoute exact path="/PHQ9" component={PHQ9} />
               <PrivateRoute exact path="/MyResults" component={MyResults} />
+              <PrivateRoute exact path="/formBuilder" component={formBuilder} />
+              <PrivateRoute exact path="/Questionare" component={Questionare} />
               <PrivateRoute exact path="/formBuilder" component={formBuilder} />
             </Switch>
           </div>
