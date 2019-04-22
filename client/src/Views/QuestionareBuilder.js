@@ -1,5 +1,42 @@
 import React, {Component} from 'react';
 import update from 'react-addons-update';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import axios from "axios";
+
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import AddIcon from '@material-ui/icons/Add';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Swal from 'sweetalert2'
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+});
 
 class QuestionareBuilder extends Component{
   constructor() {
@@ -9,7 +46,7 @@ class QuestionareBuilder extends Component{
       questions: [{ question: "", answers:[{answer:""}]}]
     };
   }
-
+  
   handleNameChange = evt => {
     this.setState({ name: evt.target.value });
   };
@@ -22,12 +59,6 @@ class QuestionareBuilder extends Component{
 
     this.setState({ questions: newQuestions });
   };
-
-  handleSubmit = evt => {
-    const { name, questions } = this.state;
-    alert(`Incorporated: ${name} with ${questions.length} questions`);
-  };
-
   handleAddQuestion = () => {
     this.setState({
       questions: this.state.questions.concat([{ question: "", answers:[{answer:""}] }])
@@ -70,69 +101,89 @@ class QuestionareBuilder extends Component{
     });
     this.setState({questions: newQuestion});
   };
-
+  handleSubmit(){
+    axios.post("/api/questionares/newQuestionare", {name: this.state.name, questions: this.state.questions})
+      .then((response) => {
+        this.setState({
+          name: "",
+          questions: [{ question: "", answers:[{answer:""}]}]
+        })
+        Swal.fire(
+          'Success!',
+          'The form will now be reviewed and approved',
+          'success'
+        )
+      });
+  }
   render() {
+    var divStyle ={
+      padding:"100px"
+    }
+    const classes = this.props;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h4>Form Builder</h4>
-        <input
-          type="text"
-          placeholder="Form Name: e.g PHQ9"
-          value={this.state.name}
-          onChange={this.handleNameChange}
-        />
-        {this.state.questions.map((question, idx) => (
-          <div className="question">
-            <input
-              type="text"
-              placeholder={`Question #${idx + 1}`}
-              value={question.question}
-              onChange={this.handleQuestionChange(idx)}
-            />
-            <button
-              type="button"
-              onClick={this.handleRemoveQuestion(idx)}
-              className="small"
-            >
-              Remove Question {idx + 1}
-            </button>
-            <button
-                type="button"
-                onClick={this.handleAddAnswer(idx)}
-                className="small"
-              >
-                Add Answer
-              </button>
-            {this.state.questions[idx].answers.map((answer,idx2) =>(
-              <div className="answer">
-                <input
-                  type="text"
-                  placeholder={`Answer #${idx2 + 1} name`}
-                  value={answer.answer}
-                  onChange={this.handleAnswerChange(idx,idx2)}
-                />
-                <button
-                type="button"
-                onClick= {this.handleRemoveAnswer(idx,idx2)}
-                className="small"
-                >
-                Remove Answer # {idx2 + 1}
-              </button>
-              </div>
-            ))}
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={this.handleAddQuestion}
-          className="small"
-        >
-          Add Question
-        </button>
-        <button>Submit</button>
-      </form>
+      <div style={divStyle}>
+      <Grid container className={classes.root} spacing={32}>
+        <Grid item xs={12}>
+          <Grid container className={classes.builder} justify="center" spacing={40}>
+            <form onSubmit={this.handleSubmit}>
+              <h4>Form Builder</h4>
+              <input
+                type="text"
+                placeholder="Form Name: e.g PHQ9"
+                value={this.state.name}
+                onChange={this.handleNameChange}
+              />
+              {this.state.questions.map((question, idx) => (
+                <div className="question">
+                  <input
+                    type="text"
+                    placeholder={`Question #${idx + 1}`}
+                    value={question.question}
+                    onChange={this.handleQuestionChange(idx)}
+                  />
+                    <Button variant="contained" color="primary" size='small' className={classes.button} onClick={this.handleAddAnswer(idx)}>
+                      Add Answer
+                      <AddIcon className={classes.rightIcon} />
+                    </Button>
+                    <Button variant="contained" color="secondary" className={classes.button} onClick={this.handleRemoveQuestion(idx)}>
+                      Delete Question
+                      <DeleteIcon className={classes.rightIcon} />
+                    </Button>
+                  {this.state.questions[idx].answers.map((answer,idx2) =>(
+                    <div className="answer">
+                      <input
+                        type="text"
+                        placeholder={`Answer Option #${idx2 + 1}`}
+                        value={answer.answer}
+                        onChange={this.handleAnswerChange(idx,idx2)}
+                      />
+                      <Grid item>
+                        <Button variant="contained" color="secondary" size='small' className={classes.button} onClick={this.handleRemoveAnswer(idx,idx2)}>
+                          Remove Answer Option
+                        <DeleteIcon className={classes.rightIcon} />
+                        </Button>
+                      </Grid>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <Button variant="contained" color="primary" className={classes.button} onClick={()=>{this.handleAddQuestion()}}>
+                  Add Question
+                  <AddIcon className={classes.rightIcon} />
+              </Button>
+              <Button variant="contained" color="primary" className={classes.button} onClick={()=>{this.handleSubmit()}}>
+                  Submit
+                <CloudUploadIcon className={classes.rightIcon} />
+              </Button>
+            </form>
+          </Grid>
+        </Grid>
+      </Grid>
+      </div>
     );
   }
 }
-
-export default QuestionareBuilder;
+QuestionareBuilder.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(QuestionareBuilder);
