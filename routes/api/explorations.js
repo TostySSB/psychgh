@@ -49,6 +49,8 @@ const addNewEval = (evals, newData, userID) => {
 }
 
 router.get('/getExploration', (req, res) => {
+	console.log("SUBMIT QUERY:");
+	console.log(req.query[0]);
 	Exploration.findOne({user_id: req.query[0]}, (err, exp) => {
 		if (err)
 			console.log(err);

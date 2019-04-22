@@ -128,7 +128,6 @@ export default class DiagnosisChart extends Component {
 				this.setState({userID: res.data.user_id});
 			}
 		});
-		console.log(this.state);
 	}
 
 	
@@ -250,6 +249,10 @@ export default class DiagnosisChart extends Component {
   			this.setState({showEvalModal: true});
   	}
 
+  	patientMenuHandler = () => {
+  		this.setState({chartSelected: false});
+  	}
+
 
   	cancelNewCardHandler = (type) => {
   		this.setState({addingCard: false});
@@ -276,6 +279,14 @@ export default class DiagnosisChart extends Component {
 		Object.keys(this.state.currentEvalData).map((key) => {
   			newData.newEval[key] = this.state.currentEvalData[key];
   		});
+
+		console.log("NEW DATA:");
+		console.log(newData);
+		console.log("CURRENT EVALS:");
+		let patient = this.state.patient;
+		patient.evals.push(newData.newEval);
+		this.setState({patient: patient});
+
   		axios.post('api/explorations/newExploration', newData);
   		//Close the modal
   		if (type === "therapy") {
@@ -334,6 +345,7 @@ export default class DiagnosisChart extends Component {
 
   		const centerStylesTwo = {
   			margin: "auto",
+  			marginBottom: "10px",
   			width: "25%"
   		};
 
@@ -431,6 +443,11 @@ export default class DiagnosisChart extends Component {
 								evalData={ev}
 							/>))
 					}
+					<div style={centerStylesTwo}>
+						<Button color="primary" variant="contained" onClick={this.patientMenuHandler}>
+							Back to Patient List
+						</Button>
+					</div>
 				</div>
 			);
 		}
@@ -486,6 +503,11 @@ export default class DiagnosisChart extends Component {
 						<h5>Diagnosis Chart not started yet.</h5>
 						<Button color="primary" variant="contained" onClick={this.firstCardHandler}>
 							Click here to start {this.state.patient.firstName}'s Chart
+						</Button>
+					</div>
+					<div style={centerStylesTwo}>
+						<Button color="primary" variant="contained" onClick={this.patientMenuHandler}>
+							Back to Patient List
 						</Button>
 					</div>
 				</div>
