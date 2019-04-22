@@ -35,8 +35,8 @@ export class MenuHandler extends Component {
             <Link to="/Patients" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>View Patients</MenuItem>
             </Link>
-            <Link to="/DepressionTest" style={{ textDecoration: 'none', display: 'block' }}>
-                <MenuItem>Depression Chart</MenuItem>
+            <Link to="/questionareBuilder" style={{ textDecoration: 'none', display: 'block' }}>
+                <MenuItem>Create new form</MenuItem>
             </Link>
             <Link to="/DiagnosisChart" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>New Diagnosis Exploration</MenuItem>
