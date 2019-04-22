@@ -19,7 +19,7 @@ export class MenuHandler extends Component {
                 <MenuItem>My account</MenuItem>
             </Link>
             <Link to="/Questionare" style={{ textDecoration: 'none', display: 'block' }}>
-                <MenuItem>Fill out Forms</MenuItem>
+                <MenuItem>Fill out forms</MenuItem>
             </Link>
             <Link to="/MyResults" style={{ textDecoration: 'none', display: 'block' }}>
                 <MenuItem>View My Results</MenuItem>

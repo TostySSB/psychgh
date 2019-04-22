@@ -6,6 +6,7 @@ const Questionare = require("../../models/Questionare");
 router.post("/newQuestionare",(req,res)=>{
     const newQuestionare = new Questionare({
         formName: req.body.name,
+        approved: false,
         questions: req.body.questions
     })
     newQuestionare
