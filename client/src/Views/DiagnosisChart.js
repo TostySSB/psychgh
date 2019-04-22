@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import classes from './DiagnosisChart.css';
+// import styles from '../components/UI/cards/DiagnosisCard.css';
 import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
 import PatientDialog from "../components/UI/dialogs/PatientDialog";
@@ -329,12 +330,20 @@ export default class DiagnosisChart extends Component {
   			marginRight: "auto",
   			marginBottom: "10px",
   			width: "75%"
-  		}
+  		};
 
   		const centerStylesTwo = {
   			margin: "auto",
   			width: "25%"
-  		}
+  		};
+
+  		const styles = {
+			marginLeft: "auto",
+  			marginRight: "auto",
+  			marginBottom: "10px",
+  			width: "25%",
+			maxWidth: "320px"
+		};
 
   		const options = {
 		    filterType: 'checkbox',
@@ -407,6 +416,7 @@ export default class DiagnosisChart extends Component {
 					<h4 style={centerStyles}>Diagnosis Chart</h4>
 					<p style={centerStyles}>Click an evaluation card below to edit the evaluation.</p>
 					<DiagnosisCard
+						style={styles}
 						type='header' 
 						firstName={this.state.patient.firstName}
 						lastName={this.state.patient.lastName}
@@ -414,6 +424,7 @@ export default class DiagnosisChart extends Component {
 
 					{this.state.patient.evals.map(ev => (
 							<DiagnosisCard
+								style={styles}
 								type={ev.type}
 								idNum={ev.id}
 								onClick={this.cardClickHandler.bind(this, ev.type, ev.id)}
