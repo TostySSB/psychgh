@@ -48,6 +48,8 @@ const addNewEval = (evals, newData, userID) => {
 
 }
 
+const
+
 router.get('/getExploration', (req, res) => {
 	console.log("SUBMIT QUERY:");
 	console.log(req.query[0]);
