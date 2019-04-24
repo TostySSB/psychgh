@@ -52,12 +52,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/core": "^7.4.3",
     "@storybook/addon-actions": "^5.0.10",
     "@storybook/addon-links": "^5.0.10",
     "@storybook/addons": "^5.0.10",
     "@storybook/react": "^5.0.10",
-    "babel-loader": "^8.0.5",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1"
   }
