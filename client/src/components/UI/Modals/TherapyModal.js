@@ -30,7 +30,8 @@ class TherapyModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			notes: ""
+			notes: "",
+			textSet: false
 		};
 	}
 
@@ -47,12 +48,20 @@ class TherapyModal extends Component {
 	submitEval = () => {
 		this.props.submitEval("therapy");
 	}
-
+	
+	textFieldHandler = (event) => {
+		// If it's the first time clicking the thing
+		// We need to set state
+		if (!this.state.textSet) {
+			this.setState({textSet: true});
+			this.setState({notes: this.props.evalData.notes});
+		}
+	}
 
 	handleChange = event => {
 		console.log(event.target.type);
 		if (event.target.type === "textarea") {
-			console.log("It's a text area");
+			console.log(event.target.value);
 		}
 		this.props.handleEvalChange(event);
 	}
@@ -82,13 +91,14 @@ class TherapyModal extends Component {
 								<FormControl variant="outlined" style={formStyle}>
 									<TextField
 										//TODO figure out the functionality to update the notes.
-										value={this.props.evalData.therapyNotes}
+										value={this.state.textSet ? this.state.notes: this.props.evalData.notes}
 										name="notes"
 										id="initial-therapy-notes"
 										label="Notes on Side Effects"
 										multiline
 										rows="4"
 										onChange={this.handleChange}
+										onClick={this.textFieldHandler}
 									/>
 								</FormControl>
 							</Grid>
@@ -99,7 +109,10 @@ class TherapyModal extends Component {
 	}
 
 	render() {
+		console.log("PROPS:");
 		console.log(this.props);
+		console.log("STATE:");
+		console.log(this.state);
 		let dialogContent = this.makeDialogContent();
 		return (
 			<Aux>
