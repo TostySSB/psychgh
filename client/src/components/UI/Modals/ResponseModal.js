@@ -19,7 +19,6 @@ import TextField from '@material-ui/core/TextField';
 import Backdrop from '../Backdrop/Backdrop';
 import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
-import Aux from '../../Aux';
 
 const formStyle = {
 	width: "100%"
@@ -131,7 +130,7 @@ class ResponseModal extends Component {
 		let dialogBody = this.makeBody();
 		console.log(this.props);
 		return(
-			<Aux>
+			<div>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
 				<Dialog
 					open={this.props.show}
@@ -176,7 +175,7 @@ class ResponseModal extends Component {
 				            </Button>
 			          </DialogActions>
 	        	</Dialog>
-			</Aux>
+			</div>
 		);
 	}
 }

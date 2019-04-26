@@ -19,7 +19,6 @@ import TextField from '@material-ui/core/TextField';
 import Backdrop from '../Backdrop/Backdrop';
 import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
-import Aux from '../../Aux';
 
 
 class CardModal extends Component {
@@ -159,7 +158,7 @@ class CardModal extends Component {
 	render() {
 		let formContent = this.makeForm(this.props.type);
 		return (
-			<Aux>
+			<div>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
 				<Dialog
 					open={this.props.show}
@@ -173,7 +172,7 @@ class CardModal extends Component {
 	        	>
 	        		{formContent}
 	        	</Dialog>
-			</Aux>
+			</div>
 		);
 	}
 }

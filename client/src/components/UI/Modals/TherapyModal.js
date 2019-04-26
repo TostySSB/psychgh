@@ -20,7 +20,6 @@ import TextField from '@material-ui/core/TextField';
 import Backdrop from '../Backdrop/Backdrop';
 import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
-import Aux from '../../Aux';
 
 const formStyle = {
 	width: "100%"
@@ -114,7 +113,7 @@ class TherapyModal extends Component {
 		console.log(this.state);
 		let dialogContent = this.makeDialogContent();
 		return (
-			<Aux>
+			<div>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
 				<Dialog
 					open={this.props.show}
@@ -138,7 +137,7 @@ class TherapyModal extends Component {
 			            </Button>
 	  				</DialogActions>
 	        	</Dialog>
-			</Aux>
+			</div>
 		);
 	}
 }

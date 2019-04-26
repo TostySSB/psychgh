@@ -20,7 +20,6 @@ import TextField from '@material-ui/core/TextField';
 import Backdrop from '../Backdrop/Backdrop';
 import Button from '@material-ui/core/Button';
 import classes from './Modal.css';
-import Aux from '../../Aux';
 
 class EvaluationModal extends Component {
 	constructor(props) {
@@ -48,7 +47,7 @@ class EvaluationModal extends Component {
 
 	render() {
 		return (
-			<Aux>
+			<div>
 				<Backdrop show={this.props.show} clicked={this.props.modalClosed} />
 				<Dialog
 					open={this.props.show}
@@ -83,7 +82,7 @@ class EvaluationModal extends Component {
 					            </Button>
 				          </DialogActions>
 	        	</Dialog>
-			</Aux>
+			</div>
 		);
 	}
 
