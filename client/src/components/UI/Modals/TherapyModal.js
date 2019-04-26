@@ -50,7 +50,7 @@ class TherapyModal extends Component {
 	
 	textFieldHandler = (event) => {
 		// If it's the first time clicking the thing
-		// We need to set state
+		// we need to set state
 		if (!this.state.textSet) {
 			this.setState({textSet: true});
 			this.setState({notes: this.props.evalData.notes});
@@ -88,8 +88,7 @@ class TherapyModal extends Component {
 							<Grid item xs={12}>
 								<FormControl variant="outlined" style={formStyle}>
 									<TextField
-										//TODO figure out the functionality to update the notes.
-										value={this.state.textSet ? this.state.notes: this.props.evalData.notes}
+										value={this.state.textSet ? this.state.notes : this.props.evalData.notes}
 										name="notes"
 										id="initial-therapy-notes"
 										label="Notes on Side Effects"

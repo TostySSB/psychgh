@@ -122,10 +122,9 @@ export default class DiagnosisChart extends Component {
 		axios.get('api/explorations/getExploration', {params: data})
 		.then(res => {
 			if (res.status === 200) {
-				console.log("RES: ");
-				console.log(res.data);
 				this.setState({patient: res.data});
 				this.setState({userID: res.data.user_id});
+				this.setState({newExploration: res.data.evals.length == 0});
 			}
 		});
 	}

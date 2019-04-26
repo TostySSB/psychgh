@@ -25,15 +25,25 @@ class EvaluationModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			evaluationNotes: ""
+			evaluationNotes: "",
+			textSet: false
 		};
 	}
 
 	handleChange = event => {
 		if (event.target.type === "textarea") {
-			console.log("It's a text area");
+			this.setState({evaluationNotes: event.target.value});
 		}
 		this.props.handleEvalChange(event);
+	}
+
+	textFieldHandler = (event) => {
+		// If it's the first time clicking the thing
+		// we need to set state
+		if (!this.state.textSet) {
+			this.setState({textSet: true});
+			this.setState({evaluationNotes: this.props.evalData.evaluationNotes});
+		}
 	}
 
 	updateEvals = () => {
@@ -63,11 +73,13 @@ class EvaluationModal extends Component {
 							<DialogContent>
 								<TextField
 									name="evaluationNotes"
+									value={this.state.textSet ? this.state.evaluationNotes : this.props.evalData.evaluationNotes}
 									rows="5"
 									multiline
 									fullWidth
 									label="Enter notes here"
 									onChange={this.handleChange}
+									onClick={this.textFieldHandler}
 								/>
 							</DialogContent>
 							<DialogActions>
