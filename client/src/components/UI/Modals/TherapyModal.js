@@ -59,9 +59,7 @@ class TherapyModal extends Component {
 	}
 
 	handleChange = event => {
-		console.log(event.target.type);
 		if (event.target.type === "textarea") {
-			let currentText = this.state.notes;
 			this.setState({notes: event.target.value});
 		}
 		this.props.handleEvalChange(event);
