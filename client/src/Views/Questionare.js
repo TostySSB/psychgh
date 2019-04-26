@@ -45,7 +45,7 @@ class Questionare extends Component{
         this.state = {
           questionareMap: [{name: "", approved:true, questions: [{ question: "", answers:[{answer:""}]}]}],
           formIndex: -1,
-          answerValues: [1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12],
+          answerValues: [-22,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12],
         };
       }
       
