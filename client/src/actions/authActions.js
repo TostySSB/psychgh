@@ -8,7 +8,13 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/login"))
+    .then(res => {
+      history.push("/login");
+      if (!res.data.isPractioner) {
+        // Add a corresponding exploration for this new user
+        axios.post("api/explorations/newExpUser", res.data);
+      }
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

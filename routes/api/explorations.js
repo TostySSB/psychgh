@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+
+
 const Exploration = require("../../models/DiagnosisExploration");
+
 
 const updateEval = (evals, newData, userID) => {
 	// Need to update the eval array, then set it to 
@@ -62,8 +65,6 @@ router.get('/getExploration', (req, res) => {
 });
 
 router.post('/newExploration', (req, res) => {
-	console.log("NEW EXPLORATION REQ:");
-	console.log(req.body);
 	let userID = req.body.userID;
 	Exploration.findOne({user_id: userID}, (err, resp) => {
 		if (err)
@@ -74,13 +75,21 @@ router.post('/newExploration', (req, res) => {
 });
 
 router.post('/updateExploration', (req, res) => {
-	console.log("REQ:");
-	console.log(req.body);
 	let userID = req.body.userID;
 	let exp; 
 	Exploration.findOne({user_id: userID}, (err, resp) => {
 		updateEval(resp, req.body.newEval, userID);
 	});
+});
+
+router.post('/newExpUser', (req, res) => {
+	const newExp = new Exploration({
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		user_id: req.body.user_id,
+		evals: []
+	});
+	newExp.save();
 });
 
 module.exports = router;

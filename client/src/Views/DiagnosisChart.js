@@ -301,7 +301,6 @@ export default class DiagnosisChart extends Component {
 
   	// Update an existing evaluation in the database
   	updateEvals = () => {
-  		// TODO: OVERWRITE OLD RESPONSE DATA
   		console.log(this.state.currentEvalData);
 		let newData = {
 			userID: this.state.userID,
@@ -362,21 +361,20 @@ export default class DiagnosisChart extends Component {
 		    print: false,
 		    download: false,
 		    filter: false,
-		    expandableRows: true,
-		    renderExpandableRow: (rowData, rowMeta) => {
-		        const colSpan = rowData.length + 1;
-		        return (
-		          <TableRow>
-		            <TableCell colSpan={colSpan}>
-		            {rowData[0]}
-		            </TableCell>
-		            <PatientDialog userID={rowData[0]}></PatientDialog>
-		          </TableRow>
+		    expandableRows: false,
+		    // renderExpandableRow: (rowData, rowMeta) => {
+		    //     const colSpan = rowData.length + 1;
+		    //     return (
+		    //       <TableRow>
+		    //         <TableCell colSpan={colSpan}>
+		    //         {rowData[0]}
+		    //         </TableCell>
+		    //         <PatientDialog userID={rowData[0]}></PatientDialog>
+		    //       </TableRow>
 		          
-		        );
-		      },
+		    //     );
+		    //   },
 		      onRowClick: (rowData) => { 
-		      	console.log(rowData);
 		      	this.setState({chartSelected: true});
 		      	this.getPatientExploration(rowData[0]);
 		      }
