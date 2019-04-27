@@ -44,3 +44,7 @@ list of currently open issues.
 ## More Documentation
 
 Visit our [documentation page](https://psychgh.readthedocs.io/en/latest/) for more info on how to use PsychGH
+
+## View Presentation PDF
+
+Find the pdf file in the root directory of this repository, and download said pdf. This will provide you with some information about this product and the design choices we made while building it.
