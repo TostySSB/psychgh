@@ -13,8 +13,9 @@ import { connect } from "react-redux";
 import Swal from 'sweetalert2';
  class PatientDialog extends Component {
   state = {
-    open: true,
+    open: this.props.open,
     user: [],
+    userID: this.props.userID,
     q10: 0,
   };
   
@@ -23,39 +24,46 @@ import Swal from 'sweetalert2';
     this.setState({ open: false });
   };
   componentWillMount(){
+    
+  }
+  componentWillReceiveProps(newProps){
+    this.setState({userID:newProps.userID, open: newProps.open});
     axios.get('/api/users/singleUser', {
-        params: {
-            userID: this.props.userID
-        }
-    })
-    .then(response => {
-        this.setState({user: response.data})
-    })
-    .catch(function(error){
-        console.log(error)
-    })
-    axios.get('/api/users/userPHQ9', {
-        params: {
-            userID: this.props.userID
-        }
-    })
-    .then(response => {
-        this.setState({q10: response.data})
-    })
-    .catch(function(error){
-        console.log(error)
-    })
+          params: {
+              userID: this.state.userID
+          }
+      })
+      .then(response => {
+          this.setState({user: response.data})
+      })
+      .catch(function(error){
+          console.log(error)
+      })
+      axios.get('/api/users/userPHQ9', {
+          params: {
+              userID: this.state.userID
+          }
+      })
+      .then(response => {
+          this.setState({q10: response.data})
+      })
+      .catch(function(error){
+          console.log(error)
+      })
+  }
+  closeThing = () => {
+    this.props.handleClose();
   }
   handleClaim(){
     const {user} = this.props.auth;
     axios.post("/api/users/claim", {email: this.state.user.email, firstName: user.name, lastName: user.lastName})
       .then((response) => {
-        this.setState({open:false})
         Swal.fire(
           'Success!',
           'You have claimed this patient',
           'success'
-        )
+        );
+        this.closeThing();
       });
   }
   genButton(){
@@ -67,11 +75,12 @@ import Swal from 'sweetalert2';
     }
   }
   render() {
+    const {classes} = this.props;
     return (
       <div>
         <Dialog
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
           fullWidth
           maxWidth='md'
@@ -125,7 +134,7 @@ import Swal from 'sweetalert2';
           </DialogContent>
           {this.genButton()}
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.props.handleClose} color="primary">
               Close
             </Button>
           </DialogActions>
@@ -135,7 +144,6 @@ import Swal from 'sweetalert2';
   }
 }
 PatientDialog.propTypes = {
-    classes: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired
 };
   
