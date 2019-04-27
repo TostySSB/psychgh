@@ -6,6 +6,7 @@ import MUIDataTable from "mui-datatables";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import PatientDialog from "../dialogs/PatientDialog";
+import { runInThisContext } from "vm";
 const columns = [
     {
         name: "user_id",
@@ -40,7 +41,7 @@ const columns = [
         }
        },
        {
-        name: "pLastName",
+        name: "plastName",
         label: "Practitioner",
         options: {
          filter: false,
@@ -48,26 +49,7 @@ const columns = [
         }
        },
 ];
-const options = {
-    filterType: 'checkbox',
-    selectableRows: false,
-    print: false,
-    download: false,
-    filter: false,
-    expandableRows: true,
-    renderExpandableRow: (rowData, rowMeta) => {
-        const colSpan = rowData.length + 1;
-        return (
-          <TableRow>
-            <TableCell colSpan={colSpan}>
-            {rowData[0]}
-            </TableCell>
-            <PatientDialog userID={rowData[0]}></PatientDialog>
-          </TableRow>
-          
-        );
-      },
-  };
+
 const styles = theme => ({
     app: {
         width: '100%'
@@ -80,12 +62,20 @@ class userList extends Component {
         this.state = {
             userMap: [],
             users:[],
+            userID: Number,
             open:false
         }
     }
+    
     handleClickOpen = () => {
         this.setState({ open: true });
     };
+    handleClose = () => {
+        this.setState({ userID: Number},() => {
+            this.setState({open: false})
+        });
+        console.log(this.state.open)
+      };
     componentDidMount(){
         axios.get('/api/users/userList')
             .then(response => {
@@ -96,6 +86,21 @@ class userList extends Component {
             })
     }
     render() {
+        const options = {
+            filterType: 'checkbox',
+            selectableRows: false,
+            print: false,
+            download: false,
+            filter: false,
+            expandableRows: false,
+            onRowClick: (rowData) => {
+                this.setState({userID: rowData[0]}, () => {
+                    this.setState({open: true})
+                })
+                console.log("lit")
+                console.log(this.state.open)
+              },
+          };
         const { classes } = this.props;
         return (
             <div className="App">
@@ -105,6 +110,7 @@ class userList extends Component {
                     columns={columns}
                     options={options}
                 />
+                <PatientDialog userID={this.state.userID} open={this.state.open} handleClose={this.handleClose}/>
             </div>
         )
     }
